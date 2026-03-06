@@ -1,0 +1,33 @@
+@import '@fontsource-variable/lexend';
+@import '@fontsource/barlow-condensed';
+
+@import 'tailwindcss';
+
+@theme {
+  --color-primary: #f2df0d;
+
+  --color-background-dark: #18181b;
+
+  --font-lexend: 'Lexend Variable', sans-serif;
+  --font-barlow-condensed: 'barlow-condensed', sans-serif;
+}
+
+@layer base {
+  * {
+    @apply px-2 py-4;
+  }
+
+  body {
+    @apply bg-background-dark  text-white font-lexend;
+  }
+
+  h1 {
+    @apply mb-2 text-3xl font-bold;
+  }
+}
+
+@layer components {
+  .form-control {
+    @apply rounded-md border bg-amber-900 px-4 py-3 text-white transition-colors outline-none invalid:text-blue-500 focus:border-amber-400;
+  }
+}
