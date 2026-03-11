@@ -1,24 +1,39 @@
-@import '@fontsource-variable/lexend';
-@import '@fontsource/barlow-condensed';
-
 @import 'tailwindcss';
+@import '@fontsource/barlow-condensed/800.css';
 
 @theme {
   --color-primary: #f2df0d;
 
   --color-background-dark: #18181b;
 
-  --font-lexend: 'Lexend Variable', sans-serif;
-  --font-barlow-condensed: 'barlow-condensed', sans-serif;
+  --font-barlow-condensed: 'Barlow Condensed', sans-serif;
+
+  --animate-reveal: reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+  @keyframes reveal {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
+.reveal {
+  opacity: 0;
+  animation: var(--animate-reveal);
 }
 
 @layer base {
   * {
-    @apply px-2 py-4;
+    @apply px-2 py-4 text-white;
   }
 
   body {
-    @apply bg-background-dark  text-white font-lexend;
+    @apply bg-background-dark font-barlow-condensed;
   }
 
   h1 {

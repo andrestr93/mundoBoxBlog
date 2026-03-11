@@ -1,0 +1,27 @@
+---
+import { Image } from 'astro:assets'
+import imgPresentation from '../images/presentation.png'
+---
+
+<section class="flex flex-col items-center">
+  <div class="relative max-w-5xl w-full aspect-video md:aspect-auto">
+    
+    <Image 
+      alt="Imagen home" 
+      loading="eager"  
+      quality="high" 
+      format="webp" 
+      src={imgPresentation} 
+      class="w-full h-auto  opacity-60" 
+    />
+
+    <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+       <h1 class="text-white text-4xl md:text-8xl font-barlow-condensed uppercase drop-shadow-2xl">
+          Equípate como un <span class="text-primary">atleta de élite.</span>
+       </h1>
+       <p class="text-white font-barlow-condensed mt-4 text-lg md:text-2xl font-medium max-w-xl">
+         La guía definitiva de calzado, combas y calleras. Comparamos calidad y precio para que tú solo te preocupes de las repeticiones.
+       </p>
+    </div>
+  </div>
+</section>
