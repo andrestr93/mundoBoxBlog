@@ -32,6 +32,10 @@
     @apply px-1 py-3 text-white w-full;
   }
 
+  section {
+    @apply p-0;
+  }
+
   body {
     @apply bg-background-dark font-barlow-condensed m-0 w-full h-full p-0;
   }
