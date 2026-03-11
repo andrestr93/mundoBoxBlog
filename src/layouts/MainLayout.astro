@@ -17,16 +17,18 @@ import "../styles/global.css";
 		<ClientRouter/>
 		<title>Astro Basics</title>
 	</head>
-	<body>
+	<body class="grid grid-cols-1">
 	
-	<div class="reveal" style="animation-delay: 0.1s;">
-      <Header />
-    </div>
-	<div class="reveal" style="animation-delay: 0.1s;">
+	
+      <Header delay="0.1s" />
+   
+	<main class="reveal p-0" style="animation-delay: 0.4s;">
 		<slot />
-		<Footer/>
-	</div>
+	</main>
+	<Footer delay="0.6s"/>
 	</body>
 </html>
+
+
 
 

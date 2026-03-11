@@ -1,3 +1,23 @@
-<footer>
-    <h1>esto es el footer</h1>
+---
+import Logo from "../shared/components/Logo.astro";
+import NavbarFooter from "../shared/components/NavbarFooter.astro";
+
+const { class: className, delay = "0s" } = Astro.props;
+---
+
+
+<footer class="flex flex-row w-full" class:list={["reveal", className]} 
+  style={`animation-delay: ${delay};`}>
+
+  <div>
+
+    <Logo/>
+
+  </div>
+
+  <div>
+    <NavbarFooter/>
+
+  </div>
+  
 </footer>
