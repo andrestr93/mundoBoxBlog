@@ -6,6 +6,7 @@ const blog = defineCollection({
     loader: glob({ base: './src/content/blog', pattern: "**/*.mdx" }),
     schema: ({ image }) => z.object({
         title: z.string(),
+        slug: z.string(),
         metaTitle: z.string().max(60), // Título para Google
         metaDescription: z.string().max(160), // Descripción para Google
         category: z.string(),

@@ -1,0 +1,26 @@
+---
+// src/pages/[category]/[slug].astro
+import { getCollection, render } from "astro:content";
+import BlogLayout from "../../layouts/BlogLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+
+  return posts.map((post) => ({
+    params: {
+      // 1. Rellena la carpeta [category]
+      category: post.data.category.toLowerCase().replace(/\s+/g, "-"),
+      // 2. Rellena el archivo [slug].astro (usa el nombre del archivo mdx)
+      slug: post.id,
+    },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BlogLayout {...post.data}>
+  <Content />
+</BlogLayout>
