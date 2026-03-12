@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import MainLayout from "../../layouts/MainLayout.astro";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("blog");
@@ -24,6 +25,21 @@ export async function getStaticPaths() {
 }
 
 const { posts, categoryName } = Astro.props;
-
 console.log(categoryName);
+console.log(posts);
 ---
+
+<MainLayout>
+  <h1>{categoryName}</h1>
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <a href={`${post.data.category.toLowerCase()}/${post.id}`}>
+            {post.data.title}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</MainLayout>
