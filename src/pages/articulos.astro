@@ -1,0 +1,10 @@
+---
+import { getCollection } from "astro:content";
+import TypeBlogPost from "../components/TypeBlogPost.astro";
+import BlogLayout from "../layouts/BlogLayout.astro";
+const blogPosts = await getCollection("blog");
+---
+
+<BlogLayout>
+  {blogPosts.map((post) => <TypeBlogPost post={post} />)}
+</BlogLayout>
