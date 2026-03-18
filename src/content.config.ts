@@ -7,14 +7,15 @@ const blog = defineCollection({
     schema: ({ image }) => z.object({
         title: z.string(),
         slug: z.string(),
-        metaTitle: z.string().max(60), // Título para Google
-        metaDescription: z.string().max(160), // Descripción para Google
-        category: z.string(),
+        metaTitle: z.string().max(60),
+        metaDescription: z.string().max(160),
+        category: z.enum(['Calzado', 'Combas', 'Calleras']),
+        tags: z.array(z.string()),
+        type: z.enum(['Comparativas', 'Reviews', 'Rankings', 'Guias de Solucion']),
         image: z.string(),
         rating: z.string(),
         reviewsCount: z.string(),
         amazonLink: z.string().url(),
-        features: z.array(z.string()),
         pros: z.array(z.string()),
         contras: z.array(z.string()),
 

@@ -1,22 +1,18 @@
 ---
-import { Image } from 'astro:assets';
-import logo from './../images/logo.png';
-import Navbar from '../shared/components/Navbar.astro';
-import Logo from '../shared/components/Logo.astro';
+import Navbar from "../shared/components/Navbar.astro";
+import Logo from "../shared/components/Logo.astro";
 const { class: className, delay = "0s" } = Astro.props;
 ---
 
-<header 
-  class:list={["reveal w-full", className]} 
+<header
+  class:list={["reveal w-full", className]}
   style={`animation-delay: ${delay};`}
 >
-  <div class="flex flex-row w-full items-center justify-center">
-      <Logo/>
-   
+  <div class="flex w-full flex-row items-center justify-center">
+    <Logo />
 
-      <div class="flex items-center">
-          <Navbar />
-      </div>
-        
+    <div class="flex items-center">
+      <Navbar />
+    </div>
   </div>
 </header>

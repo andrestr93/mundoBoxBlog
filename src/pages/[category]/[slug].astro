@@ -1,7 +1,8 @@
 ---
 // src/pages/[category]/[slug].astro
 import { getCollection, render } from "astro:content";
-import BlogLayout from "../../layouts/BlogLayout.astro";
+import ReviewTemplate from "../../components/templates/ReviewTemplate.astro";
+import MainLayout from "../../layouts/MainLayout.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -18,9 +19,16 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
+const { amazonLink, category, contras, image, rating, type } = post.data;
 const { Content } = await render(post);
 ---
 
-<BlogLayout {...post.data}>
-  <Content />
-</BlogLayout>
+<MainLayout>
+  {
+    post.data.type === "Reviews" && (
+      <ReviewTemplate {...post.data}>
+        <Content />
+      </ReviewTemplate>
+    )
+  }
+</MainLayout>

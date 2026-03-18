@@ -1,11 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 
-// 1. Buscamos todos los posts
 const posts = await getCollection("blog");
 
-// 2. Sacamos las categorías únicas y las limpiamos
-// Esto crea una lista como: ["calzado", "calleras", "combas"]
 const categories = [
   ...new Set(posts.map((post) => post.data.category.toLowerCase())),
 ];
@@ -14,11 +11,9 @@ const categories = [
 <nav class="flex w-full flex-row items-center justify-center gap-6 p-0">
   {
     categories.map((cat) => (
-      <li>
-        <a href={`/${cat}`} class="hover:text-primary decoration-0">
-          {cat}
-        </a>
-      </li>
+      <a href={`/${cat}`} class="hover:text-primary">
+        {cat}
+      </a>
     ))
   }
 </nav>

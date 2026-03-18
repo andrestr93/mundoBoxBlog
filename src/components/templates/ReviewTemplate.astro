@@ -1,0 +1,60 @@
+---
+import { Image } from "astro:assets";
+import imgzapatilla from "./../../images/calzado/zapatillas1.png";
+import Start from "../icons/Start.astro";
+import Check from "../icons/Check.astro";
+import SearchButtonAmazon from "./../../components/SearchButtonAmazon.astro";
+---
+
+<section>
+  <div class="w-full">
+    <Image
+      alt="Imagen home"
+      loading="eager"
+      quality="high"
+      format="webp"
+      src={imgzapatilla}
+    />
+  </div>
+
+  <h1 class="w-full text-center text-4xl font-bold">
+    Nike Metcon review titan
+  </h1>
+
+  <div class="flex items-center">
+    <Start class="h-12 w-12" />
+    <span class="text-primary font-normal">(4.8/5 de 124 reseñas)</span>
+  </div>
+</section>
+
+<section class="bg-primary/10 m-auto flex w-[90%] flex-col rounded-2xl p-0.5">
+  <h5 class="text-center text-2xl text-white">Caracteristicas Clave</h5>
+  <div class="flex items-center text-white">
+    <Check class="h-12 w-12" />
+
+    <p>
+      Here are the biggest technology acquisitions of 2025 so far, in reverse
+      chronological order.
+    </p>
+  </div>
+  <div class="flex items-center text-white">
+    <Check class="h-12 w-12" />
+
+    <p>
+      Here are the biggest technology acquisitions of 2025 so far, in reverse
+      chronological order.
+    </p>
+  </div>
+  <div class="flex items-center text-white">
+    <Check class="h-12 w-12" />
+
+    <p>
+      Here are the biggest technology acquisitions of 2025 so far, in reverse
+      chronological order.
+    </p>
+  </div>
+</section>
+
+<section>
+  <SearchButtonAmazon />
+</section>
