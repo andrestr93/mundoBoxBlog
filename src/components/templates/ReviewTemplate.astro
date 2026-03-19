@@ -10,120 +10,111 @@ import ThumpDown from "../icons/ThumpDown.astro";
 import Less from "../icons/Less.astro";
 ---
 
-<section>
-  <div class="w-full">
-    <Image
-      alt="Imagen home"
-      loading="eager"
-      quality="high"
-      format="webp"
-      src={imgzapatilla}
-    />
-  </div>
+<article>
+  <section>
+    <div class="w-full">
+      <Image
+        alt="Imagen home"
+        loading="eager"
+        quality="high"
+        format="webp"
+        src={imgzapatilla}
+      />
+    </div>
 
-  <h1 class="w-full text-center text-4xl font-bold">
-    Nike Metcon review titan
-  </h1>
+    <h1 class="w-full text-center text-4xl">Nike Metcon review titan</h1>
 
-  <div class="flex items-center">
-    <Start class="h-12 w-12" />
-    <span class="text-primary font-normal">(4.8/5 de 124 reseñas)</span>
-  </div>
-</section>
+    <div class="flex items-center">
+      <Start class="h-12 w-12" />
+      <span class="text-primary font-bold">(4.8/5 de 124 reseñas)</span>
+    </div>
+  </section>
 
-<section class="bg-primary/10 m-auto flex w-[90%] flex-col rounded-2xl p-0.5">
-  <h5 class="text-center text-2xl text-white">Caracteristicas Clave</h5>
-  <div class="flex items-center text-white">
-    <Check class="h-12 w-12" />
+  <section class="bg-primary/10 m-auto flex w-[90%] flex-col rounded-2xl p-0.5">
+    <div class="flex flex-row-reverse items-center">
+      <h2 class="text-2xl text-white">Caracteristicas Clave</h2>
+      <Check class="h-12 w-12" />
+    </div>
 
+    <ul>
+      <li class="flex items-start">
+        <Check class="h-12 w-12 text-green-400" aria-hidden="true" />
+        <p class="font-body text-base">Aquí tu texto de ventaja competitiva.</p>
+      </li>
+      <li class="flex items-start">
+        <Check class="h-12 w-12 text-green-400" aria-hidden="true" />
+        <p class="font-body text-base">Aquí tu texto de ventaja competitiva.</p>
+      </li>
+      <li class="flex items-start">
+        <Check class="h-12 w-12 text-green-400" aria-hidden="true" />
+        <p class="font-body text-base">Aquí tu texto de ventaja competitiva.</p>
+      </li>
+    </ul>
+  </section>
+  <li>
     <p>
       Here are the biggest technology acquisitions of 2025 so far, in reverse
       chronological order.
     </p>
-  </div>
-  <div class="flex items-center text-white">
-    <Check class="h-12 w-12" />
+  </li>
 
-    <p>
-      Here are the biggest technology acquisitions of 2025 so far, in reverse
-      chronological order.
-    </p>
-  </div>
-  <div class="flex items-center text-white">
-    <Check class="h-12 w-12" />
+  <section>
+    <SearchButtonAmazon />
+  </section>
 
-    <p>
-      Here are the biggest technology acquisitions of 2025 so far, in reverse
-      chronological order.
-    </p>
-  </div>
-</section>
+  <section
+    class="m-auto mt-8 mb-8 flex w-[90%] flex-col rounded-2xl bg-green-950/30 p-0.5"
+  >
+    <div class="flex flex-row-reverse items-center">
+      <h2 class="text-2xl text-white">Pros</h2>
+      <ThumbUp class="h-12 w-12" />
+    </div>
 
-<section>
-  <SearchButtonAmazon />
-</section>
+    <ul>
+      <li class="flex items-start">
+        <Plus class="h-12 w-12 text-green-400" aria-hidden="true" />
+        <p class="font-body text-base">Aquí tu texto de ventaja competitiva.</p>
+      </li>
+      <li class="flex items-start">
+        <Plus class="h-12 w-12 text-green-400" aria-hidden="true" />
+        <p class="font-body text-base">Aquí tu texto de ventaja competitiva.</p>
+      </li>
+      <li class="flex items-start">
+        <Plus class="h-12 w-12 text-green-400" aria-hidden="true" />
+        <p class="font-body text-base">Aquí tu texto de ventaja competitiva.</p>
+      </li>
+    </ul>
+  </section>
+  <section
+    class="m-auto mt-8 mb-8 flex w-[90%] flex-col rounded-2xl bg-red-950/30 p-0.5"
+  >
+    <div class="flex flex-row-reverse items-center">
+      <h2 class="text-2xl text-white">Contras</h2>
+      <ThumpDown class="h-12 w-12" />
+    </div>
 
-<section
-  class="m-auto mt-8 mb-8 flex w-[90%] flex-col rounded-2xl bg-green-950/30 p-0.5"
->
-  <div class="flex flex-row-reverse items-center">
-    <h5 class="text-2xl text-white">Pros</h5>
-    <ThumbUp class="h-12 w-12" />
-  </div>
-  <div class="flex items-center text-white">
-    <Plus class="h-12 w-12" />
+    <ul>
+      <li class="flex items-start">
+        <Less class="h-12 w-12" aria-hidden="true" />
+        <p class="font-body text-base">Aquí tu texto de ventaja competitiva.</p>
+      </li>
+      <li class="flex items-start">
+        <Less class="h-12 w-12" aria-hidden="true" />
+        <p class="font-body text-base">Aquí tu texto de ventaja competitiva.</p>
+      </li>
+      <li class="flex items-start">
+        <Less class="h-12 w-12" aria-hidden="true" />
+        <p class="font-body text-base">Aquí tu texto de ventaja competitiva.</p>
+      </li>
+    </ul>
+  </section>
 
-    <p>
-      Here are the biggest technology acquisitions of 2025 so far, in reverse
-      chronological order.
-    </p>
-  </div>
-  <div class="flex items-center text-white">
-    <Plus class="h-12 w-12" />
-
-    <p>
-      Here are the biggest technology acquisitions of 2025 so far, in reverse
-      chronological order.
-    </p>
-  </div>
-  <div class="flex items-center text-white">
-    <Plus class="h-12 w-12" />
-
-    <p>
-      Here are the biggest technology acquisitions of 2025 so far, in reverse
-      chronological order.
-    </p>
-  </div>
-</section>
-<section
-  class="m-auto mt-8 mb-8 flex w-[90%] flex-col rounded-2xl bg-red-950/30 p-0.5"
->
-  <div class="flex flex-row-reverse items-center">
-    <h5 class="text-2xl text-white">Contras</h5>
-    <ThumpDown class="h-13 w-13" />
-  </div>
-  <div class="flex items-center text-white">
-    <Less class="h-12 w-12" />
-
-    <p>
-      Here are the biggest technology acquisitions of 2025 so far, in reverse
-      chronological order.
-    </p>
-  </div>
-  <div class="flex items-center text-white">
-    <Less class="h-12 w-12" />
-
-    <p>
-      Here are the biggest technology acquisitions of 2025 so far, in reverse
-      chronological order.
-    </p>
-  </div>
-  <div class="flex items-center text-white">
-    <Less class="h-12 w-12" />
-
-    <p>
-      Here are the biggest technology acquisitions of 2025 so far, in reverse
-      chronological order.
-    </p>
-  </div>
-</section>
+  <section>
+    <div>
+      <h2 class="text-center text-2xl">Analisis detallado</h2>
+    </div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </section>
+</article>

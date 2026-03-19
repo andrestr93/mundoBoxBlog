@@ -1,5 +1,6 @@
 @import "tailwindcss";
-@import "@fontsource/barlow-condensed/800.css";
+@import "@fontsource/barlow-condensed/700.css";
+@import "@fontsource-variable/lexend";
 
 @theme {
   --color-primary: #f2df0d;
@@ -7,6 +8,7 @@
   --color-background-dark: #18181b;
 
   --font-barlow-condensed: "Barlow Condensed", sans-serif;
+  --font-lexend: "lexend", sans-serif;
 
   --animate-reveal: reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 
@@ -32,17 +34,22 @@
     @apply w-full px-1 py-3 text-white;
   }
 
-  section {
+  h1,
+  h2,
+  a,
+  h3 {
+    @apply font-barlow-condensed tracking-wider;
+  }
+
+  p {
+    @apply leading-relaxed text-slate-300;
+  }
+
+  article section {
     @apply p-0;
   }
 
   body {
-    @apply bg-background-dark font-barlow-condensed m-0 h-full w-full p-0;
-  }
-}
-
-@layer components {
-  .form-control {
-    @apply rounded-md border bg-amber-900 px-4 py-3 text-white transition-colors outline-none invalid:text-blue-500 focus:border-amber-400;
+    @apply bg-background-dark font-lexend m-0 h-full w-full p-0 font-[350];
   }
 }
