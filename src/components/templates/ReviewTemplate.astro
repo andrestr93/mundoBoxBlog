@@ -8,22 +8,22 @@ import ThumbUp from "../icons/ThumbUp.astro";
 import Plus from "../icons/Plus.astro";
 import ThumpDown from "../icons/ThumpDown.astro";
 import Less from "../icons/Less.astro";
+import Ripple from "../icons/Ripple.astro";
+import Shield from "../icons/Shield.astro";
 ---
 
 <article>
-  <section>
-    <div class="w-full">
-      <Image
-        alt="Imagen home"
-        loading="eager"
-        quality="high"
-        format="webp"
-        src={imgzapatilla}
-      />
-    </div>
-
+  <header>
+    <Image
+      alt="Imagen home"
+      loading="eager"
+      quality="high"
+      format="webp"
+      src={imgzapatilla}
+    />
     <h1 class="w-full text-center text-4xl">Nike Metcon review titan</h1>
-
+  </header>
+  <section>
     <div class="flex items-center">
       <Start class="h-12 w-12" />
       <span class="text-primary font-bold">(4.8/5 de 124 reseñas)</span>
@@ -51,12 +51,6 @@ import Less from "../icons/Less.astro";
       </li>
     </ul>
   </section>
-  <li>
-    <p>
-      Here are the biggest technology acquisitions of 2025 so far, in reverse
-      chronological order.
-    </p>
-  </li>
 
   <section>
     <SearchButtonAmazon />
@@ -109,12 +103,19 @@ import Less from "../icons/Less.astro";
     </ul>
   </section>
 
-  <section>
-    <div>
-      <h2 class="text-center text-2xl">Analisis detallado</h2>
+  <section class="m-auto mt-8 mb-8 flex w-[90%] flex-col rounded-2xl p-0.5">
+    <div class="flex flex-row-reverse items-end justify-center">
+      <h2 class="text-3xl text-white">Analisis Detallado</h2>
+      <Ripple class="h-12 w-12" />
     </div>
-    <div></div>
-    <div></div>
-    <div></div>
+
+    <ul class="p-0">
+      <li class="flex justify-start">
+        <div class="flex items-center justify-start">
+          <Shield class="h-12 w-12" aria-hidden="true" />
+          <h3 class="font-body text-2xl font-bold">Durabilidad</h3>
+        </div>
+      </li>
+    </ul>
   </section>
 </article>
