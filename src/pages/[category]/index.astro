@@ -28,18 +28,19 @@ export async function getStaticPaths() {
 const { posts, categoryName } = Astro.props;
 ---
 
-<MainLayout>
-  <h1>{categoryName}</h1>
-  <ul>
+<MainLayout
+  image=""
+  title={`Todo sobre ${categoryName}: Reviews a fondo y Guias de compra`}
+  description=` ¿Necesitas material de ${categoryName}?. Encuentra reviews honestas , comparativas de los mejores modelos y guias detalladas para mejorar tu rendieminto en el Box . Todo lo que un atleta de crossfit necesita saber enta aqui.`
+>
+  <h1 class="text-center text-2xl font-bold">Listado de {categoryName}</h1>
+  <ul class="p-0">
     {
       posts.map((post) => (
         <li>
-          <a href={`${post.data.category.toLowerCase()}/${post.id}`}>
-            {post.data.title}
-          </a>
+          <Card post={post} />
         </li>
       ))
     }
   </ul>
-  <Card />
 </MainLayout>

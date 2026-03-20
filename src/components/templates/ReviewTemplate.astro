@@ -11,6 +11,21 @@ import Less from "../icons/Less.astro";
 import Ripple from "../icons/Ripple.astro";
 import Shield from "../icons/Shield.astro";
 import Bolt from "../icons/Bolt.astro";
+import { propsToFilename } from "astro/assets";
+
+const {
+  title,
+  image,
+  pros,
+  contras,
+  characteristics,
+  category,
+  time,
+  rating,
+  metaDescription,
+  tags,
+  slug,
+} = Astro.props;
 ---
 
 <article>
@@ -20,14 +35,14 @@ import Bolt from "../icons/Bolt.astro";
       loading="eager"
       quality="high"
       format="webp"
-      src={imgzapatilla}
+      src={image}
     />
-    <h1 class="w-full text-center text-4xl">Nike Metcon review titan</h1>
+    <h1 class="w-full text-center text-4xl">{title}</h1>
   </header>
   <section>
     <div class="flex items-center">
       <Start class="h-12 w-12" />
-      <span class="text-primary font-bold">(4.8/5 de 124 reseñas)</span>
+      <span class="text-primary font-bold">(rating)</span>
     </div>
   </section>
 
@@ -38,18 +53,14 @@ import Bolt from "../icons/Bolt.astro";
     </div>
 
     <ul>
-      <li class="flex items-start">
-        <Check class="h-12 w-12 text-green-400" aria-hidden="true" />
-        <p>Aquí tu texto de ventaja competitiva.</p>
-      </li>
-      <li class="flex items-start">
-        <Check class="h-12 w-12 text-green-400" aria-hidden="true" />
-        <p>Aquí tu texto de ventaja competitiva.</p>
-      </li>
-      <li class="flex items-start">
-        <Check class="h-12 w-12 text-green-400" aria-hidden="true" />
-        <p>Aquí tu texto de ventaja competitiva.</p>
-      </li>
+      {
+        characteristics.map((characteristic: string) => (
+          <li class="flex items-start">
+            <Check class="h-12 w-12 text-green-400" aria-hidden="true" />
+            <p>{characteristic}</p>
+          </li>
+        ))
+      }
     </ul>
   </section>
 
@@ -66,18 +77,16 @@ import Bolt from "../icons/Bolt.astro";
     </div>
 
     <ul>
-      <li class="flex items-start">
-        <Plus class="h-12 w-12 text-green-400" aria-hidden="true" />
-        <p>Aquí tu texto de ventaja competitiva.</p>
-      </li>
-      <li class="flex items-start">
-        <Plus class="h-12 w-12 text-green-400" aria-hidden="true" />
-        <p>Aquí tu texto de ventaja competitiva.</p>
-      </li>
-      <li class="flex items-start">
-        <Plus class="h-12 w-12 text-green-400" aria-hidden="true" />
-        <p>Aquí tu texto de ventaja competitiva.</p>
-      </li>
+      <ul>
+        {
+          pros.map((pro: string) => (
+            <li class="flex items-start">
+              <Plus class="h-12 w-12 text-green-400" aria-hidden="true" />
+              <p>{pro}</p>
+            </li>
+          ))
+        }
+      </ul>
     </ul>
   </section>
   <section
@@ -89,18 +98,16 @@ import Bolt from "../icons/Bolt.astro";
     </div>
 
     <ul>
-      <li class="flex items-start">
-        <Less class="h-12 w-12" aria-hidden="true" />
-        <p>Aquí tu texto de ventaja competitiva.</p>
-      </li>
-      <li class="flex items-start">
-        <Less class="h-12 w-12" aria-hidden="true" />
-        <p>Aquí tu texto de ventaja competitiva.</p>
-      </li>
-      <li class="flex items-start">
-        <Less class="h-12 w-12" aria-hidden="true" />
-        <p>Aquí tu texto de ventaja competitiva.</p>
-      </li>
+      <ul>
+        {
+          contras.map((contra: string) => (
+            <li class="flex items-start">
+              <Less class="h-12 w-12 text-green-400" aria-hidden="true" />
+              <p>{contra}</p>
+            </li>
+          ))
+        }
+      </ul>
     </ul>
   </section>
 

@@ -1,97 +1,95 @@
 ---
 import { Image } from "astro:assets";
 import imgzapatilla from "./../images/calzado/zapatillas1.png";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+const { post } = Astro.props;
+
+const { data } = post;
+
+const { title, image, category, time, rating, metaDescription, tags, slug } =
+  data;
 ---
 
-<section class="w-full rounded-2xl">
-  <h2 class="text-2xl font-bold">Listado de Calzado</h2>
-  <ul class="grid list-none grid-cols-1">
-    <li>
-      <article class="p-0 transition-all duration-300 hover:-translate-y-1">
-        <div
-          class="bg-primary/10 overflow-hidden rounded-2xl border border-white/10 shadow-xl shadow-black/50"
-        >
-          <div class="aspect-video overflow-hidden">
-            <Image
-              alt="Nike Metcon"
-              src={imgzapatilla}
-              class="h-full w-full object-cover transition-transform duration-500 hover:scale-110"
-            />
-          </div>
-
-          <div class="flex items-center justify-between p-4">
-            <p
-              class="bg-primary/20 text-primary w-min rounded-lg px-3 py-1 text-xs font-bold tracking-wider uppercase"
-            >
-              Análisis
-            </p>
-            <p class="text-sm text-slate-400">5 min de lectura</p>
-          </div>
-
-          <h3 class="p-0">
-            <a
-              class="hover:text-primary block text-xl font-bold text-white capitalize transition-colors"
-              href="#"
-            >
-              Nike Metcon 9: El análisis definitivo
-            </a>
-          </h3>
-          <p class="line-clamp-2 text-sm">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
-          </p>
-        </div>
-      </article>
-    </li>
-  </ul>
-</section>
-
-<!-----
-
-
-
-
-<a href={href} class="block aspect-video overflow-hidden" aria-label={`Leer review de ${title}`}>
-    <img 
-      src={img} 
-      alt={`Zapatillas de CrossFit ${title}`} 
-      class="w-full h-full object-cover"
-      loading="lazy" 
-    />
-  </a>
-
-  <div class="p-4 flex flex-col flex-grow">
-    
-    <h3 class="font-heading text-xl font-bold uppercase tracking-tight text-white mb-2">
-      <a href={href} class="hover:text-primary transition-colors">
-        {title}
-      </a>
-    </h3>
-
-    <div class="flex items-center gap-1 mb-4 text-sm">
-      <span class="text-yellow-400">★</span>
-      <span class="font-bold text-white">{rating}</span>
-      <span class="text-slate-400 ml-1">(124 reseñas)</span>
-    </div>
-
-    <p class="font-body text-sm text-slate-300 line-clamp-2 mb-4">
-      Analizamos la durabilidad y estabilidad de la nueva {title} tras 3 meses de WODs intensos.
-    </p>
-
-    <div class="mt-auto">
-      <a 
-        href={href} 
-        class="inline-block w-full text-center bg-primary text-black font-black uppercase py-2 rounded-lg text-sm hover:bg-white transition-colors"
+<section class="w-full rounded-2xl p-0">
+  <div class="grid list-none grid-cols-1">
+    <article class="p-0 transition-all duration-300 hover:-translate-y-1">
+      <div
+        class="bg-primary/10 overflow-hidden rounded-2xl border border-white/10 shadow-xl shadow-black/50"
       >
-        Leer Review Completa
-      </a>
-    </div>
+        <div class="aspect-video overflow-hidden">
+          <Image
+            width={720}
+            height={540}
+            alt={title}
+            src={image}
+            class="h-full w-full object-cover transition-transform duration-500 hover:scale-110"
+          />
+        </div>
+
+        <div class="flex items-center justify-between p-4">
+          <p
+            class="bg-primary/20 text-primary font-barlow-condensed w-min rounded-lg px-3 py-1 text-xs tracking-wider uppercase"
+          >
+            {category}
+          </p>
+          <p
+            class="text-primary font-barlow-condensed w-min rounded-lg px-3 py-1 text-xs tracking-wider uppercase"
+          >
+            {time}
+          </p>
+
+          <div class="flex items-end justify-end">
+            <ul class="list-none">
+              {
+                tags.map((tag) => (
+                  <li class="p-0">
+                    <badge class="bg-primary/20 text-primary font-barlow-condensed w-min rounded-lg px-3 py-1 text-xs tracking-wider uppercase">
+                      {tag}
+                    </badge>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+
+        <h3 class="p-0">
+          <a
+            class="hover:text-primary block text-xl font-bold text-white capitalize transition-colors"
+            href={`/${category.toLowerCase()}/${slug}`}
+          >
+            {title}
+          </a>
+        </h3>
+        <p class="line-clamp-2 text-sm">
+          {metaDescription}
+        </p>
+      </div>
+    </article>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org/",
+        "@type": "Review",
+        itemReviewed: {
+          "@type": "Product",
+          name: post.data.title,
+          image: image,
+        },
+        reviewRating: {
+          "@type": "Rating",
+          ratingValue: rating,
+          bestRating: "5",
+        },
+        author: {
+          "@type": "Organization",
+          name: "MundoBox",
+        },
+      })}
+    />
   </div>
---- -->
+</section>
