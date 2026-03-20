@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
+import Card from "../../components/Card.astro";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("blog");
@@ -40,4 +41,5 @@ const { posts, categoryName } = Astro.props;
       ))
     }
   </ul>
+  <Card />
 </MainLayout>
