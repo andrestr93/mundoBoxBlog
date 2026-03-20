@@ -42,7 +42,7 @@
   }
 
   p {
-    @apply leading-relaxed text-slate-300;
+    @apply text-base leading-relaxed text-slate-300;
   }
 
   article section {
