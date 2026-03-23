@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import imgzapatilla from "./../images/calzado/zapatillas1.png";
 import type { CollectionEntry } from "astro:content";
+import Clock from "./icons/Clock.astro";
 
 interface Props {
   post: CollectionEntry<"blog">;
@@ -29,32 +30,33 @@ const { title, image, category, time, rating, metaDescription, tags, slug } =
             class="h-full w-full object-cover transition-transform duration-500 hover:scale-110"
           />
         </div>
-
-        <div class="flex items-center justify-between p-4">
+        <div class="flex items-center justify-between p-0">
           <p
-            class="bg-primary/20 text-primary font-barlow-condensed w-min rounded-lg px-3 py-1 text-xs tracking-wider uppercase"
+            class="bg-primary/20 text-primary font-barlow-condensed h-min w-min rounded-lg px-3 py-1 text-xs tracking-wider uppercase"
           >
             {category}
           </p>
-          <p
-            class="text-primary font-barlow-condensed w-min rounded-lg px-3 py-1 text-xs tracking-wider uppercase"
-          >
-            {time}
-          </p>
-
-          <div class="flex items-end justify-end">
-            <ul class="list-none">
-              {
-                tags.map((tag) => (
-                  <li class="p-0">
-                    <badge class="bg-primary/20 text-primary font-barlow-condensed w-min rounded-lg px-3 py-1 text-xs tracking-wider uppercase">
-                      {tag}
-                    </badge>
-                  </li>
-                ))
-              }
-            </ul>
+          <div class="flex items-center justify-end p-0">
+            <Clock class="h-10 w-10" />
+            <p
+              class="text-primary font-barlow-condensed w-max rounded-lg px-3 py-1 text-xs tracking-wider uppercase"
+            >
+              {time}
+            </p>
           </div>
+        </div>
+        <div class="flex p-0">
+          <ul class="flex w-min list-none gap-1 p-0">
+            {
+              tags.map((tag) => (
+                <li class="p-0">
+                  <badge class="bg-primary/20 text-primary font-barlow-condensed w-min rounded-lg px-3 py-1 text-xs tracking-wider uppercase">
+                    {tag}
+                  </badge>
+                </li>
+              ))
+            }
+          </ul>
         </div>
 
         <h3 class="p-0">

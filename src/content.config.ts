@@ -13,7 +13,7 @@ const blog = defineCollection({
         descriptions: z.array(z.string()),
         characteristics: z.array(z.string()),
         category: z.enum(['Calzado', 'Combas', 'Calleras']),
-        tags: z.array(z.string()),
+        tags: z.array(z.string()).max(4),
         type: z.enum(['Comparativas', 'Reviews', 'Rankings', 'Guias de Solucion']),
         image: image(),
         rating: z.string(),
