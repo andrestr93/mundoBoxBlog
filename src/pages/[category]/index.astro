@@ -30,11 +30,11 @@ const { posts, categoryName } = Astro.props;
 
 <MainLayout
   image=""
-  title={`Todo sobre ${categoryName}: Reviews a fondo y Guias de compra`}
-  description=` ¿Necesitas material de ${categoryName}?. Encuentra reviews honestas , comparativas de los mejores modelos y guias detalladas para mejorar tu rendieminto en el Box . Todo lo que un atleta de crossfit necesita saber enta aqui.`
+  title={`Mejores ${categoryName} de Crossfit 2026 - Comparativa y Opiniones | MundoBox`}
+  description=` ¿Buscas los mejores complementos para Crossfit? Analizamos los mejores para que tu solo te tengas que preocupar  `
 >
   <h1 class="text-center text-2xl font-bold">Listado de {categoryName}</h1>
-  <ul class="p-0">
+  <ul class="grid p-0 md:grid-cols-3 lg:grid-cols-4">
     {
       posts.map((post) => (
         <li>

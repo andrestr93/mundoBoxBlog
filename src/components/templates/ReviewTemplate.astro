@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-import imgzapatilla from "./../../images/calzado/zapatillas1.png";
 import Start from "../icons/Start.astro";
 import Check from "../icons/Check.astro";
 import SearchButtonAmazon from "./../../components/SearchButtonAmazon.astro";
@@ -11,7 +10,7 @@ import Less from "../icons/Less.astro";
 import Ripple from "../icons/Ripple.astro";
 import Shield from "../icons/Shield.astro";
 import Bolt from "../icons/Bolt.astro";
-import { propsToFilename } from "astro/assets";
+import Report from "../icons/Report.astro";
 
 const {
   title,
@@ -19,157 +18,133 @@ const {
   pros,
   contras,
   characteristics,
-  category,
-  time,
+  reviewsCount,
   rating,
-  metaDescription,
-  tags,
-  slug,
+  comfort,
+  performance,
+  durability,
 } = Astro.props;
 ---
 
 <article>
-  <header>
-    <Image
-      alt="Imagen home"
-      loading="eager"
-      quality="high"
-      format="webp"
-      src={image}
-    />
-    <h1 class="w-full text-center text-4xl">{title}</h1>
-  </header>
-  <section>
-    <div class="flex items-center">
-      <Start class="h-12 w-12" />
-      <span class="text-primary font-bold">(rating)</span>
-    </div>
-  </section>
-
-  <section class="bg-primary/10 m-auto flex w-[90%] flex-col rounded-2xl p-0.5">
-    <div class="flex flex-row-reverse items-center">
-      <h2 class="text-2xl text-white">Caracteristicas Clave</h2>
-      <Check class="h-12 w-12" />
-    </div>
-
-    <ul>
-      {
-        characteristics.map((characteristic: string) => (
-          <li class="flex items-start">
-            <Check class="h-12 w-12 text-green-400" aria-hidden="true" />
-            <p>{characteristic}</p>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-
-  <section>
-    <SearchButtonAmazon />
-  </section>
-
-  <section
-    class="m-auto mt-8 mb-8 flex w-[90%] flex-col rounded-2xl bg-green-950/30 p-0.5"
+  <header
+    class="grid grid-cols-1 items-center justify-center md:grid-cols-2 lg:grid-cols-3"
   >
-    <div class="flex flex-row-reverse items-center">
-      <h2 class="text-2xl text-white">Pros</h2>
-      <ThumbUp class="h-12 w-12" />
+    <div>
+      <Image
+        quality="high"
+        format="webp"
+        widths={[768, 1024]}
+        alt=`Analisis y review ${title}`
+        class="h-132.75 w-full object-cover"
+        loading="eager"
+        src={image}
+      />
     </div>
+    <div
+      class="bg-primary/10 md:w-1xl m-auto grid w-full grid-cols-1 rounded-2xl p-0.5"
+    >
+      <h1 class="text-bold w-full text-3xl">
+        {title}
+      </h1>
+      <div class="flex items-center">
+        <Start class="h-12 w-12" />
+        <span class="text-primary text-fluid-body font-bold"
+          >{rating}/{reviewsCount}</span
+        >
+      </div>
+      <div class="flex flex-row-reverse items-center">
+        <p class="p-0 text-lg font-bold text-white">Caracteristicas Clave</p>
+        <Report class="h-14 w-14" />
+      </div>
 
-    <ul>
+      <ul class="p-0">
+        {
+          characteristics.map((characteristic: string) => (
+            <li class="flex items-start">
+              <Check
+                class="text-fluid-body h-12 w-12 text-green-400"
+                aria-hidden="true"
+              />
+              <p class="text-sm">{characteristic}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <SearchButtonAmazon />
+    </div>
+  </header>
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    <div
+      class="m-auto mt-8 mb-8 flex w-full flex-col rounded-2xl bg-green-950/50 p-0.5"
+    >
+      <div class="flex w-full flex-row-reverse items-center">
+        <h2 class="text-lg font-bold text-green-500">Pros</h2>
+        <ThumbUp class="h-12 w-12" />
+      </div>
+
       <ul>
         {
           pros.map((pro: string) => (
             <li class="flex items-start">
               <Plus class="h-12 w-12 text-green-400" aria-hidden="true" />
-              <p>{pro}</p>
+              <p class="text-sm font-bold">{pro}</p>
             </li>
           ))
         }
       </ul>
-    </ul>
-  </section>
-  <section
-    class="m-auto mt-8 mb-8 flex w-[90%] flex-col rounded-2xl bg-red-950/30 p-0.5"
-  >
-    <div class="flex flex-row-reverse items-center">
-      <h2 class="text-2xl text-white">Contras</h2>
-      <ThumpDown class="h-12 w-12" />
     </div>
+    <div
+      class="m-auto mt-8 mb-8 flex w-full flex-col rounded-2xl bg-red-950/50 p-0.5"
+    >
+      <div class="flex w-full flex-row-reverse items-center">
+        <h2 class="text-lg font-bold text-red-500">Contras</h2>
+        <ThumpDown class="h-12 w-12" />
+      </div>
 
-    <ul>
       <ul>
         {
           contras.map((contra: string) => (
             <li class="flex items-start">
-              <Less class="h-12 w-12 text-green-400" aria-hidden="true" />
-              <p>{contra}</p>
+              <Less class="h-12 w-12 text-red-400" aria-hidden="true" />
+              <p class="text-sm font-bold">{contra}</p>
             </li>
           ))
         }
       </ul>
-    </ul>
+    </div>
   </section>
 
   <section
     class="bg-primary/10 m-auto mt-8 mb-8 flex w-[90%] flex-col rounded-2xl p-0.5"
   >
     <div class="flex flex-row-reverse items-end justify-center">
-      <h2 class="text-3xl text-white">Analisis Detallado</h2>
+      <h2 class="text-lg font-bold text-white">Analisis Detallado</h2>
       <Ripple class="h-12 w-12" />
     </div>
 
     <ul>
       <li class="flex flex-col">
-        <div class="flex p-0">
+        <div class="flex items-center p-0">
           <Shield class="h-12 w-12" aria-hidden="true" />
-          <h3 class="font-body text-2xl font-bold">Durabilidad</h3>
+          <h3 class="text-base font-bold">Durabilidad</h3>
         </div>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
-        </p>
+
+        <p>{durability}</p>
       </li>
       <li class="flex flex-col">
-        <div class="flex p-0">
+        <div class="flex items-center p-0">
           <Ripple class="h-12 w-12" aria-hidden="true" />
-          <h3 class="font-body text-2xl font-bold">Comodidad</h3>
+          <h3 class="text-base font-bold">Comodidad</h3>
         </div>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
-        </p>
+        <p>{comfort}</p>
       </li>
       <li class="flex flex-col">
-        <div class="flex p-0">
+        <div class="flex items-center p-0">
           <Bolt class="h-12 w-12" aria-hidden="true" />
-          <h3 class="font-body text-2xl font-bold">Rendimiento</h3>
+          <h3 class="text-base font-bold">Rendimiento</h3>
         </div>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
-        </p>
+        <p>{performance}</p>
       </li>
     </ul>
   </section>

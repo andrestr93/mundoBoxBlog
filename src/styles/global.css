@@ -34,15 +34,20 @@
     @apply w-full px-1 py-3 text-white;
   }
 
-  h1,
-  h2,
-  a,
-  h3 {
-    @apply font-barlow-condensed tracking-wider;
+  h1 {
+    @apply text-4xl font-extrabold;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+
+  a {
+    @apply font-barlow-condensed font-bold;
   }
 
   p {
-    @apply text-base leading-relaxed text-slate-300;
+    @apply text-sm leading-relaxed font-bold text-slate-300;
   }
 
   article section {
@@ -50,6 +55,6 @@
   }
 
   body {
-    @apply bg-background-dark font-lexend m-0 h-full w-full p-0 font-[350];
+    @apply font-lexend m-0 h-full w-full bg-black p-0;
   }
 }

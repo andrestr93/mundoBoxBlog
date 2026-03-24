@@ -1,0 +1,17 @@
+# Robots.txt para MundoBox.blog
+User-agent: *
+Allow: /
+
+# Bloquear carpetas de sistema de Astro
+Disallow: /_astro/
+Disallow: /chunks/
+
+# Evitar rastreo de enlaces de Amazon (si usas un redireccionador tipo /go/amazon)
+# Disallow: /go/
+
+# Indicar el mapa del sitio a Google
+Sitemap: https://mundobox.blog/sitemap-index.xml
+
+# Bloquear bots de IA que solo roban contenido (opcional pero recomendado)
+User-agent: GPTBot
+Disallow: /

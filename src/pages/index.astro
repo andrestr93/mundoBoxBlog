@@ -1,12 +1,32 @@
 ---
-import Categories from "../components/Categories.astro";
+import { getCollection } from "astro:content";
+import Card from "../components/Card.astro";
 import Presentation from "../components/Presentation.astro";
 import MainLayout from "../layouts/MainLayout.astro";
-import Articles from "./articulos.astro";
+const imageDefault = "/default-og.png";
+const posts = await getCollection("blog");
+
+const lastPosts = posts.sort((a, b) => {
+  return a.data.pubDate.valueOf() - b.data.pubDate.valueOf();
+});
+
+const latestPosts = lastPosts.slice(0, 3);
 ---
 
-<MainLayout>
+<MainLayout
+  title={"MundoBox | Reviews y Guías de Equipamiento para Crossfit 2026"}
+  description={"Análisis a fondo del mejor material para Crossfit. Comparamos zapatillas, combas, calleras y accesorios para que elijas el equipo perfecto para tu próximo WOD."}
+  image={imageDefault}
+>
   <Presentation />
-  <Articles />
-  <Categories />
+
+  <ul class="grid p-0 md:grid-cols-3 lg:grid-cols-4">
+    {
+      latestPosts.map((post) => (
+        <li class="p-0">
+          <Card post={post} />
+        </li>
+      ))
+    }
+  </ul>
 </MainLayout>
