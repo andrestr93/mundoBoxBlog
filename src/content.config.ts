@@ -11,7 +11,7 @@ const blog = defineCollection({
         pubDate: z.date(),
         metaTitle: z.string().max(60),
         metaDescription: z.string().max(160),
-        characteristics: z.array(z.string().max(100)),
+        characteristics: z.array(z.string().max(100)).max(4),
         durability: z.string(),
         performance: z.string(),
         comfort: z.string(),
@@ -22,8 +22,8 @@ const blog = defineCollection({
         rating: z.string(),
         reviewsCount: z.string(),
         amazonLink: z.string().url(),
-        pros: z.array(z.string()),
-        contras: z.array(z.string()),
+        pros: z.array(z.string().max(50)),
+        contras: z.array(z.string().max(50)),
 
     }),
 });

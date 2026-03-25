@@ -28,7 +28,7 @@ const {
 
 <article>
   <header
-    class="grid grid-cols-1 items-center justify-center md:grid-cols-2 lg:grid-cols-3"
+    class="mx-auto grid max-w-2xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
   >
     <div>
       <Image
@@ -36,25 +36,21 @@ const {
         format="webp"
         widths={[768, 1024]}
         alt=`Analisis y review ${title}`
-        class="h-132.75 w-full object-cover"
+        class="h-full w-full object-cover"
         loading="eager"
         src={image}
       />
     </div>
-    <div
-      class="bg-primary/10 md:w-1xl m-auto grid w-full grid-cols-1 rounded-2xl p-0.5"
-    >
-      <h1 class="text-bold w-full text-3xl">
+    <div class="bg-primary/10 rounded-2xl">
+      <h1>
         {title}
       </h1>
       <div class="flex items-center">
-        <Start class="h-12 w-12" />
-        <span class="text-primary text-fluid-body font-bold"
-          >{rating}/{reviewsCount}</span
-        >
+        <Start class="h-10 w-10" />
+        <p class="text-primary font-bold">{rating}/{reviewsCount}</p>
       </div>
       <div class="flex flex-row-reverse items-center">
-        <p class="p-0 text-lg font-bold text-white">Caracteristicas Clave</p>
+        <p class="p-0 font-bold text-white">Caracteristicas Clave</p>
         <Report class="h-14 w-14" />
       </div>
 
@@ -62,11 +58,8 @@ const {
         {
           characteristics.map((characteristic: string) => (
             <li class="flex items-start">
-              <Check
-                class="text-fluid-body h-12 w-12 text-green-400"
-                aria-hidden="true"
-              />
-              <p class="text-sm">{characteristic}</p>
+              <Check class="h-12 w-12 text-green-400" aria-hidden="true" />
+              <p>{characteristic}</p>
             </li>
           ))
         }
@@ -74,40 +67,38 @@ const {
       <SearchButtonAmazon />
     </div>
   </header>
-  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-    <div
-      class="m-auto mt-8 mb-8 flex w-full flex-col rounded-2xl bg-green-950/50 p-0.5"
-    >
-      <div class="flex w-full flex-row-reverse items-center">
-        <h2 class="text-lg font-bold text-green-500">Pros</h2>
+  <section
+    class="mx-auto grid max-w-2xl grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3"
+  >
+    <div class="bg-green-950/50 px-10">
+      <div class="flex flex-row-reverse items-center p-0">
+        <h2 class="font-bold text-green-500">Pros</h2>
         <ThumbUp class="h-12 w-12" />
       </div>
 
-      <ul>
+      <ul class="p-0">
         {
           pros.map((pro: string) => (
-            <li class="flex items-start">
+            <li class="flex items-center p-0">
               <Plus class="h-12 w-12 text-green-400" aria-hidden="true" />
-              <p class="text-sm font-bold">{pro}</p>
+              <p>{pro}</p>
             </li>
           ))
         }
       </ul>
     </div>
-    <div
-      class="m-auto mt-8 mb-8 flex w-full flex-col rounded-2xl bg-red-950/50 p-0.5"
-    >
-      <div class="flex w-full flex-row-reverse items-center">
-        <h2 class="text-lg font-bold text-red-500">Contras</h2>
+    <div class="bg-red-950/50">
+      <div class="flex flex-row-reverse items-center p-0">
+        <h2 class="font-bold text-red-500">Contras</h2>
         <ThumpDown class="h-12 w-12" />
       </div>
 
-      <ul>
+      <ul class="p-0">
         {
           contras.map((contra: string) => (
-            <li class="flex items-start">
+            <li class="flex items-center p-0">
               <Less class="h-12 w-12 text-red-400" aria-hidden="true" />
-              <p class="text-sm font-bold">{contra}</p>
+              <p>{contra}</p>
             </li>
           ))
         }
@@ -116,18 +107,18 @@ const {
   </section>
 
   <section
-    class="bg-primary/10 m-auto mt-8 mb-8 flex w-[90%] flex-col rounded-2xl p-0.5"
+    class="bg-primary/10 mx-auto mt-8 mb-8 flex max-w-xl flex-col rounded-2xl p-0.5"
   >
     <div class="flex flex-row-reverse items-end justify-center">
-      <h2 class="text-lg font-bold text-white">Analisis Detallado</h2>
+      <h2 class="font-bold text-white">Analisis Detallado</h2>
       <Ripple class="h-12 w-12" />
     </div>
 
-    <ul>
+    <ul class="p-5">
       <li class="flex flex-col">
         <div class="flex items-center p-0">
           <Shield class="h-12 w-12" aria-hidden="true" />
-          <h3 class="text-base font-bold">Durabilidad</h3>
+          <h3 class="font-bold">Durabilidad</h3>
         </div>
 
         <p>{durability}</p>
@@ -135,14 +126,14 @@ const {
       <li class="flex flex-col">
         <div class="flex items-center p-0">
           <Ripple class="h-12 w-12" aria-hidden="true" />
-          <h3 class="text-base font-bold">Comodidad</h3>
+          <h3 class="font-bold">Comodidad</h3>
         </div>
         <p>{comfort}</p>
       </li>
       <li class="flex flex-col">
         <div class="flex items-center p-0">
           <Bolt class="h-12 w-12" aria-hidden="true" />
-          <h3 class="text-base font-bold">Rendimiento</h3>
+          <h3 class="font-bold">Rendimiento</h3>
         </div>
         <p>{performance}</p>
       </li>
