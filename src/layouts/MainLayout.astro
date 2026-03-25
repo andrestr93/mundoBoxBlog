@@ -7,11 +7,44 @@ import "../styles/global.css";
 interface Props {
   title: string;
   description: string;
-  image: string;
+  image?: string;
+  rating?: string;
+  reviewsCount?: string;
 }
 
-const { title, description, image = "/default-og.png" } = Astro.props;
+const {
+  title,
+  description,
+  image = "/default-og.png",
+  rating,
+  reviewsCount,
+} = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImageURL = new URL(image, Astro.site);
+
+// Generamos el JSON-LD solo si hay rating
+const schema = rating
+  ? {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      name: title,
+      image: socialImageURL,
+      description: description,
+      brand: {
+        "@type": "Brand",
+        name: "MundoBox",
+      },
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: rating,
+        reviewCount: reviewsCount || 1,
+      },
+      offers: {
+        "@type": "Offer",
+        availability: "https://schema.org/InStock",
+      },
+    }
+  : null;
 ---
 
 <!doctype html>
@@ -31,20 +64,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, Astro.url)} />
+    <meta property="og:image" content={socialImageURL} />
 
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL(image, Astro.url)} />
+    <meta property="twitter:image" content={socialImageURL} />
     <ClientRouter />
-    <title>{title}</title>
   </head>
   <body class="grid">
     <Header delay="0.1s" />
 
-    <main class="reveal p-0" style="animation-delay: 0.4s;">
+    <main class="p-0" style="animation-delay: 0.4s;">
       <slot />
     </main>
     <Footer delay="0.6s" />

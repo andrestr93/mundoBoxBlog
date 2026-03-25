@@ -26,6 +26,7 @@ const {
   contras,
   image,
   rating,
+  reviewsCount,
   type,
   metaTitle,
   metaDescription,
@@ -33,7 +34,13 @@ const {
 const { Content } = await render(post);
 ---
 
-<MainLayout title={metaTitle} description={metaDescription} image={image.src}>
+<MainLayout
+  title={metaTitle}
+  description={metaDescription}
+  image={image.src}
+  rating={rating}
+  reviewsCount={reviewsCount}
+>
   {
     post.data.type === "Reviews" && (
       <ReviewTemplate {...post.data}>

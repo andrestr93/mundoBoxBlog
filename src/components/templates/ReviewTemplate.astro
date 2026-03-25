@@ -21,6 +21,7 @@ const {
   reviewsCount,
   rating,
   comfort,
+  metaTitle,
   performance,
   durability,
 } = Astro.props;
@@ -35,8 +36,9 @@ const {
         quality="high"
         format="webp"
         widths={[768, 1024]}
-        alt=`Analisis y review ${title}`
+        alt=` ${metaTitle}`
         class="h-full w-full object-cover"
+        fetchpriority={"high"}
         loading="eager"
         src={image}
       />

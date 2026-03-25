@@ -17,7 +17,9 @@ const { title, image, category, time, rating, metaDescription, tags, slug } =
 
 <section class="w-full rounded-2xl">
   <div class="grid list-none grid-cols-1">
-    <article class="transition-all duration-300 hover:-translate-y-1">
+    <article
+      class="group relative transition-all duration-300 hover:-translate-y-1"
+    >
       <div
         class="hover:bg-primary/10 overflow-hidden rounded-2xl border border-white/10 shadow-xl shadow-black/50"
       >
@@ -50,20 +52,22 @@ const { title, image, category, time, rating, metaDescription, tags, slug } =
             {
               tags.map((tag) => (
                 <li class="p-0">
-                  <badge class="bg-background-dark border-primary/30 text-primary font-barlow-condensed border-2 px-3 py-1 text-xs tracking-wider uppercase">
+                  <span class="bg-background-dark border-primary/30 text-primary font-barlow-condensed border-2 px-3 py-1 text-xs tracking-wider uppercase">
                     {tag}
-                  </badge>
+                  </span>
                 </li>
               ))
             }
           </ul>
         </div>
 
-        <h3 class="p-0">
+        <h3>
           <a
-            class="block text-xl font-bold text-white capitalize transition-colors"
+            class="font-bold text-white capitalize transition-colors"
             href={`/${category.toLowerCase()}/${slug}`}
           >
+            <span class="absolute inset-0" aria-hidden="true"></span>
+
             {title}
           </a>
         </h3>
