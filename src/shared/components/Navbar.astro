@@ -9,14 +9,11 @@ const categories = [
 ---
 
 <nav
-  class="flex w-full flex-row items-center justify-center gap-6 p-0 text-xl capitalize"
+  class="flex w-full flex-row items-center justify-center gap-6 p-0 text-2xl capitalize"
 >
   {
     categories.map((cat) => (
-      <a
-        href={`/${cat}`}
-        class="hover:text-primary hover:decoration-primary underline underline-offset-4"
-      >
+      <a href={`/${cat}`} class="hover:text-primary">
         {cat}
       </a>
     ))
