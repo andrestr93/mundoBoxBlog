@@ -66,6 +66,12 @@ const schema = rating
     <meta property="og:description" content={description} />
     <meta property="og:image" content={socialImageURL} />
 
+    {/* Inyección del Schema de Google */}
+    {
+      schema && (
+        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+      )
+    }
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={title} />
@@ -73,7 +79,7 @@ const schema = rating
     <meta property="twitter:image" content={socialImageURL} />
     <ClientRouter />
   </head>
-  <body class="grid">
+  <body class="grid w-full">
     <Header delay="0.1s" />
 
     <main class="p-0" style="animation-delay: 0.4s;">

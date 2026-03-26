@@ -19,7 +19,7 @@ const blog = defineCollection({
         tags: z.array(z.string()).max(4),
         type: z.enum(['Comparativas', 'Reviews', 'Rankings', 'Guias de Solucion']),
         image: image(),
-        rating: z.string(),
+        rating: z.number(),
         reviewsCount: z.string(),
         amazonLink: z.string().url(),
         pros: z.array(z.string().max(50)),
