@@ -5,8 +5,8 @@ import Header from "../components/Header.astro";
 import "../styles/global.css";
 
 interface Props {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   image?: string;
   rating?: number;
   reviewsCount?: string;
@@ -82,7 +82,7 @@ const schema = rating
   <body>
     <Header delay="0.1s" />
 
-    <main class="reveal p-0" style="animation-delay: 0.4s;">
+    <main class="reveal mb-5 p-0" style="animation-delay: 0.4s;">
       <slot />
     </main>
     <Footer delay="0.6s" />

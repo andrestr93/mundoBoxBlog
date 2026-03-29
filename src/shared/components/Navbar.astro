@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-
+import Menu from "../../components/icons/Menu.astro";
 const posts = await getCollection("blog");
 
 const categories = [
@@ -9,15 +9,62 @@ const categories = [
 ---
 
 <nav
-  class="flex w-full flex-row items-center justify-center gap-6 p-0 text-2xl capitalize"
+  class="hidden items-center gap-8 text-sm font-bold tracking-widest text-white uppercase md:flex"
 >
   {
     categories.map((cat) => (
-      <a href={`/${cat}`} class="hover:text-primary">
+      <a
+        href={`/categoria/${cat.toLowerCase()}`}
+        class="hover:text-primary transition-colors"
+      >
         {cat}
       </a>
     ))
   }
-  <a> prueba </a>
-  <a>prueba</a>
 </nav>
+
+<div class="relative border-white/10 text-white">
+  <button id="boton-menu" class="flex justify-end focus:outline-none md:hidden">
+    <Menu class="h-12 w-12" />
+  </button>
+
+  <nav
+    id="caja-menu"
+    class="bg-primary absolute top-full z-[100] hidden w-full border-white/10 shadow-2xl md:hidden"
+  >
+    <ul class="flex flex-col text-sm font-bold tracking-widest uppercase">
+      <li class="text-white">
+        <a
+          href="/zapatillas"
+          class="block border-b border-white/5 p-6 hover:bg-white/5"
+          >Zapatillas</a
+        >
+      </li>
+      <li>
+        <a
+          href="/accesorios"
+          class="block border-b border-white/5 p-6 hover:bg-white/5"
+          >Accesorios</a
+        >
+      </li>
+      <li><a href="/guias" class="block p-6 hover:bg-white/5">Guías</a></li>
+    </ul>
+  </nav>
+</div>
+<script>
+  // Función para que funcione incluso al navegar entre páginas en Astro
+  const prepararMenu = () => {
+    const boton = document.getElementById("boton-menu");
+    const caja = document.getElementById("caja-menu");
+
+    boton?.addEventListener("click", () => {
+      // Abre o cierra el menú
+      caja?.classList.toggle("hidden");
+    });
+  };
+
+  // Inicializar
+  prepararMenu();
+  // Si usas transiciones de página en Astro, esto lo reinicia al cambiar de URL
+  document.addEventListener("astro:after-swap", prepararMenu);
+</script>
