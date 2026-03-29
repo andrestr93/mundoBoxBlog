@@ -1,0 +1,16 @@
+---
+import Navbar from "../shared/components/Navbar.astro";
+import Logo from "../shared/components/Logo.astro";
+const { class: className, delay = "0s" } = Astro.props;
+---
+
+<header
+  class:list={["reveal w-full", className]}
+  style={`animation-delay: ${delay};`}
+>
+  <div class="flex w-full flex-row items-center justify-center">
+    <Logo />
+
+    <Navbar />
+  </div>
+</header>

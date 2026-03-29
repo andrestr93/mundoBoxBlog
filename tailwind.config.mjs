@@ -1,22 +1,16 @@
-// @ts-check
 import { defineConfig } from "astro/config";
-
+import sitemap from "@astrojs/sitemap"; // Debe aparecer aquí
 import tailwindcss from "@tailwindcss/vite";
-
 import mdx from "@astrojs/mdx";
 
-import sitemap from "@astrojs/sitemap";
-
-import cloudflare from "@astrojs/cloudflare";
-
-// https://astro.build/config
 export default defineConfig({
-  site: "http://localhost:4321/",
+  // SUSTITUYE POR TU DOMINIO REAL
+  site: "https://mundobox.blog",
 
   vite: {
     plugins: [tailwindcss()],
   },
 
+  // El orden de las integraciones no suele afectar, pero déjalas así:
   integrations: [mdx(), sitemap()],
-  adapter: cloudflare(),
 });

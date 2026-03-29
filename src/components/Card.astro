@@ -1,0 +1,106 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import Clock from "./icons/Clock.astro";
+import Arrow from "./icons/arrow.astro";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+const { post } = Astro.props;
+
+const { data } = post;
+
+const { title, image, category, time, rating, metaDescription, tags, slug } =
+  data;
+---
+
+<section class="rounded-2xl">
+  <div>
+    <article
+      class="group relative transition-all duration-300 hover:-translate-y-1"
+    >
+      <div
+        class="hover:bg-primary/10 overflow-hidden rounded-2xl border border-white/10 shadow-xl shadow-black/50"
+      >
+        <div class="aspect-video overflow-hidden">
+          <Image
+            width={720}
+            height={540}
+            alt={title}
+            src={image}
+            class="h-full w-full object-cover"
+          />
+        </div>
+        <div class="flex items-center">
+          <p
+            class="bg-primary/20 text-primary font-barlow-condensed h-min w-min rounded-lg px-3 py-1 tracking-wider uppercase"
+          >
+            {category}
+          </p>
+          <div class="flex items-center justify-end p-0">
+            <Clock class="h-12 w-12" />
+            <p
+              class="text-primary font-barlow-condensed text-md w-fit rounded-lg text-right tracking-wider uppercase"
+            >
+              {time}
+            </p>
+          </div>
+        </div>
+
+        <ul class="flex w-fit list-none gap-1 p-0">
+          {
+            tags.map((tag) => (
+              <li class="p-0">
+                <span class="bg-background-dark border-primary/30 text-primary font-barlow-condensed border-2 px-3 py-1 tracking-wider uppercase">
+                  {tag}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+
+        <h3>
+          <a
+            class="font-bold text-white capitalize transition-colors"
+            href={`/${category.toLowerCase()}/${slug}`}
+          >
+            <span class="absolute inset-0" aria-hidden="true"></span>
+
+            {title}
+          </a>
+        </h3>
+        <p class="font-barlow-condensed text-slate-300">
+          {metaDescription}
+        </p>
+        <div class="flex items-center justify-start gap-0">
+          <p class="font-barlow-condensed w-fit text-lg font-bold uppercase">
+            Leer articulo
+          </p>
+          <p class="w-auto"><Arrow class="h-10" /></p>
+        </div>
+      </div>
+    </article>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org/",
+        "@type": "Review",
+        itemReviewed: {
+          "@type": "Product",
+          name: post.data.title,
+          image: image,
+        },
+        reviewRating: {
+          "@type": "Rating",
+          ratingValue: rating,
+          bestRating: "5",
+        },
+        author: {
+          "@type": "Organization",
+          name: "MundoBox",
+        },
+      })}
+    />
+  </div>
+</section>

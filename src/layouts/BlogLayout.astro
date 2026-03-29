@@ -1,0 +1,13 @@
+---
+import { ClientRouter } from "astro:transitions";
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <body class="grid grid-cols-1">
+    <main class="reveal p-0" style="animation-delay: 0.4s;">
+      <slot />
+    </main>
+  </body>
+</html>

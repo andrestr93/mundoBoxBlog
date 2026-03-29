@@ -1,0 +1,41 @@
+---
+// src/pages/[category]/[slug].astro
+import { getCollection, render } from "astro:content";
+import ReviewTemplate from "../../components/templates/ReviewTemplate.astro";
+import MainLayout from "../../layouts/MainLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+
+  return posts.map((post) => ({
+    params: {
+      // 1. Rellena la carpeta [category]
+      category: post.data.category.toLowerCase().replace(/\s+/g, "-"),
+      // 2. Rellena el archivo [slug].astro (usa el nombre del archivo mdx)
+      slug: post.id,
+    },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+
+const { image, rating, reviewsCount, metaTitle, metaDescription } = post.data;
+const { Content } = await render(post);
+---
+
+<MainLayout
+  title={metaTitle}
+  description={metaDescription}
+  image={image.src}
+  rating={rating}
+  reviewsCount={reviewsCount}
+>
+  {
+    post.data.type === "Reviews" && (
+      <ReviewTemplate {...post.data}>
+        <Content />
+      </ReviewTemplate>
+    )
+  }
+</MainLayout>

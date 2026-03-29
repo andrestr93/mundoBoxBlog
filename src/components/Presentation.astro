@@ -1,0 +1,36 @@
+---
+import { Image } from "astro:assets";
+import imgPresentation from "../images/presentation.png";
+const currentYear = new Date().getFullYear();
+---
+
+<section class="flex flex-col items-center p-0">
+  <div class="relative h-full w-full max-w-5xl rounded-2xl md:aspect-auto">
+    <Image
+      alt="Portada MundoBox | blog sobre complementos Crosffit"
+      loading="eager"
+      quality="high"
+      format="webp"
+      src={imgPresentation}
+      class="h-full w-full object-cover opacity-80"
+      widths={[768, 1024]}
+      sizes="100vw"
+      alt="Atleta de Crossfit entrenando en el box con material de MundoBox"
+      fetchpriority="high"
+    />
+
+    <div
+      class="absolute inset-0 flex flex-col items-center justify-center px-4 text-center"
+    >
+      <h1
+        class="font-barlow-condensed text-2xl font-extrabold tracking-tighter md:text-5xl"
+      >
+        DOMINA EL BOX CON EL <span class="text-primary">MEJOR EQUIPAMIENTO</span
+        >
+        <p class="font-extralight text-white md:text-4xl">
+          Reviews y Guías de Material para Crossfit {currentYear}
+        </p>
+      </h1>
+    </div>
+  </div>
+</section>

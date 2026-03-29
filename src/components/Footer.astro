@@ -1,0 +1,20 @@
+---
+import Logo from "../shared/components/Logo.astro";
+import NavbarFooter from "../shared/components/NavbarFooter.astro";
+
+const { class: className, delay = "0s" } = Astro.props;
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class:list={["reveal", className]} style={`animation-delay: ${delay};`}>
+  <section class="flex w-full flex-row">
+    <Logo />
+    <NavbarFooter />
+  </section>
+  <section class="flex items-center justify-center">
+    <p class="font-barlow-condensed text-center">
+      &copy; {currentYear} MundoBox — Todos los derechos reservados.
+    </p>
+  </section>
+</footer>

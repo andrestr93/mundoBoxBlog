@@ -1,0 +1,20 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+const blogPosts = await getCollection("blog");
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+---
+
+<h1>My posts</h1>
+<ul>
+  {
+    blogPosts.map((post) => (
+      <li>
+        <a href={`${post.data.category.toLowerCase()}/${post.id}`}>
+          {post.data.title}
+        </a>
+      </li>
+    ))
+  }
+</ul>
