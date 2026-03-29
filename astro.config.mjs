@@ -7,12 +7,16 @@ import mdx from "@astrojs/mdx";
 
 import sitemap from "@astrojs/sitemap";
 
+import cloudflare from "@astrojs/cloudflare";
+
 // https://astro.build/config
 export default defineConfig({
   site: "http://localhost:4321/",
+
   vite: {
     plugins: [tailwindcss()],
   },
 
   integrations: [mdx(), sitemap()],
+  adapter: cloudflare(),
 });
