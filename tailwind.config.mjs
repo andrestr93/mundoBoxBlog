@@ -13,4 +13,8 @@ export default defineConfig({
 
   // El orden de las integraciones no suele afectar, pero déjalas así:
   integrations: [mdx(), sitemap()],
+  image: {
+    // 2. Esto le dice a Astro: "No proceses imágenes en el Worker"
+    service: passthroughImageService(),
+  },
 });
