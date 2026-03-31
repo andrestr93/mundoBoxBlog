@@ -20,4 +20,11 @@ export default defineConfig({
 
   integrations: [mdx(), sitemap()],
   adapter: cloudflare(),
+  image: {
+    // Esto le dice a Astro: "Optimiza tú las imágenes usando Sharp
+    // durante el build, no le pidas nada a Cloudflare luego"
+    service: {
+      entrypoint: "astro/assets/services/sharp",
+    },
+  },
 });
