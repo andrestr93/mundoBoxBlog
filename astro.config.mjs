@@ -17,6 +17,10 @@ export default defineConfig({
   adapter: cloudflare({
     imageService: "passthrough",
   }),
+  build: {
+    // Aquí le decimos a Astro: "No crees la carpeta _astro, crea una llamada assets"
+    assets: "assets",
+  },
 
   vite: {
     plugins: [tailwindcss()],
