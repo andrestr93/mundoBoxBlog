@@ -31,7 +31,7 @@
 
 @layer base {
   * {
-    @apply m-0 w-full p-0 px-1 py-3 text-white;
+    @apply mx-auto w-full px-1 py-3 text-white;
   }
 
   h1,
