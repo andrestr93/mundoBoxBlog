@@ -13,13 +13,16 @@ import cloudflare from "@astrojs/cloudflare";
 export default defineConfig({
   site: "https://mundoboxblog.andrestr93.workers.dev/",
   output: "static",
+  base: "/", // Asegura que todo parta de la raíz
+  adapter: cloudflare({
+    imageService: "passthrough",
+  }),
 
   vite: {
     plugins: [tailwindcss()],
   },
 
   integrations: [mdx(), sitemap()],
-  adapter: cloudflare(),
   image: {
     // Esto le dice a Astro: "Optimiza tú las imágenes usando Sharp
     // durante el build, no le pidas nada a Cloudflare luego"
