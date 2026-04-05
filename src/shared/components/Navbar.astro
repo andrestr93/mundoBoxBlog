@@ -7,8 +7,6 @@ const posts = await getCollection("blog");
 const categories = [
   ...new Set(posts.map((post) => post.data.category.toLowerCase())),
 ];
-
-console.log(categories);
 ---
 
 <nav
