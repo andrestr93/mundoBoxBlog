@@ -6,12 +6,11 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  // Nota: Cambiaremos esta URL luego cuando crees tu proyecto en Pages de verdad
-  site: "https://mundoboxblog.andrestr93.workers.dev/",
-  output: "static", // 100% estático
+  site: "https://mundobox.blog/",
+  output: "static",
   base: "/",
   build: {
-    assets: "assets", // Mantenemos tu genial idea de quitar el guion bajo
+    assets: "assets",
   },
   vite: {
     plugins: [tailwindcss()],
@@ -19,7 +18,6 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
   image: {
     service: {
-      // Usamos Sharp en tu PC, las imágenes subirán ya optimizadas a Cloudflare
       entrypoint: "astro/assets/services/sharp",
     },
   },
