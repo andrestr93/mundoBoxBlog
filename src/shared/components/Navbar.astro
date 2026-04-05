@@ -7,6 +7,8 @@ const posts = await getCollection("blog");
 const categories = [
   ...new Set(posts.map((post) => post.data.category.toLowerCase())),
 ];
+
+console.log(categories);
 ---
 
 <nav
@@ -28,30 +30,19 @@ const categories = [
 
   <nav
     id="caja-menu"
-    class="bg-primary absolute top-full z-[100] hidden w-full border-white/10 shadow-2xl md:hidden"
+    class="bg-primary absolute top-full z-[50] hidden w-full border-white/10 shadow-2xl md:hidden"
   >
-    <ul class="flex flex-col text-sm font-bold tracking-widest uppercase">
-      <li class="text-white">
-        <a
-          href="/zapatillas"
-          class="block border-b border-white/5 p-6 hover:bg-white/5"
-          >Zapatillas</a
-        >
-      </li>
-      <li>
-        <a
-          href="/accesorios"
-          class="block border-b border-white/5 p-6 hover:bg-white/5"
-          >Accesorios</a
-        >
-      </li>
-      <li><a href="/guias" class="block p-6 hover:bg-white/5">Guías</a></li>
-    </ul>
+    {
+      categories.map((cat) => (
+        <a href={`/${cat}`} class="hover:text-primary">
+          {cat}
+        </a>
+      ))
+    }
   </nav>
 </div>
 <script>
-  // Función para que funcione incluso al navegar entre páginas en Astro
-  const prepararMenu = () => {
+  const menuMobile = () => {
     const boton = document.getElementById("boton-menu");
     const caja = document.getElementById("caja-menu");
 
@@ -61,8 +52,7 @@ const categories = [
     });
   };
 
-  // Inicializar
-  prepararMenu();
+  menuMobile();
   // Si usas transiciones de página en Astro, esto lo reinicia al cambiar de URL
-  document.addEventListener("astro:after-swap", prepararMenu);
+  document.addEventListener("astro:after-swap", menuMobile);
 </script>
