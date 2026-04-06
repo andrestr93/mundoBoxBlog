@@ -21,18 +21,18 @@ const categories = [
   }
 </nav>
 
-<div class="relative border-white/10 text-white">
+<div class="border-white/10 text-white">
   <button id="boton-menu" class="flex justify-end focus:outline-none md:hidden">
     <Menu class="h-12 w-12" />
   </button>
 
   <nav
     id="caja-menu"
-    class="bg-primary absolute top-full z-[50] hidden w-full border-white/10 shadow-2xl md:hidden"
+    class="fixed left-0 z-[9999] flex hidden w-full flex-col bg-black shadow-2xl md:hidden"
   >
     {
       categories.map((cat) => (
-        <a href={`/${cat}`} class="hover:text-primary">
+        <a href={`/${cat}`} class="hover:text-primary text-center">
           {cat}
         </a>
       ))
