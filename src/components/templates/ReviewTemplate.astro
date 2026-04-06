@@ -28,7 +28,7 @@ const {
 ---
 
 <article>
-  <header class="mx-auto grid max-w-5xl grid-cols-1 md:grid-cols-2">
+  <header class="mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-2">
     <div>
       <Image
         quality="high"
@@ -49,29 +49,35 @@ const {
         <Start class="h-10 w-10" />
         <p class="text-primary font-bold">{rating}/{reviewsCount} reseñas</p>
       </div>
-      <div class="bg-primary/10 rounded-2xl">
+      <div class="bg-primary/15 rounded-2xl">
         <div class="flex flex-row-reverse items-center">
           <p class="p-0 font-bold text-white uppercase">
             Caracteristicas Clave
           </p>
-          <Report class="h-12 w-12" />
+          <Report class="h-13 w-13" />
         </div>
 
         <ul class="p-0">
           {
             characteristics.map((characteristic: string) => (
               <li class="flex items-center">
-                <Check class="h-10 w-10 text-green-400" aria-hidden="true" />
+                <Check class="h-12 w-12 text-green-400" aria-hidden="true" />
                 <p class="p-0">{characteristic}</p>
               </li>
             ))
           }
         </ul>
       </div>
-      <SearchButtonAmazon />
+      <div>
+        <SearchButtonAmazon />
+        <p class="text-primary text-center text-xs font-bold">
+          Ganamos una pequeña comisión si compras a través de este enlace sin
+          coste extra para ti
+        </p>
+      </div>
     </div>
   </header>
-  <section class="mx-auto grid max-w-5xl grid-cols-1 gap-5 md:grid-cols-2">
+  <section class="mx-auto grid max-w-6xl grid-cols-1 gap-5 md:grid-cols-2">
     <div class="rounded-2xl bg-green-950/50 p-0">
       <div class="flex flex-row-reverse items-center p-0">
         <h3 class="text-green-500">Pros</h3>
@@ -109,11 +115,11 @@ const {
   </section>
 
   <section
-    class="bg-primary/10 mx-auto mt-8 mb-8 flex max-w-3xl flex-col rounded-2xl px-4 py-2"
+    class="bg-primary/5 mx-auto mt-8 mb-8 flex max-w-5xl flex-col rounded-2xl px-4 py-2"
   >
     <div class="flex flex-row-reverse items-center">
       <h2 class="font-bold text-white">Analisis Detallado</h2>
-      <Ripple class="h-12 w-12" />
+      <Ripple class="h-15 w-15" />
     </div>
 
     <ul class="p-5">
