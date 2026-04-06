@@ -5,7 +5,7 @@ const { class: className, delay = "0s" } = Astro.props;
 ---
 
 <header
-  class:list={["reveal w-full", className]}
+  class:list={["reveal relative z-1000 w-full", className]}
   style={`animation-delay: ${delay};`}
 >
   <div class="flex w-full flex-row items-center justify-center">
