@@ -5,7 +5,9 @@ import imgRack from "../images/rack.png";
 ---
 
 <MainLayout>
-  <section class="relative h-full w-full rounded-2xl md:aspect-auto">
+  <section
+    class="font-barlow-condensed relative m-auto max-w-6xl rounded-2xl text-center"
+  >
     <Image
       alt="Portada MundoBox | blog sobre complementos Crosffit"
       loading="eager"
@@ -13,22 +15,32 @@ import imgRack from "../images/rack.png";
       widths={[768, 1024]}
       sizes="100vw"
       format="webp"
-      class="h-full w-full object-cover opacity-30"
+      class="m-auto h-full w-full rounded-4xl object-cover opacity-30"
       src={imgRack}
       alt="Atleta de Crossfit entrenando en el box con material de MundoBox"
     />
 
-    <div
-      class="absolute inset-0 flex flex-col items-center justify-center px-4 text-center font-bold"
-    >
-      <h1 class="text-primary font-barlow-condensed h-min text-9xl">404</h1>
+    <div class="absolute inset-0 flex flex-col px-4 text-center font-bold">
+      <h1
+        class="text-primary font-barlow-condensed text-9xl md:text-[25rem] lg:text-[28rem]"
+      >
+        404
+      </h1>
 
-      <h2 class="text-primary capitalize">esta pagina no cuenta</h2>
+      <h2 class="text-primary text-center text-4xl capitalize md:text-6xl">
+        esta pagina no cuenta
+      </h2>
 
-      <p>Parece que el enlace se ha quedado sin aire o nunca existio</p>
+      <p class="text-xl md:text-4xl">
+        Parece que el enlace se ha quedado sin aire o nunca existio
+      </p>
 
       <div>
-        <button class="bg-primary max-w-xl text-black">Volver al Inicio</button>
+        <button
+          class="bg-primary w-fit rounded-3xl p-5 text-xl text-black md:text-5xl"
+        >
+          <a class="font-bold" href="/"> Volver al Inicio </a>
+        </button>
       </div>
     </div>
   </section>
