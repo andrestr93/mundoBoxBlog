@@ -20,7 +20,10 @@ const {
   reviewsCount,
 } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const socialImageURL = new URL(image, Astro.site);
+const socialImageURL = new URL(
+  image || "./../images/presentation.png",
+  Astro.site,
+);
 
 // Generamos el JSON-LD solo si hay rating
 const schema = rating
