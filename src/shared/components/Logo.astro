@@ -1,12 +1,12 @@
 ---
 import "@fontsource/barlow-condensed/600.css";
+
+const { class: className } = Astro.props;
 ---
 
-<div class="flex items-center">
+<div>
   <a href="/">
-    <span
-      class="font-barlow-condensed text-3xl leading-none font-black tracking-tighter md:text-5xl lg:text-6xl"
-    >
+    <span class=`${className}`>
       MUNDO<span class="text-primary">BOX</span>
     </span>
   </a>

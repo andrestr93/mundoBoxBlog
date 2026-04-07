@@ -9,7 +9,9 @@ const { class: className, delay = "0s" } = Astro.props;
   style={`animation-delay: ${delay};`}
 >
   <div class="flex w-full flex-row items-center justify-center">
-    <Logo />
+    <Logo
+      class="font-barlow-condensed text-4xl leading-none font-black tracking-tighter"
+    />
 
     <Navbar />
   </div>

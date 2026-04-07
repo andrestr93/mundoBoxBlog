@@ -7,13 +7,19 @@ const { class: className, delay = "0s" } = Astro.props;
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class:list={["reveal", className]} style={`animation-delay: ${delay};`}>
-  <section class="flex w-full flex-row">
-    <Logo />
+<footer
+  class="p-0"
+  class:list={["reveal", className]}
+  style={`animation-delay: ${delay};`}
+>
+  <section class="flex items-center">
+    <Logo
+      class="font-barlow-condensed text-3xl leading-none font-black tracking-tighter"
+    />
     <NavbarFooter />
   </section>
-  <section class="flex flex-col items-center justify-center">
-    <p class="font-barlow-condensed text-center">
+  <section>
+    <p class="font-barlow-condensed text-center text-sm md:text-xl">
       &copy; {currentYear} MundoBox — Todos los derechos reservados.
     </p>
   </section>

@@ -7,7 +7,7 @@ const blog = defineCollection({
     schema: ({ image }) => z.object({
         title: z.string(),
         slug: z.string(),
-        time: z.string(),
+        time: z.number(),
         pubDate: z.date(),
         metaTitle: z.string().max(60),
         metaDescription: z.string().max(160),
@@ -20,7 +20,7 @@ const blog = defineCollection({
         type: z.enum(['Comparativas', 'Reviews', 'Rankings', 'Guias de Solucion']),
         image: image(),
         rating: z.number(),
-        reviewsCount: z.string(),
+        reviewsCount: z.number(),
         amazonLink: z.string().url(),
         pros: z.array(z.string().max(50)),
         contras: z.array(z.string().max(50)),
