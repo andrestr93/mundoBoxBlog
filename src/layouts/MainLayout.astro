@@ -5,18 +5,19 @@ import Header from "../components/Header.astro";
 import "../styles/global.css";
 
 interface Props {
-  metaTitle?: string;
-  metaDescription?: string;
+  title?: string;
+  description?: string;
   image?: string;
   rating?: number;
   reviewsCount?: number;
 }
 
 const {
-  metaTitle,
-  metaDescription,
+  title,
+  description,
   image = "/default-og.png",
   rating,
+
   reviewsCount,
 } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -27,9 +28,9 @@ const schema = rating
   ? {
       "@context": "https://schema.org/",
       "@type": "Product",
-      name: metaTitle,
-      image: socialImageURL.href,
-      description: metaDescription,
+      name: title,
+      image: socialImageURL,
+      description: description,
       brand: {
         "@type": "Brand",
         name: "MundoBox",
@@ -52,32 +53,40 @@ const schema = rating
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="robots" content="index, follow" />
-    <meta name="googlebot" content="index, follow" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>{metaTitle}</title>
-    <meta name="description" content={metaDescription} />
+    {/* TÍTULO DE LA PESTAÑA Y GOOGLE */}
+    <title>{title}</title>
+    <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
 
+    {/* OPEN GRAPH (Facebook, WhatsApp, Telegram) */}
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
-    <meta property="og:title" content={metaTitle} />
-    <meta property="og:description" content={metaDescription} />
-    <meta property="og:image" content={socialImageURL.href} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImageURL} />
+    <meta property="og:image:secure_url" content={socialImageURL} />
 
-    {/* Inyección del Schema de Google */}
-    {
-      schema && (
-        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-      )
-    }
+    {/* TWITTER */}
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={Astro.url} />
-    <meta property="twitter:title" content={metaTitle} />
-    <meta property="twitter:description" content={metaDescription} />
-    <meta property="twitter:image" content={socialImageURL.href} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={socialImageURL} />
+
+    {/* SCHEMA.ORG (Estrellitas en Google) */}
+    {
+      schema && (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={JSON.stringify(schema)}
+        />
+      )
+    }
+
     <ClientRouter />
   </head>
   <body>

@@ -20,13 +20,13 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 
-const { image, rating, reviewsCount, metaTitle, metaDescription } = post.data;
+const { image, rating, reviewsCount, title, metaDescription } = post.data;
 const { Content } = await render(post);
 ---
 
 <MainLayout
-  metaTitle={metaTitle}
-  metaDescription={metaDescription}
+  title={title}
+  description={metaDescription}
   image={image.src}
   rating={rating}
   reviewsCount={reviewsCount}
