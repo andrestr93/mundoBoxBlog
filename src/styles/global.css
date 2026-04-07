@@ -58,6 +58,6 @@
   }
 
   body {
-    @apply font-Inter bg-zinc-950;
+    @apply font-Inter bg-zinc-950 px-3 py-2;
   }
 }
