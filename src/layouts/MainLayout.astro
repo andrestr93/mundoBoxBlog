@@ -20,8 +20,9 @@ const {
 
   reviewsCount,
 } = Astro.props;
+const relativeImage = image ?? "/default-og.png";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const socialImageURL = new URL(image, Astro.site);
+const socialImageURL = new URL(relativeImage, Astro.site);
 
 // Generamos el JSON-LD solo si hay rating
 const schema = rating
@@ -66,15 +67,15 @@ const schema = rating
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={socialImageURL} />
-    <meta property="og:image:secure_url" content={socialImageURL} />
+    <meta property="og:image" content={relativeImage} />
+    <meta property="og:image:secure_url" content={relativeImage} />
 
     {/* TWITTER */}
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={socialImageURL} />
+    <meta property="twitter:image" content={relativeImage} />
 
     {/* SCHEMA.ORG (Estrellitas en Google) */}
     {

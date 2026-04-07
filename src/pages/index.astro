@@ -4,6 +4,7 @@ import Card from "../components/Card.astro";
 import Presentation from "../components/Presentation.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 const imageDefault = "/default-og.png";
+
 const posts = await getCollection("blog");
 
 const lastPosts = posts.sort((a, b) => {
@@ -14,8 +15,8 @@ const latestPosts = lastPosts.slice(0, 3);
 ---
 
 <MainLayout
-  metaTitle={"MundoBox | Reviews y Guías de Equipamiento para Crossfit 2026"}
-  metaDescription={"Análisis a fondo del mejor material para Crossfit. Comparamos zapatillas, combas, calleras y accesorios para que elijas el equipo perfecto para tu próximo WOD."}
+  title={"MundoBox | Reviews y Guías de Equipamiento para Crossfit 2026"}
+  description={"Análisis a fondo del mejor material para Crossfit. Comparamos zapatillas, combas, calleras y accesorios para que elijas el equipo perfecto para tu próximo WOD."}
   image={imageDefault}
 >
   <Presentation />
