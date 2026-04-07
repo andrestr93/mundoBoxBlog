@@ -19,16 +19,16 @@ const {
   rating,
   reviewsCount,
 } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const socialImageURL = new URL(image, Astro.site);
-
+//const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = Astro.site ? Astro.site.href : "https://tu-dominio.com";
+const socialImageURL = new URL(image || "/default-og.png", Astro.site).href;
 // Generamos el JSON-LD solo si hay rating
 const schema = rating
   ? {
       "@context": "https://schema.org/",
       "@type": "Product",
       name: metaTitle,
-      image: socialImageURL.href,
+      image: socialImageURL,
       description: metaDescription,
       brand: {
         "@type": "Brand",
@@ -65,7 +65,7 @@ const schema = rating
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={metaTitle} />
     <meta property="og:description" content={metaDescription} />
-    <meta property="og:image" content={socialImageURL.href} />
+    <meta property="og:image" content={socialImageURL} />
 
     {/* Inyección del Schema de Google */}
     {
@@ -77,7 +77,7 @@ const schema = rating
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={metaTitle} />
     <meta property="twitter:description" content={metaDescription} />
-    <meta property="twitter:image" content={socialImageURL.href} />
+    <meta property="twitter:image" content={socialImageURL} />
     <ClientRouter />
   </head>
   <body>
