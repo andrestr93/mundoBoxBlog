@@ -5,16 +5,16 @@ import Header from "../components/Header.astro";
 import "../styles/global.css";
 
 interface Props {
-  title?: string;
-  description?: string;
+  metaTitle?: string;
+  metaDescription?: string;
   image?: string;
   rating?: number;
-  reviewsCount?: string;
+  reviewsCount?: number;
 }
 
 const {
-  title,
-  description,
+  metaTitle,
+  metaDescription,
   image = "/default-og.png",
   rating,
   reviewsCount,
@@ -27,9 +27,9 @@ const schema = rating
   ? {
       "@context": "https://schema.org/",
       "@type": "Product",
-      name: title,
+      name: metaTitle,
       image: socialImageURL,
-      description: description,
+      description: metaDescription,
       brand: {
         "@type": "Brand",
         name: "MundoBox",
@@ -52,17 +52,19 @@ const schema = rating
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <title>{metaTitle}</title>
+    <meta name="description" content={metaDescription} />
     <link rel="canonical" href={canonicalURL} />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={metaTitle} />
+    <meta property="og:description" content={metaDescription} />
     <meta property="og:image" content={socialImageURL} />
 
     {/* Inyección del Schema de Google */}
@@ -73,8 +75,8 @@ const schema = rating
     }
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={Astro.url} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
+    <meta property="twitter:title" content={metaTitle} />
+    <meta property="twitter:description" content={metaDescription} />
     <meta property="twitter:image" content={socialImageURL} />
     <ClientRouter />
   </head>
