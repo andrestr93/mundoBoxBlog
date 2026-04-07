@@ -7,7 +7,11 @@ const { class: className, delay = "0s" } = Astro.props;
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class:list={["reveal", className]} style={`animation-delay: ${delay};`}>
+<footer
+  class="p-0"
+  class:list={["reveal", className]}
+  style={`animation-delay: ${delay};`}
+>
   <section class="flex items-center">
     <Logo
       class="font-barlow-condensed text-3xl leading-none font-black tracking-tighter"
