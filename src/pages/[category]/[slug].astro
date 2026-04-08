@@ -3,7 +3,6 @@
 import { getCollection, render } from "astro:content";
 import ReviewTemplate from "../../components/templates/ReviewTemplate.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
-import { getImage } from "astro:assets";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -23,20 +22,12 @@ const { post } = Astro.props;
 
 const { image, rating, reviewsCount, title, metaDescription } = post.data;
 const { Content } = await render(post);
-
-const optimizedMetaImage = await getImage({
-  src: image, // <--- AQUÍ: El objeto directo, SIN .src
-  width: 1200,
-  height: 630,
-  format: "jpg", // JPG comprime mucho más que PNG o WebP para redes sociales
-  quality: 70, // Calidad 70 es perfecta: invisible al ojo, muy ligera
-});
 ---
 
 <MainLayout
   title={title}
   description={metaDescription}
-  image={optimizedMetaImage.src}
+  image={image.src}
   rating={rating}
   reviewsCount={reviewsCount}
 >
