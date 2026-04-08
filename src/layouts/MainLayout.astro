@@ -20,7 +20,7 @@ const {
 
   reviewsCount,
 } = Astro.props;
-const relativeImage = image ?? `/presentation.png`;
+const relativeImage = image ?? `/og-defecto.png`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(relativeImage, Astro.site);
 
@@ -50,32 +50,34 @@ const schema = rating
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" prefix="og: https://ogp.me/ns#">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
 
-    {/* TÍTULO DE LA PESTAÑA Y GOOGLE */}
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
 
-    {/* OPEN GRAPH (Facebook, WhatsApp, Telegram) */}
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+
     <meta property="og:image" content={socialImageURL} />
     <meta property="og:image:secure_url" content={socialImageURL} />
 
-    {/* TWITTER */}
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={Astro.url} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={socialImageURL} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={Astro.url} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageURL} />
 
     {/* SCHEMA.ORG (Estrellitas en Google) */}
     {

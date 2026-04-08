@@ -14,13 +14,16 @@ const currentYear = new Date().getFullYear();
 >
   <section class="flex items-center">
     <Logo
-      class="font-barlow-condensed text-3xl leading-none font-black tracking-tighter"
+      class="font-barlow-condensed text-3xl leading-none font-black tracking-tighter md:text-7xl"
     />
     <NavbarFooter />
   </section>
-  <section>
+  <section class="flex items-center justify-end">
     <p class="font-barlow-condensed text-center text-sm md:text-xl">
       &copy; {currentYear} MundoBox — Todos los derechos reservados.
+    </p>
+    <p class="font-barlow-condensed text-center text-sm md:text-xl">
+      Creada por andrestr93 💚
     </p>
   </section>
 </footer>

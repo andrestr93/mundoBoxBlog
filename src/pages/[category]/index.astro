@@ -33,6 +33,10 @@ const { posts, categoryName } = Astro.props;
   description=` ¿Buscas los mejores complementos para Crossfit? Analizamos los mejores para que tu solo te tengas que preocupar  `
 >
   <h1 class="text-center">Listado de {categoryName}</h1>
+  <p class="font-barlow-condensed">
+    Listado del mejor calzado seleccionado por nuestros profesionales para un
+    mejor agarre
+  </p>
   <ul class="grid max-w-full p-0 md:grid-cols-3 lg:grid-cols-4">
     {
       posts.map((post) => (
