@@ -20,7 +20,7 @@ const {
 
   reviewsCount,
 } = Astro.props;
-const relativeImage = image ?? `/og-default.png`;
+const relativeImage = image ?? `/default-og.png`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(relativeImage, Astro.site);
 
