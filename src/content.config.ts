@@ -16,6 +16,7 @@ const blog = defineCollection({
         performance: z.string(),
         comfort: z.string(),
         category: z.enum(['Calzado', 'Combas', 'Calleras']),
+        brand: z.string(),
         tags: z.array(z.string()).max(4),
         type: z.enum(['Comparativas', 'Reviews', 'Rankings', 'Guias de Solucion']),
         image: image(),
