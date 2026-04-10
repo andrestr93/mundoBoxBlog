@@ -11,6 +11,7 @@ import Ripple from "../icons/Ripple.astro";
 import Shield from "../icons/Shield.astro";
 import Bolt from "../icons/Bolt.astro";
 import Report from "../icons/Report.astro";
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
 
 const {
   title,
@@ -20,11 +21,21 @@ const {
   characteristics,
   reviewsCount,
   rating,
-  comfort,
-  metaTitle,
-  performance,
-  durability,
+  name,
+  details,
 } = Astro.props;
+
+interface Details {
+  title: string;
+  content: string;
+  icon: "shield" | "bolt" | "ripple";
+}
+
+const ICON_COMPONENTS: Record<Details["icon"], AstroComponentFactory> = {
+  shield: Shield,
+  bolt: Bolt,
+  ripple: Ripple,
+};
 ---
 
 <article>
@@ -34,7 +45,7 @@ const {
         quality="low"
         widths={[768, 1024]}
         format="png"
-        alt=`${metaTitle}`
+        alt=`Analisis de las zapatillas${name}`
         class="h-full w-full object-cover"
         fetchpriority={"low"}
         loading="eager"
@@ -126,28 +137,21 @@ const {
     </div>
 
     <ul class="p-5">
-      <li class="flex flex-col">
-        <div class="flex items-center p-0">
-          <Shield class="h-12 w-12" aria-hidden="true" />
-          <h3 class="font-bold">Durabilidad</h3>
-        </div>
+      {
+        details.map((item: Details) => {
+          const Icon = ICON_COMPONENTS[item.icon];
+          return (
+            <li class="flex flex-col">
+              <div class="flex items-center p-0">
+                <Icon class="h-12 w-12" aria-hidden="true" />
+                <h3 class="font-bold">{item.title}</h3>
+              </div>
 
-        <p>{durability}</p>
-      </li>
-      <li class="flex flex-col">
-        <div class="flex items-center p-0">
-          <Ripple class="h-12 w-12" aria-hidden="true" />
-          <h3 class="font-bold">Comodidad</h3>
-        </div>
-        <p>{comfort}</p>
-      </li>
-      <li class="flex flex-col">
-        <div class="flex items-center p-0">
-          <Bolt class="h-12 w-12" aria-hidden="true" />
-          <h3 class="font-bold">Rendimiento</h3>
-        </div>
-        <p>{performance}</p>
-      </li>
+              <p set:html={item.content} />
+            </li>
+          );
+        })
+      }
     </ul>
   </section>
 </article>
