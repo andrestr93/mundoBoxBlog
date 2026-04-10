@@ -3,6 +3,8 @@ import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import Clock from "./icons/Clock.astro";
 import Arrow from "./icons/arrow.astro";
+import { formatDistanceToNow } from "date-fns";
+import { es } from "date-fns/locale"; // <-- Asegúrate de que tiene las llaves
 
 interface Props {
   post: CollectionEntry<"blog">;
@@ -11,8 +13,23 @@ const { post } = Astro.props;
 
 const { data } = post;
 
-const { title, image, category, time, rating, metaDescription, tags, slug } =
-  data;
+const {
+  title,
+  image,
+  category,
+  time,
+  rating,
+  pubDate,
+  metaDescription,
+  tags,
+  slug,
+} = data;
+
+// Convierte el string a objeto Date y saca la distancia
+const tiempoPublicado = formatDistanceToNow(new Date(pubDate), {
+  addSuffix: true,
+  locale: es,
+});
 ---
 
 <section class="rounded-2xl">
@@ -42,68 +59,59 @@ const { title, image, category, time, rating, metaDescription, tags, slug } =
             </p>
             <div class="flex items-center justify-end p-0">
               <Clock class="h-12 w-12" />
-              <p
-                class="text-primary font-barlow-condensed text-md w-fit rounded-lg text-right tracking-wider uppercase"
+              <time
+                class="font-barlow-condensed text-primary capitalize"
+                datetime={pubDate.toString()}
               >
-                {time} min
-              </p>
+                {tiempoPublicado}
+              </time>
             </div>
           </div>
+        </div>
 
-          <ul class="flex w-fit list-none gap-1 p-0">
-            {
-              tags.map((tag) => (
-                <li class="p-0">
-                  <span class="bg-background-dark border-primary/30 text-primary font-barlow-condensed border-2 px-3 py-1 tracking-wider uppercase">
-                    {tag}
-                  </span>
-                </li>
-              ))
-            }
-          </ul>
+        <h3>
+          <a
+            class="font-bold text-white capitalize transition-colors"
+            href={`/${category.toLowerCase()}/${slug}`}
+          >
+            <span class="absolute inset-0" aria-hidden="true"></span>
 
-          <h3>
-            <a
-              class="font-bold text-white capitalize transition-colors"
-              href={`/${category.toLowerCase()}/${slug}`}
-            >
-              <span class="absolute inset-0" aria-hidden="true"></span>
-
-              {title}
-            </a>
-          </h3>
-          <p class="font-barlow-condensed text-slate-300">
-            {metaDescription}
+            {title}
+          </a>
+        </h3>
+        <p class="font-barlow-condensed text-slate-300">{metaDescription}</p>
+        <div class="flex items-center justify-start gap-0">
+          <p class="font-barlow-condensed w-fit text-lg font-bold uppercase">
+            Leer articulo
           </p>
-          <div class="flex items-center justify-start gap-0">
-            <p class="font-barlow-condensed w-fit text-lg font-bold uppercase">
-              Leer articulo
-            </p>
-            <p class="w-auto"><Arrow class="h-10" /></p>
-          </div>
+          <p class="w-auto">
+            <Arrow class="h-10" />
+          </p>
         </div>
       </div>
     </article>
-    <script
-      type="application/ld+json"
-      set:html={JSON.stringify({
-        "@context": "https://schema.org/",
-        "@type": "Review",
-        itemReviewed: {
-          "@type": "Product",
-          name: post.data.title,
-          image: image,
-        },
-        reviewRating: {
-          "@type": "Rating",
-          ratingValue: rating,
-          bestRating: "5",
-        },
-        author: {
-          "@type": "Organization",
-          name: "MundoBox",
-        },
-      })}
-    />
   </div>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org/",
+      "@type": "Review",
+      itemReviewed: {
+        "@type": "Product",
+        name: post.data.title,
+        image: image,
+      },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: rating,
+        bestRating: "5",
+      },
+      author: {
+        "@type": "Organization",
+        name: "MundoBox",
+      },
+    })}
+  />
 </section>
+;
+
