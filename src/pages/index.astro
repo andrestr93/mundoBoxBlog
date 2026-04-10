@@ -12,22 +12,29 @@ const lastPosts = posts.sort((a, b) => {
 });
 
 const latestPosts = lastPosts.slice(0, 3);
+const currentYear = new Date().getFullYear();
 ---
 
 <MainLayout
-  title={"MundoBox | Reviews y Guías de Equipamiento para Crossfit 2026"}
-  description={"Análisis a fondo del mejor material para Crossfit. Comparamos zapatillas, combas, calleras y accesorios para que elijas el equipo perfecto para tu próximo WOD."}
+  title={`MundoBox | Guías de Equipamiento Crossfit y Análisis ${currentYear}`}
+  description={"¿Quieres mejorar tus marcas? En MundoBox probamos y analizamos el mejor material de Crossfit en Amazon. De atletas para atletas."}
   image={imageDefault}
 >
-  <Presentation />
+  <section class="flex flex-col items-center p-0">
+    <Presentation />
+  </section>
 
-  <ul class="grid grid-cols-1 gap-2 p-0 md:grid-cols-3">
-    {
-      latestPosts.map((post) => (
-        <li class="p-0">
-          <Card post={post} />
-        </li>
-      ))
-    }
-  </ul>
+  <section>
+    <h2 class="text-center">Ultimos Analisis</h2>
+
+    <ul class="grid grid-cols-1 gap-2 p-0 md:grid-cols-3">
+      {
+        latestPosts.map((post) => (
+          <li class="p-0">
+            <Card post={post} />
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 </MainLayout>

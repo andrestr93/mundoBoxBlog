@@ -20,7 +20,7 @@ const blog = defineCollection({
                 icon: z.string(),
             })
         ).min(3), // Obligas a que al menos haya 3 para mantener el SEO
-        category: z.enum(['Calzado', 'Combas', 'Calleras']),
+        category: z.enum(['Zapatillas', 'Combas', 'Calleras']),
         brand: z.string(),
         tags: z.array(z.string()).max(4),
         type: z.enum(['Comparativas', 'Reviews', 'Rankings', 'Guias de Solucion']),
@@ -28,8 +28,8 @@ const blog = defineCollection({
         rating: z.number(),
         reviewsCount: z.number(),
         amazonLink: z.string().url(),
-        pros: z.array(z.string().max(100)).max(4),
-        contras: z.array(z.string().max(100)).max(4),
+        pros: z.array(z.string().max(80)).max(4),
+        contras: z.array(z.string().max(80)).max(4),
 
     }),
 });

@@ -103,7 +103,7 @@ const ICON_COMPONENTS: Record<Details["icon"], AstroComponentFactory> = {
           pros.map((pro: string) => (
             <li class="flex items-center p-0">
               <Plus class="h-12 w-12 text-green-400" aria-hidden="true" />
-              <p class="leading-none">{pro}</p>
+              <p>{pro}</p>
             </li>
           ))
         }
@@ -120,7 +120,7 @@ const ICON_COMPONENTS: Record<Details["icon"], AstroComponentFactory> = {
           contras.map((contra: string) => (
             <li class="flex items-center p-0">
               <Less class="h-10 w-10" />
-              <p class="p-0">{contra}</p>
+              <p>{contra}</p>
             </li>
           ))
         }
@@ -136,7 +136,7 @@ const ICON_COMPONENTS: Record<Details["icon"], AstroComponentFactory> = {
       <Ripple class="h-15 w-15" />
     </div>
 
-    <ul class="p-5">
+    <ul class="p-4">
       {
         details.map((item: Details) => {
           const Icon = ICON_COMPONENTS[item.icon];
