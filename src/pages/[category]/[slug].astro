@@ -20,7 +20,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 
-const { image, rating, reviewsCount, title, metaDescription } = post.data;
+const { image, rating, reviewCount, title, metaDescription } = post.data;
 const { Content } = await render(post);
 ---
 
@@ -29,10 +29,10 @@ const { Content } = await render(post);
   description={metaDescription}
   image={image.src}
   rating={rating}
-  reviewsCount={reviewsCount}
+  reviewCount={reviewCount}
 >
   {
-    post.data.type === "Reviews" && (
+    post.data.type === "Review" && (
       <ReviewTemplate {...post.data}>
         <Content />
       </ReviewTemplate>
