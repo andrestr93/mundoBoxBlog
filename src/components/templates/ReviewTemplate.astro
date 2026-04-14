@@ -19,7 +19,7 @@ const {
   pros,
   contras,
   characteristics,
-  reviewsCount,
+  reviewCount,
   rating,
   name,
   details,
@@ -58,11 +58,10 @@ const ICON_COMPONENTS: Record<Details["icon"], AstroComponentFactory> = {
       </h1>
       <div
         class="flex items-center"
-        aria-label={`Puntuación de ${rating} basada en ${reviewsCount} reseñas`}
+        aria-label={`Puntuación de ${rating} basada en ${reviewCount} reseñas`}
       >
-        <Start class="h-10 w-10" />
-        <p class="text-primary font-bold">
-          {rating}/5 ({reviewsCount} reseñas)
+        <p class="text-lg font-bold">
+          {rating}/5 estrellas ({reviewCount} reseñas)
         </p>
       </div>
       <div class="bg-primary/15 rounded-2xl">
