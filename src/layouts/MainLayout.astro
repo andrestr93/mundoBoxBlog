@@ -34,29 +34,42 @@ const socialImageURL = new URL(relativeImage, Astro.site);
 
 // Generamos el JSON-LD solo si hay rating
 
-const schema = rating
-  ? {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      headline: title,
-      author: {
-        "@type": "Organization",
-        name: "Mundobox",
-      },
-      brand: {
-        "@type": "Brand",
-        name: brand,
-      },
+const productSchema = {
+  "@type": "Product",
+  name: title,
+  description,
+  brand: {
+    "@type": "Brand",
+    name: brand,
+  },
+  image: image,
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: rating,
+    reviewCount: reviewCount,
+  },
+  offers: {
+    "@type": "Offer",
+    availability: "https://schema.org/InStock",
+    url: canonicalURL,
+  },
+};
 
-      url: canonicalURL,
-      image: image,
-      offers: {
-        "@type": "Offer",
-        availability: "https://schema.org/InStock",
-        url: canonicalURL,
-      },
-    }
-  : null;
+const blogSchema = {
+  "@type": "BlogPosting",
+  headline: title,
+  author: {
+    "@type": "Organization",
+    name: "Mundobox",
+  },
+  image: image,
+  mainEntityOfPage: canonicalURL,
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [blogSchema, productSchema],
+};
 ---
 
 <!doctype html>
