@@ -13,6 +13,7 @@ const blog = defineCollection({
         metaTitle: z.string().max(60),
         metaDescription: z.string().max(160),
         characteristics: z.array(z.string().max(80)).max(5),
+        author: z.string(),
         details: z.array(
             z.object({
                 title: z.string(),
@@ -26,7 +27,7 @@ const blog = defineCollection({
         type: z.enum(['Comparativas', 'Reviews', 'Rankings', 'Guias de Solucion']),
         image: image(),
         rating: z.number(),
-        reviewsCount: z.number(),
+        reviewCount: z.number(),
         amazonLink: z.string().url(),
         pros: z.array(z.string().max(80)).max(4),
         contras: z.array(z.string().max(80)).max(4),

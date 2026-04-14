@@ -11,49 +11,39 @@ interface Props {
   rating?: number;
   reviewsCount?: number;
   brand?: string;
+  author: string;
+  reviewCount: number;
 }
 
-const { title, description, image, rating, brand, reviewsCount } = Astro.props;
+const { title, description, image, rating, brand, reviewCount } = Astro.props;
 const relativeImage = image ?? `/default.png`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(relativeImage, Astro.site);
 
 // Generamos el JSON-LD solo si hay rating
+
 const schema = rating
   ? {
       "@context": "https://schema.org/",
       "@type": "Product",
       name: title,
-      image: image, // Asegúrate de que esta URL sea absoluta (con https://)
       description: description,
-      brand: {
-        "@type": "Brand",
-        name: brand, // Aquí debería ir la marca (ej: Nike, Picsil), no tu web
-      },
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: rating,
-        bestRating: "5",
-        worstRating: "1",
-        reviewCount: reviewsCount || 1,
-      },
       review: {
         "@type": "Review",
         reviewRating: {
           "@type": "Rating",
-          ratingValue: rating,
+          ratingValue: rating || 5, // Valor por defecto si no hay
+          bestRating: 5,
         },
         author: {
           "@type": "Person",
-          name: "MundoBox", // Esto da autoridad (EEAT)
+          name: "MundoBox", // Tu nombre o el del autor
         },
       },
-      offers: {
-        "@type": "Offer",
-        url: Astro.url.href, // La URL de tu review
-        priceCurrency: "EUR",
-        price: "0", // Amazon no permite poner el precio exacto que no sea dinámico, pero Google pide el campo
-        availability: "https://schema.org/InStock",
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: rating || 4.5,
+        reviewCount: reviewCount || 10,
       },
     }
   : null;
