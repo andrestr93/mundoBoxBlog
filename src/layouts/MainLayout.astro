@@ -9,13 +9,16 @@ interface Props {
   description?: string;
   image?: string;
   rating?: number;
+  name: string;
   reviewsCount?: number;
   brand?: string;
   author: string;
   reviewCount: number;
+  slug: string;
 }
 
-const { title, description, image, rating, brand, reviewCount } = Astro.props;
+const { title, description, image, rating, brand, reviewCount, slug, name } =
+  Astro.props;
 const relativeImage = image ?? `/default.png`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(relativeImage, Astro.site);
@@ -24,26 +27,25 @@ const socialImageURL = new URL(relativeImage, Astro.site);
 
 const schema = rating
   ? {
-      "@context": "https://schema.org/",
-      "@type": "Article",
-      name: title,
-      description: description,
-      review: {
-        "@type": "Review",
-        reviewRating: {
-          "@type": "Rating",
-          ratingValue: rating | 1,
-          bestRating: 5,
-        },
-        author: {
-          "@type": "Person",
-          name: "MundoBox",
-        },
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name,
+      description,
+      brand: {
+        "@type": "Brand",
+        name: brand,
       },
+      url: canonicalURL,
+      image: image,
       aggregateRating: {
         "@type": "AggregateRating",
         ratingValue: rating,
         reviewCount: reviewCount,
+      },
+      offers: {
+        "@type": "Offer",
+        availability: "https://schema.org/InStock",
+        url: `${canonicalURL}/${slug}`,
       },
     }
   : null;
