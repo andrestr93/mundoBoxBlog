@@ -32,18 +32,18 @@ const schema = rating
         "@type": "Review",
         reviewRating: {
           "@type": "Rating",
-          ratingValue: rating || 5, // Valor por defecto si no hay
+          ratingValue: rating | 1,
           bestRating: 5,
         },
         author: {
           "@type": "Person",
-          name: "MundoBox", // Tu nombre o el del autor
+          name: "MundoBox",
         },
       },
       aggregateRating: {
         "@type": "AggregateRating",
-        ratingValue: rating || 4.5,
-        reviewCount: reviewCount || 10,
+        ratingValue: rating,
+        reviewCount: reviewCount,
       },
     }
   : null;
