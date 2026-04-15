@@ -71,7 +71,7 @@ const homeSchema = isHome
           },
         },
         {
-          "@type": "CollectionPage",
+          "@type": "WebPage",
           "@id": `${siteUrl}#webpage`,
           url: siteUrl,
           name: title,
@@ -82,9 +82,6 @@ const homeSchema = isHome
             "@id": `${siteUrl}#organization`,
           },
           description: description,
-          breadcrumb: {
-            "@id": `${siteUrl}#breadcrumb`,
-          },
           inLanguage: "es-ES",
         },
       ],

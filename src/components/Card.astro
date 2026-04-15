@@ -94,25 +94,4 @@ const tiempoPublicado = formatDistanceToNow(new Date(pubDate), {
       </div>
     </article>
   </div>
-  <script
-    type="application/ld+json"
-    set:html={JSON.stringify({
-      "@context": "https://schema.org/",
-      "@type": "Review",
-      itemReviewed: {
-        "@type": "Product",
-        name: post.data.title,
-        image: image,
-      },
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: rating,
-        bestRating: "5",
-      },
-      author: {
-        "@type": "Organization",
-        name: "MundoBox",
-      },
-    })}
-  />
 </section>
