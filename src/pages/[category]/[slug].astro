@@ -20,10 +20,55 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 
-const { image, rating, reviewCount, title, metaDescription } = post.data;
+const {
+  image,
+  rating,
+  reviewCount,
+  title,
+  name,
+  metaDescription,
+  brand,
+  pubDate,
+} = post.data;
 const { Content } = await render(post);
+
+const schema = {
+  "@context": "https://schema.org/",
+  "@type": "Review",
+  itemReviewed: {
+    "@type": "Product",
+    name: name,
+    image: new URL(image.src, Astro.site).toString(),
+    brand: {
+      "@type": "Brand",
+      name: brand,
+    },
+  },
+  reviewRating: {
+    "@type": "Rating",
+    ratingValue: rating.toString(),
+    bestRating: "5",
+    worstRating: "1",
+  },
+  author: {
+    "@type": "Person",
+    name: "Andrés",
+    url: "https://mundobox.blog/about",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "MundoBox",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://mundobox.blog/logo.png", // Asegúrate de que esta URL exista
+    },
+  },
+  reviewBody: metaDescription,
+  datePublished: pubDate || new Date().toISOString(),
+};
 ---
 
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
 <MainLayout
   title={title}
   description={metaDescription}
