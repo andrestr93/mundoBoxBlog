@@ -1,0 +1,29 @@
+fragment BlogParts on Blog {
+  __typename
+  title
+  metaTitle
+  slug
+  metaDescription
+  pubDate
+  time
+  name
+  author
+  category
+  brand
+  type
+  image
+  rating
+  reviewCount
+  amazonLink
+  tags
+  characteristics
+  pros
+  contras
+  details {
+    __typename
+    title
+    content
+    icon
+  }
+  body
+}
