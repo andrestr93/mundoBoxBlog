@@ -32,49 +32,33 @@ const relativeImage = image ?? `/default.png`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(relativeImage, Astro.site);
 
-// Generamos el JSON-LD solo si hay rating
-
-const productSchema = {
-  "@type": "Product",
-  name: title,
-  description,
-  brand: {
-    "@type": "Brand",
-    name: brand,
-  },
-  image: image,
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: rating,
-    reviewCount: reviewCount,
-  },
-  offers: {
-    "@type": "Offer",
-    availability: "https://schema.org/InStock",
-    url: canonicalURL,
-  },
-};
-
-const blogSchema = {
-  "@type": "BlogPosting",
-  headline: title,
-  author: {
-    "@type": "Organization",
-    name: "Mundobox",
-  },
-  image: image,
-  mainEntityOfPage: canonicalURL,
-
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingCount: rating,
-    reviewCount: reviewCount,
-  },
-};
-
-const schema = {
+const homeSchema = {
   "@context": "https://schema.org",
-  "@graph": [blogSchema, productSchema],
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${Astro.site}#website`,
+      url: Astro.site,
+      name: "MundoBox",
+      description: description,
+      publisher: {
+        "@id": `${Astro.site}#organization`,
+      },
+      inLanguage: "es-ES",
+    },
+    {
+      "@type": "Organization",
+      "@id": `${Astro.site}#organization`,
+      name: "MundoBox",
+      url: Astro.site,
+      logo: {
+        "@type": "ImageObject",
+        url: `${Astro.site}logo.png`, // Asegúrate de que tu logo esté en public/logo.png
+        width: "600",
+        height: "60",
+      },
+    },
+  ],
 };
 ---
 
@@ -111,17 +95,7 @@ const schema = {
       name="google-site-verification"
       content="obdZR3ImUTWfkcDb2xxlY-4EOKMLYtgma64kgWfNB-U"
     />
-
-    {/* SCHEMA.ORG (Estrellitas en Google) */}
-    {
-      schema && (
-        <script
-          type="application/ld+json"
-          is:inline
-          set:html={JSON.stringify(schema)}
-        />
-      )
-    }
+    <script type="application/ld+json" set:html={JSON.stringify(homeSchema)} />
 
     <ClientRouter />
   </head>
