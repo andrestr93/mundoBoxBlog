@@ -33,6 +33,8 @@ const {
 const relativeImage = image ?? `/default.png`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(relativeImage, Astro.site);
+const siteUrl = Astro.site;
+const logoUrl = "/logo.png";
 
 const homeSchema = isHome
   ? {
@@ -40,26 +42,50 @@ const homeSchema = isHome
       "@graph": [
         {
           "@type": "WebSite",
-          "@id": `${Astro.site}#website`,
-          url: Astro.site,
+          "@id": `${siteUrl}#website`,
+          url: siteUrl,
           name: "MundoBox",
           description: description,
           publisher: {
-            "@id": `${Astro.site}#organization`,
+            "@id": `${siteUrl}#organization`,
           },
           inLanguage: "es-ES",
         },
         {
           "@type": "Organization",
-          "@id": `${Astro.site}#organization`,
+          "@id": `${siteUrl}#organization`,
           name: "MundoBox",
-          url: Astro.site,
+          url: siteUrl,
           logo: {
             "@type": "ImageObject",
-            url: `${Astro.site}logo.png`, // Asegúrate de que tu logo esté en public/logo.png
+            inLanguage: "es-ES",
+            "@id": `${siteUrl}#logo`,
+            url: logoUrl,
+            contentUrl: logoUrl,
             width: "600",
             height: "60",
+            caption: "MundoBox",
           },
+          image: {
+            "@id": `${siteUrl}#logo`,
+          },
+        },
+        {
+          "@type": "CollectionPage",
+          "@id": `${siteUrl}#webpage`,
+          url: siteUrl,
+          name: title,
+          isPartOf: {
+            "@id": `${siteUrl}#website`,
+          },
+          about: {
+            "@id": `${siteUrl}#organization`,
+          },
+          description: description,
+          breadcrumb: {
+            "@id": `${siteUrl}#breadcrumb`,
+          },
+          inLanguage: "es-ES",
         },
       ],
     }
