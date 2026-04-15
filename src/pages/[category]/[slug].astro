@@ -36,13 +36,9 @@ const schema = {
   "@context": "https://schema.org/",
   "@type": "Review",
   itemReviewed: {
-    "@type": "Product",
-    name: name,
+    "@type": "Thing", // <--- CAMBIA "Product" por "Thing"
+    name: title,
     image: new URL(image.src, Astro.site).toString(),
-    brand: {
-      "@type": "Brand",
-      name: brand,
-    },
   },
   reviewRating: {
     "@type": "Rating",
@@ -58,10 +54,6 @@ const schema = {
   publisher: {
     "@type": "Organization",
     name: "MundoBox",
-    logo: {
-      "@type": "ImageObject",
-      url: "https://mundobox.blog/logo.png", // Asegúrate de que esta URL exista
-    },
   },
   reviewBody: metaDescription,
   datePublished: pubDate || new Date().toISOString(),
