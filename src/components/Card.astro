@@ -6,27 +6,15 @@ import Arrow from "./icons/arrow.astro";
 import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale"; // <-- Asegúrate de que tiene las llaves
 
-interface Props {
-  post: CollectionEntry<"blog">;
-}
 const { post } = Astro.props;
 
 const { data } = post;
 
-const {
-  title,
-  image,
-  category,
-
-  rating,
-  pubDate,
-  metaDescription,
-
-  slug,
-} = data;
+const { title, image, category, type, rating, pubDate, metaDescription, slug } =
+  data;
 
 // Convierte el string a objeto Date y saca la distancia
-const tiempoPublicado = formatDistanceToNow(new Date(pubDate), {
+const publishTime = formatDistanceToNow(new Date(pubDate), {
   addSuffix: true,
   locale: es,
 });
@@ -38,7 +26,7 @@ const tiempoPublicado = formatDistanceToNow(new Date(pubDate), {
       class="group relative transition-all duration-300 hover:-translate-y-1"
     >
       <div
-        class="hover:bg-primary/10 mx-auto max-w-[25rem] rounded-2xl border border-white/10 shadow-xl shadow-black/50"
+        class="hover:bg-primary/10 mx-auto max-w-[25rem] rounded-2xl border border-white/10 p-5 shadow-xl shadow-black/50"
       >
         <div class="aspect-video h-full w-full">
           <Image
@@ -58,12 +46,12 @@ const tiempoPublicado = formatDistanceToNow(new Date(pubDate), {
             {category}
           </p>
           <div class="flex w-fit items-center p-0">
-            <Clock class="h-12 w-12" />
+            <Clock class="h-12 w-7" />
             <time
-              class="font-barlow-condensed text-primary text-right text-lg font-semibold uppercase italic"
+              class="font-barlow-condensed text-primary text-right text-lg font-semibold capitalize italic"
               datetime={pubDate.toString()}
             >
-              {tiempoPublicado}
+              {publishTime}
             </time>
           </div>
         </div>
@@ -81,14 +69,21 @@ const tiempoPublicado = formatDistanceToNow(new Date(pubDate), {
         <p class="font-barlow-condensed font-bold text-slate-400 italic">
           {metaDescription}
         </p>
-        <div class="flex items-center justify-start gap-0">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center justify-start gap-0">
+            <p
+              class="font-barlow-condensed w-fit text-lg font-bold uppercase italic"
+            >
+              Leer articulo
+            </p>
+            <p class="w-auto">
+              <Arrow class="h-10" />
+            </p>
+          </div>
           <p
-            class="font-barlow-condensed w-fit text-lg font-bold uppercase italic"
+            class="bg-primary/5 text-primary font-barlow-condensed w-fit rounded-lg px-3 py-1 font-bold tracking-wider uppercase italic"
           >
-            Leer articulo
-          </p>
-          <p class="w-auto">
-            <Arrow class="h-10" />
+            {type}
           </p>
         </div>
       </div>

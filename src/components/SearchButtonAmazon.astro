@@ -1,15 +1,21 @@
 ---
 import ShoppingCart from "./icons/Cart.astro";
+
+interface Props {
+  amazonUrl: string;
+}
+
+const { amazonUrl } = Astro.props;
 ---
 
 <div>
   <a
     rel="nofollow sponsored"
     target="_blank"
-    href="#"
+    href={amazonUrl}
     class="bg-primary font-barlow-condensed flex items-center justify-center rounded-2xl text-2xl font-bold text-black"
   >
-    Ver Precio en Amazon
+    Ver Precio y Disponibilidad en Amazon
     <ShoppingCart class="h-11 w-11" />
   </a>
 </div>

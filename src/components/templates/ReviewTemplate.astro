@@ -20,6 +20,7 @@ const {
   contras,
   characteristics,
   reviewCount,
+  amazonLink,
   rating,
   name,
   details,
@@ -84,7 +85,7 @@ const ICON_COMPONENTS: Record<Details["icon"], AstroComponentFactory> = {
         </ul>
       </div>
       <div>
-        <SearchButtonAmazon />
+        <SearchButtonAmazon amazonUrl={amazonLink} />
         <p class="text-primary text-center text-xs font-bold">
           Ganamos una pequeña comisión si compras a través de este enlace sin
           coste extra para ti

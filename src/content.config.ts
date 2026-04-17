@@ -5,7 +5,7 @@ import { z } from 'astro/zod';
 const blog = defineCollection({
     loader: glob({ base: './src/content/blog', pattern: "**/*.yaml" }),
     schema: ({ image }) => z.object({
-        title: z.string().max(50),
+        title: z.string().max(100),
         slug: z.string(),
         time: z.number(),
         name: z.string(),
@@ -23,7 +23,6 @@ const blog = defineCollection({
         ).min(3), // Obligas a que al menos haya 3 para mantener el SEO
         category: z.enum(['Zapatillas', 'Combas', 'Calleras']),
         brand: z.string(),
-        tags: z.array(z.string()).max(4),
         type: z.enum(['Comparativa', 'Review', 'Ranking', 'Guia de Solucion']),
         image: image(),
         rating: z.number(),
