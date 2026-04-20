@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import Start from "../icons/Start.astro";
 import EmptyStart from "../icons/EmptyStart.astro";
+import EmptyStart from "../icons/EmptyStart.astro";
 import Check from "../icons/Check.astro";
 import SearchButtonAmazon from "./../../components/SearchButtonAmazon.astro";
 import ThumbUp from "../icons/ThumbUp.astro";
@@ -41,6 +42,9 @@ const ICON_COMPONENTS: Record<Details["icon"], AstroComponentFactory> = {
 
 const fullStars = Math.round(rating);
 const emptyStars = 5 - fullStars;
+
+const fullStars = Math.round(rating);
+const emptyStars = 5 - fullStars;
 ---
 
 <article>
@@ -61,6 +65,7 @@ const emptyStars = 5 - fullStars;
         {title}
       </h1>
       <div
+        class="flex w-fit items-center p-0"
         class="flex w-fit items-center p-0"
         aria-label={`Puntuación de ${rating} basada en ${reviewCount} reseñas`}
       >
