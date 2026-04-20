@@ -1,9 +1,8 @@
 ---
 import { Image } from "astro:assets";
-import type { CollectionEntry } from "astro:content";
 import Clock from "./icons/Clock.astro";
 import Arrow from "./icons/arrow.astro";
-import { formatDistanceToNow, formatDistanceToNowStrict } from "date-fns";
+import { formatDistanceToNowStrict } from "date-fns";
 import { es } from "date-fns/locale"; // <-- Asegúrate de que tiene las llaves
 
 const { post } = Astro.props;

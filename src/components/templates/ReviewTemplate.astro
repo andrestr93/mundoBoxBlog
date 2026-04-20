@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import Start from "../icons/Start.astro";
+import EmptyStart from "../icons/EmptyStart.astro";
 import Check from "../icons/Check.astro";
 import SearchButtonAmazon from "./../../components/SearchButtonAmazon.astro";
 import ThumbUp from "../icons/ThumbUp.astro";
@@ -37,6 +38,9 @@ const ICON_COMPONENTS: Record<Details["icon"], AstroComponentFactory> = {
   bolt: Bolt,
   ripple: Ripple,
 };
+
+const fullStars = Math.round(rating);
+const emptyStars = 5 - fullStars;
 ---
 
 <article>
@@ -57,12 +61,33 @@ const ICON_COMPONENTS: Record<Details["icon"], AstroComponentFactory> = {
         {title}
       </h1>
       <div
-        class="flex items-center"
+        class="flex w-fit items-center p-0"
         aria-label={`Puntuación de ${rating} basada en ${reviewCount} reseñas`}
       >
-        <p class="text-lg font-bold">
-          {rating}/5 estrellas ({reviewCount} reseñas)
-        </p>
+        <div class="flex p-0">
+          {
+            // Pintamos las estrellas llenas
+            Array.from({ length: fullStars }).map((_) => (
+              <span>
+                <Start />{" "}
+              </span>
+            ))
+          }
+          {
+            // Pintamos las estrellas vacías
+            Array.from({ length: emptyStars }).map((_) => (
+              <span>
+                {" "}
+                <EmptyStart />{" "}
+              </span>
+            ))
+          }
+        </div>
+        <div>
+          <p class="text-medium w-max p-0 font-bold text-white">
+            ({rating}/5 de {reviewCount} reseñas)
+          </p>
+        </div>
       </div>
       <div class="bg-primary/15 rounded-2xl">
         <div class="flex flex-row-reverse items-center">
