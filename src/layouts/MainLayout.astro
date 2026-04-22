@@ -3,6 +3,7 @@ import { ClientRouter } from "astro:transitions";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import "../styles/global.css";
+import { fade } from "astro:transitions";
 
 interface Props {
   title?: string;
@@ -122,6 +123,7 @@ const homeSchema = isHome
       name="google-site-verification"
       content="obdZR3ImUTWfkcDb2xxlY-4EOKMLYtgma64kgWfNB-U"
     />
+    <ClientRouter />
 
     {
       homeSchema && (
@@ -131,15 +133,13 @@ const homeSchema = isHome
         />
       )
     }
-
-    <ClientRouter />
   </head>
-  <body>
-    <Header delay="0.1s" />
+  <body transition:animate={fade({ duration: "0.4s" })}>
+    <Header />
 
-    <main class="reveal mb-5 w-full p-0" style="animation-delay: 0.4s;">
+    <main class="mb-5 w-full p-0">
       <slot />
     </main>
-    <Footer delay="0.6s" />
+    <Footer />
   </body>
 </html>

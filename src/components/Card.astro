@@ -2,8 +2,10 @@
 import { Image } from "astro:assets";
 import Clock from "./icons/Clock.astro";
 import Arrow from "./icons/arrow.astro";
+import { fade } from "astro:transitions";
+
 import { formatDistanceToNowStrict } from "date-fns";
-import { es } from "date-fns/locale"; // <-- Asegúrate de que tiene las llaves
+import { es } from "date-fns/locale";
 
 const { post } = Astro.props;
 
@@ -31,6 +33,8 @@ const publishTime = formatDistanceToNowStrict(new Date(pubDate), {
             width={800}
             height={800}
             alt={title}
+            transition:name="product"
+            transition:animate={fade({ duration: "0.4s" })}
             src={image}
             quality="mid"
             class="h-full w-full object-cover"
