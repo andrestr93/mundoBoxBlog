@@ -3,24 +3,22 @@ import { getCollection } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
 import Card from "../../components/Card.astro";
 
+const getFullYear = new Date().getFullYear();
 export async function getStaticPaths() {
   const allPosts = await getCollection("blog");
 
-  // 1. Extraemos todas las categorías únicas que existen en tus MDX
   const uniqueCategories = [
     ...new Set(allPosts.map((post) => post.data.category.toLowerCase())),
   ];
 
-  // 2. Por cada categoría, creamos una página
   return uniqueCategories.map((category) => {
-    // Filtramos los posts que pertenecen a esta categoría específica
     const filteredPosts = allPosts.filter(
       (post) => post.data.category.toLowerCase() === category,
     );
 
     return {
-      params: { category }, // Esto rellena el hueco de la URL (ej: /calzado)
-      props: { posts: filteredPosts, categoryName: category }, // Pasamos los posts como "props"
+      params: { category },
+      props: { posts: filteredPosts, categoryName: category },
     };
   });
 }
@@ -36,15 +34,15 @@ const categorySchema = {
       "@type": "CollectionPage",
       "@id": `${categoryUrl}#webpage`,
       url: categoryUrl,
-      name: `Mejores ${categoryName} de Crossfit 2026 - MundoBox`,
+      name: `Mejores ${categoryName} de Crossfit ${getFullYear} - MundoBox`,
       description: `Descubre nuestra selección de las mejores ${categoryName} para Crossfit analizadas por expertos.`,
       isPartOf: { "@id": `${Astro.site}/#website` },
       breadcrumb: { "@id": `${categoryUrl}#breadcrumb` },
     },
     {
       "@type": "ItemList",
-      name: `Listado de ${categoryName}`,
-      description: `Análisis y reseñas de ${categoryName} para entrenamiento funcional.`,
+      name: `Mejores ${categoryName} de Crossfit ${getFullYear} - MundoBox`,
+      description: `Descubre nuestra selección de las mejores ${categoryName} para Crossfit analizadas por expertos.`,
       itemListElement: posts.map((post, index) => ({
         "@type": "ListItem",
         position: index + 1,

@@ -62,7 +62,7 @@ const schema = {
   itemReviewed: {
     "@type": "Product",
     name: title,
-    image: image,
+    image: optimizeImage,
     brand: {
       "@type": "Brand",
       name: brand,
@@ -91,7 +91,7 @@ const schema = {
   isHome={false}
   title={title}
   description={metaDescription}
-  image={image.src}
+  image={optimizeImage.src}
   rating={rating}
   reviewCount={reviewCount}
 >
