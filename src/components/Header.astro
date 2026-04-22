@@ -2,7 +2,6 @@
 import Navbar from "../shared/components/Navbar.astro";
 import Logo from "../shared/components/Logo.astro";
 import { fade } from "astro:transitions";
-const { class: className } = Astro.props;
 ---
 
 <header transition:animate={fade({ duration: "0.4s" })}>

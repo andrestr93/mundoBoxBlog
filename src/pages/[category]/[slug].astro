@@ -3,6 +3,7 @@
 import { getCollection, render } from "astro:content";
 import ReviewTemplate from "../../components/templates/ReviewTemplate.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
+import { getImage } from "astro:assets";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -32,12 +33,18 @@ const {
 } = post.data;
 const { Content } = await render(post);
 
+const optimizeImage = await getImage({
+  src: image,
+  format: "webp",
+  quality: 50,
+});
+
 const schema = {
   "@context": "https://schema.org/",
   "@type": "Review", // El tipo principal es RESEÑA, no Producto
   headline: title,
   description: metaDescription,
-  image: image,
+  image: optimizeImage,
   datePublished: pubDate || new Date().toISOString(),
   author: {
     "@type": "Person",
