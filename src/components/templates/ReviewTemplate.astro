@@ -1,31 +1,18 @@
 ---
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
 import { Image } from "astro:assets";
-import Start from "../icons/Start.astro";
-import EmptyStart from "../icons/EmptyStart.astro";
+import Bolt from "../icons/Bolt.astro";
 import Check from "../icons/Check.astro";
-import SearchButtonAmazon from "./../../components/SearchButtonAmazon.astro";
-import ThumbUp from "../icons/ThumbUp.astro";
-import Plus from "../icons/Plus.astro";
-import ThumpDown from "../icons/ThumpDown.astro";
+import EmptyStart from "../icons/EmptyStart.astro";
 import Less from "../icons/Less.astro";
+import Plus from "../icons/Plus.astro";
+import Report from "../icons/Report.astro";
 import Ripple from "../icons/Ripple.astro";
 import Shield from "../icons/Shield.astro";
-import Bolt from "../icons/Bolt.astro";
-import Report from "../icons/Report.astro";
-import type { AstroComponentFactory } from "astro/runtime/server/index.js";
-
-const {
-  title,
-  image,
-  pros,
-  contras,
-  characteristics,
-  reviewCount,
-  amazonLink,
-  rating,
-  name,
-  details,
-} = Astro.props;
+import Start from "../icons/Start.astro";
+import ThumbUp from "../icons/ThumbUp.astro";
+import ThumpDown from "../icons/ThumpDown.astro";
+import SearchButtonAmazon from "../SearchButtonAmazon.astro";
 
 interface Details {
   title: string;
@@ -39,6 +26,18 @@ const ICON_COMPONENTS: Record<Details["icon"], AstroComponentFactory> = {
   ripple: Ripple,
 };
 
+const {
+  title,
+  name,
+  image,
+  rating,
+  reviewCount,
+  amazonLink,
+  characteristics,
+  pros,
+  contras,
+} = Astro.props;
+
 const fullStars = Math.round(rating);
 const emptyStars = 5 - fullStars;
 ---
@@ -51,7 +50,7 @@ const emptyStars = 5 - fullStars;
         widths={[1024]}
         transition:name="product"
         format="png"
-        alt=`${name}`
+        alt={name}
         loading="eager"
         src={image}
       />
@@ -162,23 +161,6 @@ const emptyStars = 5 - fullStars;
       <h2 class="font-bold text-white">Analisis Detallado</h2>
       <Ripple class="h-15 w-15" />
     </div>
-
-    <ul class="p-4">
-      {
-        details.map((item: Details) => {
-          const Icon = ICON_COMPONENTS[item.icon];
-          return (
-            <li class="flex flex-col">
-              <div class="flex items-center p-0">
-                <Icon class="h-12 w-12" aria-hidden="true" />
-                <h3 class="font-bold">{item.title}</h3>
-              </div>
-
-              <p set:html={item.content} />
-            </li>
-          );
-        })
-      }
-    </ul>
+    <slot />
   </section>
 </article>
