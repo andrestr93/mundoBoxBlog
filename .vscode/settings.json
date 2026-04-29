@@ -1,7 +1,0 @@
-{
-  "yaml.schemas": {
-    "file:///${workspaceFolder}/.astro/collections/blog.schema.json": "src/content/blog/*.mdx"
-  },
-  "yaml.completion": true,
-  "yaml.validate": true
-}
