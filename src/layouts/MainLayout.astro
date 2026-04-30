@@ -17,19 +17,15 @@ interface Props {
   reviewCount?: number;
   slug?: string;
   isHome?: boolean;
+  isNotIndex?: boolean;
 }
 
 const {
   title,
   description,
   image,
-  rating,
-  brand,
-  reviewCount,
-  slug,
-  name,
-  category,
   isHome = false,
+  isNotIndex = false,
 } = Astro.props;
 const relativeImage = image ?? `/default.png`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -97,6 +93,8 @@ const homeSchema = isHome
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
+
+    {isNotIndex && <meta name="robots" content="noindex, follow" />}
 
     <title>{title}</title>
     <meta name="description" content={description} />

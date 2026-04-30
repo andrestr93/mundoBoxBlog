@@ -2,38 +2,131 @@
 import MainLayout from "../layouts/MainLayout.astro";
 ---
 
-<MainLayout>
-  <div
-    class="bg-primary/5 mx-auto flex max-w-6xl flex-col rounded-2xl px-4 py-2 text-lg font-bold"
-  >
-    <h1 class="text-center">Aviso Legal y Condiciones de Uso</h1>
-    <p class="font-bold">
-      1. Identificación del Titular En cumplimiento con el artículo 10 de la Ley
-      34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y
-      del Comercio Electrónico (LSSI-CE), se informa que el titular de esta web
-      es [Tu Nombre Completo], con NIF [Tu NIF], domicilio en [Tu
-      Ciudad/Provincia] y correo electrónico de contacto [Tu Email].
-    </p>
-    <p class="font-bold">
-      2.Propiedad Intelectual Los contenidos de este blog (textos, análisis y
-      fotografías propias) están protegidos por derechos de autor. Queda
-      prohibida la reproducción total o parcial sin consentimiento previo.
-    </p>
+<MainLayout title={"Legal"} isNotIndex={true}>
+  <section>
+    <h1 class="text-center">Politica de Cookies y Información Legal</h1>
+    <div>
+      <p>
+        1. Datos Identificativos del Titular En cumplimiento del artículo 10 de
+        la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la
+        Información y Comercio Electrónico (LSSI-CE), se informa de los
+        siguientes datos identificativos: Titular del sitio web: [Tu nombre
+        completo o razón social] NIF/NIE/CIF: [Tu número de identificación
+        fiscal] Domicilio: [Tu dirección completa], España Correo electrónico de
+        contacto: [tu@email.com] Nombre de dominio: [www.tudominio.com]
+      </p>
+    </div>
 
-    <p class="font-bold">
-      3.Declaración de Afiliación (Amazon Associates) Como afiliado de Amazon,
-      percibo ingresos por compras adscritas que cumplen los requisitos
-      aplicables. Esto significa que, si compras un producto a través de mis
-      enlaces, yo recibo una pequeña comisión sin que a ti te cueste ni un
-      céntimo extra. Esto ayuda a mantener los costes del servidor y las pruebas
-      de material.
-    </p>
-    <p class="font-bold">
-      4. Limitación de Responsabilidad Este blog ofrece opiniones informativas.
-      No soy responsable del uso inadecuado del material deportivo aquí
-      analizado ni de las lesiones que puedan derivarse de una mala práctica del
-      CrossFit. Consulta siempre con tu coach antes de probar nuevo equipamiento
-      o suplementación.
-    </p>
-  </div>
+    <div>
+      <p>
+        2. Objeto y Naturaleza del Sitio Web Este sitio web es un blog personal
+        dedicado al CrossFit y al fitness funcional. Su contenido incluye:
+        Artículos informativos y educativos sobre CrossFit Análisis y reseñas de
+        productos relacionados con el deporte Recomendaciones de equipamiento,
+        nutrición y entrenamiento Enlaces de afiliado al Programa de Afiliados
+        de Amazon (Amazon Associates) Las opiniones expresadas son personales y
+        no constituyen asesoramiento médico, nutricional o de entrenamiento
+        profesional.
+      </p>
+    </div>
+
+    <div>
+      <p>
+        3. Propiedad Intelectual e Industrial Todos los contenidos de este sitio
+        web —incluyendo textos, fotografías, gráficos, imágenes, logotipos y
+        código fuente— son propiedad del titular o se utilizan bajo licencia, y
+        están protegidos por la Ley de Propiedad Intelectual (Real Decreto
+        Legislativo 1/1996). Queda expresamente prohibida la reproducción total
+        o parcial, distribución, comunicación pública o transformación de los
+        contenidos sin autorización escrita del titular, salvo que se indique lo
+        contrario.
+      </p>
+    </div>
+
+    <div>
+      <p>
+        4. Responsabilidad sobre los Contenidos El titular se reserva el derecho
+        de modificar, suspender o eliminar contenidos sin previo aviso. No se
+        garantiza la exactitud, integridad o actualidad de la información
+        publicada, aunque se pone especial cuidado en mantenerla al día. Los
+        productos analizados se basan en experiencia personal y/o investigación.
+        Los resultados individuales pueden variar significativamente. 5.
+        Legislación Aplicable y Jurisdicción Este aviso legal se rige por la
+        legislación española vigente. Para cualquier controversia derivada del
+        uso de este sitio web, las partes se someten a los juzgados y tribunales
+        del domicilio del titular, salvo que la normativa aplicable establezca
+        otro fuero.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div>
+      <p>
+        Programa de Afiliados de Amazon Este sitio participa en el Programa de
+        Afiliados de Amazon EU (Amazon Associates), un programa de publicidad
+        para afiliados diseñado para proporcionar un medio para que los sitios
+        web ganen honorarios por publicidad mediante la publicidad y el enlace a
+        amazon.es. Los enlaces de afiliado están claramente identificados en los
+        artículos La comisión varía entre un 1% y un 10% según la categoría del
+        producto El precio que pagas tú como comprador no varía por usar un
+        enlace de afiliado Amazon gestiona el proceso de compra, el pago y el
+        servicio postventa Independencia Editorial Las comisiones de afiliado no
+        influyen en mis análisis ni recomendaciones. Mi objetivo es ofrecer
+        información honesta y útil a la comunidad CrossFit. Sigo estos
+        principios: Analizo los productos basándome en sus méritos reales, no en
+        el porcentaje de comisión Incluyo tanto puntos positivos como negativos
+        en cada reseña No acepto pagos por escribir reseñas favorables Si un
+        producto no lo recomendaría a un amigo, no lo recomendaré en el blog
+        Algunas reseñas se basan en investigación y datos de otros usuarios, no
+        solo en uso personal Identificación de Contenido Afiliado Verás avisos
+        como los siguientes en los artículos con contenido afiliado: "Este
+        artículo contiene enlaces de afiliado" "(enlace de afiliado)" junto al
+        producto Un banner de aviso al inicio del artículo
+      </p>
+    </div>
+  </section>
+  <section>
+    <div>
+      <p>
+        1. Contenido Informativo, No Profesional Soy un apasionado del CrossFit
+        que comparte su experiencia y conocimiento. No soy médico,
+        nutricionista, entrenador certificado ni profesional de la salud. El
+        contenido de este blog: Refleja mi experiencia personal y la
+        investigación que realizo Puede no ser adecuado para todas las personas
+        No tiene en cuenta condiciones médicas individuales Puede quedar
+        desactualizado con el avance del conocimiento científico
+      </p>
+      <p>
+        2. Riesgo del Ejercicio Físico El CrossFit y el ejercicio de alta
+        intensidad conllevan riesgos inherentes. Antes de comenzar cualquier
+        programa de entrenamiento descrito o referenciado en este blog: Consulta
+        con tu médico, especialmente si tienes condiciones previas de salud
+        Trabaja con un entrenador cualificado para aprender la técnica correcta
+        Escucha a tu cuerpo y no fuerces más allá de tus límites El titular de
+        este blog no se hace responsable de lesiones o daños derivados del
+        seguimiento de contenidos publicados
+      </p>
+      <p>
+        3. Análisis de Productos Las reseñas y análisis de productos publicados
+        en este blog: Representan la opinión personal del autor en un momento
+        determinado Pueden estar basadas en uso personal, investigación o
+        feedback de otros usuarios No garantizan los mismos resultados para
+        todos los usuarios Los precios, disponibilidad y características de los
+        productos pueden cambiar sin previo aviso No sustituyen a las
+        instrucciones oficiales del fabricante 4. Exactitud de la Información
+        Aunque me esfuerzo por publicar información precisa y actualizada, no
+        puedo garantizar la exactitud, integridad o actualidad de todos los
+        contenidos. El titular no se responsabiliza de: Errores u omisiones en
+        el contenido Cambios en la información desde la fecha de publicación
+        Resultados derivados del uso de la información publicada Contenido de
+        sitios web externos enlazados desde este blog 5. Limitación de
+        Responsabilidad En la máxima medida permitida por la legislación
+        española aplicable, el titular de este blog queda exento de
+        responsabilidad por daños directos, indirectos, incidentales,
+        consecuentes o punitivos derivados del uso de este sitio web o de la
+        aplicación de su contenido.
+      </p>
+    </div>
+  </section>
 </MainLayout>
