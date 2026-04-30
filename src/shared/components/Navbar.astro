@@ -19,6 +19,10 @@ const categories = [
       </a>
     ))
   }
+
+  <a class="hover:text-primary text-white transition-colors" href="/sobremi"
+    >Sobre mi</a
+  >
 </nav>
 
 <div class="border-white/10 text-white">
@@ -30,13 +34,10 @@ const categories = [
     id="caja-menu"
     class="fixed left-0 z-9999 hidden w-full flex-col bg-black text-center shadow-2xl md:hidden"
   >
-    {
-      categories.map((cat) => (
-        <a href={`/${cat}`} class="hover:text-primary text-center">
-          {cat}
-        </a>
-      ))
-    }
+    <div class="flex flex-col">
+      {categories.map((cat) => <a href={`/${cat}`}>{cat}</a>)}
+      <a href="/sobremi">Sobre mi</a>
+    </div>
   </nav>
 </div>
 <script>
