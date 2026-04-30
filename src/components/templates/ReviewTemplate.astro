@@ -20,12 +20,6 @@ interface Details {
   icon: "shield" | "bolt" | "ripple";
 }
 
-const ICON_COMPONENTS: Record<Details["icon"], AstroComponentFactory> = {
-  shield: Shield,
-  bolt: Bolt,
-  ripple: Ripple,
-};
-
 const {
   title,
   name,

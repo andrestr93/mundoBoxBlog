@@ -1,7 +1,103 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import { Image } from "astro:assets";
+import imgAtlete from "./../assets/images/atlete.png";
 ---
 
-<MainLayout>
-  <h2>Sobre mi</h2>
+<MainLayout isNotIndex={true} title={"Sobre Mi"}>
+  <section class="flex flex-col items-center">
+    <div class="relative h-full w-full max-w-7xl rounded-2xl md:aspect-auto">
+      <Image
+        loading="eager"
+        quality="high"
+        format="webp"
+        src={imgAtlete}
+        class="h-full w-full object-cover opacity-80"
+        widths={[768, 1024, 1600]}
+        sizes="100vw"
+        alt="Atleta de Crossfit entrenando en el box "
+        fetchpriority="high"
+      />
+      <div>
+        <h1>Sobre MundoBox</h1>
+        <p>
+          Esto no va solo de levantar peso. Va de superarte, de entender el
+          proceso y de tomar decisiones con criterio.
+        </p>
+      </div>
+
+      <div>
+        <h2>Cómo empezó todo</h2>
+        <p>
+          Empecé en el CrossFit hace algo más de un año y medio, casi sin
+          pensarlo demasiado. Fue un familiar quien me habló de ello, y lo que
+          empezó como una simple prueba terminó convirtiéndose en parte de mi
+          rutina… y de mi forma de entender el deporte.
+        </p>
+        <p>
+          Venía del típico gimnasio: máquinas, cascos, entrenar solo. Y
+          sinceramente, eso acababa siendo monótono. El CrossFit fue justo lo
+          contrario desde el primer día.
+        </p>
+      </div>
+      <div>
+        <h2>Más que un deporte</h2>
+        <p>
+          Aquí entrenas en grupo, pero compites contigo mismo. Cada día es una
+          oportunidad para mejorar tu marca, tu técnica o simplemente tu
+          mentalidad.
+        </p>
+        <p>
+          Lo que más me enganchó fue la comunidad. Ese ambiente donde todos
+          empujan, donde nadie te juzga y donde cada pequeño progreso cuenta.
+        </p>
+      </div>
+
+      <div>
+        <h2>El problema que detecté</h2>
+        <p>
+          Cuando empecé, me encontré con un problema bastante claro: no tenía ni
+          idea de qué material necesitaba realmente.
+        </p>
+        <p>
+          ¿Qué zapatillas elegir? ¿Qué calleras merecen la pena? ¿Qué accesorios
+          son útiles de verdad y cuáles son puro marketing?
+        </p>
+        <p>
+          Buscaba información, pero todo lo que encontraba era demasiado
+          genérico. No había contenido realmente especializado en CrossFit,
+          hecho desde la experiencia real.
+        </p>
+      </div>
+
+      <div>
+        <h2>Así nació MundoBox</h2>
+        <p>
+          De ahí surge MundoBox. Un sitio donde poder encontrar análisis claros,
+          sin humo y basados en uso real.
+        </p>
+        <p>
+          Aquí no vas a encontrar recomendaciones vacías. Cada producto que
+          analizo —ya sean zapatillas, calleras o cualquier complemento— está
+          pensado para ayudarte a decidir si encaja contigo o no.
+        </p>
+        <p>
+          Además, también comparto guías prácticas para mejorar técnica, evitar
+          errores comunes y sacar más partido a tus entrenamientos.
+        </p>
+      </div>
+
+      <p>
+        <h2>Mi objetivo</h2>
+        <p>
+          No se trata de venderte nada. Se trata de darte la información que a
+          mí me hubiese gustado tener cuando empecé.
+        </p>
+      </p>
+      <p>
+        Si estás empezando, si quieres mejorar o si simplemente buscas tomar
+        mejores decisiones sobre tu equipamiento, este es tu sitio.
+      </p>
+    </div>
+  </section>
 </MainLayout>
