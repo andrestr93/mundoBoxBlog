@@ -20,7 +20,7 @@ const blog = defineCollection({
         image: image(),
         rating: z.number(),
         reviewCount: z.number(),
-        amazonLink: z.string().url(),
+        amazonLink: z.string(),
         pros: z.array(z.string().max(80)).max(4),
         contras: z.array(z.string().max(80)).max(4),
 

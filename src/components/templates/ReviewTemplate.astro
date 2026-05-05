@@ -11,12 +11,6 @@ import ThumbUp from "../icons/ThumbUp.astro";
 import ThumpDown from "../icons/ThumpDown.astro";
 import SearchButtonAmazon from "../SearchButtonAmazon.astro";
 
-interface Details {
-  title: string;
-  content: string;
-  icon: "shield" | "bolt" | "ripple";
-}
-
 const {
   title,
   name,
@@ -58,7 +52,7 @@ const emptyStars = 5 - fullStars;
         <div class="flex p-0">
           {
             // Pintamos las estrellas llenas
-            Array.from({ length: fullStars }).map((_) => (
+            Array.from({ length: fullStars }).map(() => (
               <span>
                 <Start />{" "}
               </span>
@@ -66,7 +60,7 @@ const emptyStars = 5 - fullStars;
           }
           {
             // Pintamos las estrellas vacías
-            Array.from({ length: emptyStars }).map((_) => (
+            Array.from({ length: emptyStars }).map(() => (
               <span>
                 {" "}
                 <EmptyStart />{" "}

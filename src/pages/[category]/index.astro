@@ -81,6 +81,7 @@ const categorySchema = {
   description=`Descubre nuestra selección de las mejores ${categoryName} para Crossfit.`
 >
   <script
+    is:inline
     slot="schema-post"
     type="application/ld+json"
     set:html={JSON.stringify(categorySchema)}

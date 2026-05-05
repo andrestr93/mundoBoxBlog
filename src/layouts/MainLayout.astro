@@ -125,6 +125,7 @@ const homeSchema = isHome
     {
       homeSchema && (
         <script
+          is:inline
           type="application/ld+json"
           set:html={JSON.stringify(homeSchema)}
         />

@@ -4,13 +4,16 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "lint": "eslint .",
+    "check": "astro check",
+    "build": "astro check && eslint .  astro build && ",
     "preview": "pnpm run build && wrangler pages dev dist",
     "astro": "astro",
     "generate-types": "wrangler types",
     "deploy": "pnpm run build && wrangler pages deploy dist"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.9",
     "@astrojs/cloudflare": "^13.1.8",
     "@astrojs/mdx": "^5.0.4",
     "@astrojs/sitemap": "^3.7.2",
@@ -20,13 +23,18 @@
     "astro": "^6.1.5",
     "date-fns": "^4.1.0",
     "sharp": "^0.34.5",
-    "tailwindcss": "^4.2.1"
+    "tailwindcss": "^4.2.1",
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.19",
+    "@typescript-eslint/parser": "^8.59.2",
+    "eslint": "^10.3.0",
+    "eslint-plugin-astro": "^1.7.0",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
+    "typescript-eslint": "^8.59.2",
     "wrangler": "^4.78.0"
   }
 }

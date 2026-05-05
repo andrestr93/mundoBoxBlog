@@ -3,13 +3,16 @@ import { getCollection } from "astro:content";
 import Card from "../components/Card.astro";
 import Presentation from "../components/Presentation.astro";
 import MainLayout from "../layouts/MainLayout.astro";
+import type { CollectionEntry } from "astro:content";
 const imageDefault = "/default.png";
 
 const posts = await getCollection("blog");
 
-const lastPosts = posts.sort((a: any, b: any) => {
-  return a.data.pubDate.valueOf() - b.data.pubDate.valueOf();
-});
+const lastPosts = posts.sort(
+  (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) => {
+    return a.data.pubDate.valueOf() - b.data.pubDate.valueOf();
+  },
+);
 
 const latestPosts = lastPosts.slice(0, 3);
 const currentYear = new Date().getFullYear();
@@ -26,7 +29,7 @@ const currentYear = new Date().getFullYear();
   </section>
 
   <section>
-    <h2 class="text-center">Ultimos Analisis</h2>
+    <h2 class="text-center">Ultimos Análisis</h2>
 
     <ul class="grid grid-cols-1 gap-2 p-0 md:grid-cols-3">
       {

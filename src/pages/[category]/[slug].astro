@@ -21,16 +21,8 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 
-const {
-  image,
-  rating,
-  reviewCount,
-  title,
-  name,
-  metaDescription,
-  brand,
-  pubDate,
-} = post.data;
+const { image, rating, reviewCount, title, metaDescription, brand, pubDate } =
+  post.data;
 const { Content } = await render(post);
 
 const optimizeImage = await getImage({
@@ -84,7 +76,11 @@ const schema = {
 };
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>
 <MainLayout
   isHome={false}
   title={title}

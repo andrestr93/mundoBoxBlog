@@ -3,9 +3,8 @@
   "include": [
     ".astro/types.d.ts",
     "**/*",
-    "./worker-configuration.d.ts"
+    "./worker-configuration.d.ts",
+    ".eslintrc.cjs"
   ],
-  "exclude": [
-    "dist"
-  ]
+  "exclude": ["dist"]
 }
