@@ -67,9 +67,7 @@ const schema = {
       "@type": "Brand",
       name: brand,
     },
-    // TRUCO PARA AFILIADOS:
-    // Añadimos una oferta vacía o genérica para "engañar" al validador
-    // y que no pida precios, pero especificamos que es una reseña.
+
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: rating.toString(),
