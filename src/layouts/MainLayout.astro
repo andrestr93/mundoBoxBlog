@@ -3,7 +3,6 @@ import { ClientRouter } from "astro:transitions";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import "../styles/global.css";
-import { fade } from "astro:transitions";
 
 interface Props {
   title?: string;
@@ -132,7 +131,7 @@ const homeSchema = isHome
       )
     }
   </head>
-  <body transition:animate={fade({ duration: "0.4s" })}>
+  <body>
     <Header />
 
     <main class="mb-5 w-full p-0">
