@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "lint": "eslint .",
     "check": "astro check",
-    "build": "astro check && eslint .  astro build && ",
+    "build": "astro build",
     "preview": "pnpm run build && wrangler pages dev dist",
     "astro": "astro",
     "generate-types": "wrangler types",
