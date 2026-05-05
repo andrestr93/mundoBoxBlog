@@ -33,7 +33,6 @@ const categories = [
   <nav
     class="fixed top-0 right-0 h-full w-full translate-x-full flex-col bg-black text-center transition-transform duration-300 ease-in-out md:hidden"
     id="box-menu"
-    class="fixed top-0 right-0 h-full w-full translate-x-full flex-col bg-black text-center transition-transform duration-300 ease-in-out md:hidden"
   >
     <div>
       <button
@@ -68,7 +67,5 @@ const categories = [
     };
 
     menuMobile();
-    // Si usas transiciones de página en Astro, esto lo reinicia al cambiar de URL
-    document.addEventListener("astro:after-swap", menuMobile);
   </script>
 </div>
