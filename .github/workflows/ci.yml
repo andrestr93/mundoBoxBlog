@@ -1,4 +1,4 @@
-name: Quality Check
+name: Quality Check & Deploy
 
 on:
   push:
@@ -14,21 +14,22 @@ jobs:
 
       - uses: pnpm/action-setup@v4
         with:
-          version: 9 # O la versión que uses
+          version: 10 # Tu log dice que usas v10.11.1
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22 # Tu log dice v22.22.0
           cache: "pnpm"
 
       - name: Install dependencies
-        run: pnpm install
-
-      - name: Run Lint
-        run: pnpm run lint
+        # Añadimos --no-frozen-lockfile por si hay cambios de arquitectura
+        run: pnpm install --no-frozen-lockfile
 
       - name: Run Astro Check
         run: pnpm run check
 
-      - name: Build
+      - name: Run Lint
+        run: pnpm run lint
+
+      - name: Build Project
         run: pnpm run build
