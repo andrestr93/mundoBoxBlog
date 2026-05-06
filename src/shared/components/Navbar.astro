@@ -39,12 +39,11 @@ const categories = [
         class="text-primary flex justify-end px-5 text-4xl"
         id="close-menu">×</button
       >
-      <div>
-        <div class="text-primary flex flex-col text-2xl">
-          {categories.map((cat) => <a href={`/${cat}`}>{cat}</a>)}
 
-          <a href="/sobremi">Sobre mi</a>
-        </div>
+      <div class="text-primary flex flex-col text-2xl">
+        {categories.map((cat) => <a href={`/${cat}`}>{cat}</a>)}
+
+        <a href="/sobremi">Sobre mi</a>
       </div>
     </div>
   </nav>
