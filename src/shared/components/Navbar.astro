@@ -39,33 +39,36 @@ const categories = [
         class="text-primary flex justify-end px-5 text-4xl"
         id="close-menu">×</button
       >
-      <div>
-        <div class="text-primary flex flex-col text-2xl">
-          {categories.map((cat) => <a href={`/${cat}`}>{cat}</a>)}
 
-          <a href="/sobremi">Sobre mi</a>
-        </div>
+      <div class="text-primary flex flex-col text-2xl">
+        {categories.map((cat) => <a href={`/${cat}`}>{cat}</a>)}
+
+        <a href="/sobremi">Sobre mi</a>
       </div>
     </div>
   </nav>
-
   <script>
-    const menuMobile = () => {
+    const setupMenu = () => {
       const butOpen = document.getElementById("open-menu");
       const butClose = document.getElementById("close-menu");
       const boxMenu = document.getElementById("box-menu");
 
-      butOpen?.addEventListener("click", () => {
-        boxMenu?.classList.toggle("translate-x-0");
-        boxMenu?.classList.toggle("translate-x-full");
+      if (!butOpen || !butClose || !boxMenu) return;
+      if (boxMenu.dataset.menuInitialized) return;
+
+      butOpen.addEventListener("click", () => {
+        boxMenu.classList.toggle("translate-x-0");
+        boxMenu.classList.toggle("translate-x-full");
       });
 
-      butClose?.addEventListener("click", () => {
-        boxMenu?.classList.toggle("translate-x-full");
-        boxMenu?.classList.toggle("translate-x-0");
+      butClose.addEventListener("click", () => {
+        boxMenu.classList.toggle("translate-x-full");
+        boxMenu.classList.toggle("translate-x-0");
       });
+
+      boxMenu.dataset.menuInitialized = "true";
     };
 
-    menuMobile();
+    document.addEventListener("astro:page-load", setupMenu);
   </script>
 </div>
