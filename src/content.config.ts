@@ -14,7 +14,7 @@ const blog = defineCollection({
         metaDescription: z.string().max(160),
         characteristics: z.array(z.string().max(80)).max(5),
         author: z.string(),
-        category: z.enum(['Zapatillas', 'Combas', 'Calleras']),
+        category: z.enum(['Zapatillas', 'Combas', 'Calleras', 'Suplementos']),
         brand: z.string(),
         type: z.enum(['Análisis', 'Guia de Solución']),
         image: image(),
