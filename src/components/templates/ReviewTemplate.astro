@@ -17,9 +17,10 @@ const {
   image,
   rating,
   reviewCount,
-  amazonLink,
+  linkAfiliates,
   characteristics,
   pros,
+  brand,
   contras,
 } = Astro.props;
 
@@ -94,7 +95,7 @@ const emptyStars = 5 - fullStars;
         </ul>
       </div>
       <div>
-        <SearchButtonAmazon amazonUrl={amazonLink} />
+        <SearchButtonAmazon brand={brand} linkAfiliates={linkAfiliates} />
         <p class="text-primary text-center text-xs font-bold">
           Ganamos una pequeña comisión si compras a través de este enlace sin
           coste extra para ti

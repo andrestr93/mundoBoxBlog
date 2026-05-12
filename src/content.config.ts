@@ -11,7 +11,7 @@ const blog = defineCollection({
         name: z.string(),
         pubDate: z.date(),
         metaTitle: z.string().max(80),
-        metaDescription: z.string().max(180),
+        metaDescription: z.string().max(160),
         characteristics: z.array(z.string().max(80)).max(5),
         author: z.string(),
         category: z.enum(['Zapatillas', 'Combas', 'Calleras', 'Suplementos']),
