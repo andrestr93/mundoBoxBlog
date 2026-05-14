@@ -1,0 +1,102 @@
+---
+interface Props {
+  categoryName: string;
+}
+
+const { categoryName } = Astro.props;
+---
+
+{
+  categoryName === "zapatillas" && (
+    <>
+      <h1 class="mb-6 text-center text-3xl font-bold text-white">
+        Las Mejores Zapatillas de CrossFit en 2026: Análisis y Comparativas para
+        Elegir Bien
+      </h1>
+
+      <p class="text-center text-gray-400">
+        <strong>Elegir bien la zapatilla lo cambia todo en CrossFit</strong> .
+        Analizamos las
+        <strong>mejores zapatillas CrossFit 2026</strong> para hombre y mujer,
+        con comparativas reales como Nike Metcon vs Reebok Nano, y{" "}
+        <strong>
+          guías para saber cómo elegir según tu WOD. Si tienes pie ancho, buscas
+          algo barato de buena calidad o quieres una zapatilla que aguante tanto
+          levantamiento como saltos, aquí encuentras tu respuesta.
+        </strong>
+        También cubrimos dudas clave: cuánto duran, qué drop necesitas y cuál es
+        la diferencia entre zapatilla de CrossFit y running.
+      </p>
+    </>
+  )
+}
+{
+  categoryName === "calleras" && (
+    <>
+      <h1 class="mb-6 text-center text-3xl font-bold text-white">
+        Las Mejores Calleras para CrossFit en 2026: Guía de Compra y Análisis
+      </h1>
+      <p class="text-center text-gray-400">
+        Las <strong>calleras son imprescindibles en cualquier box.</strong> En
+        MundoBox{" "}
+        <strong>
+          analizamos las mejores calleras CrossFit 2026 para que elijas con
+          criterio: calleras de cuero, modelos de 3 agujeros y las mejores
+          opciones calidad precio para todos los niveles.
+        </strong>
+        ¿Dudas entre calleras de cuero o sintético? ¿No sabes si coger de 2 o 3
+        agujeros? Te lo explicamos todo, junto con las mejores opciones para
+        <strong>
+          toes to bar, muscle up y cómo medir tu talla correctamente.
+        </strong>{" "}
+        Si estás empezando, también tienes aquí las mejores calleras CrossFit
+        para principiantes.
+      </p>
+    </>
+  )
+}
+{
+  categoryName === "combas" && (
+    <>
+      <h1 class="mb-6 text-center text-3xl font-bold text-white">
+        Las Mejores Combas para CrossFit en 2026: Velocidad, Dobles y Guía de
+        Compra
+      </h1>
+      <p class="text-center text-gray-400">
+        Una buena comba desbloquea los dobles.{" "}
+        <strong>
+          Analizamos las mejores combas CrossFit velocidad 2026, con
+          comparativas como RX vs RPM y guías para elegir el cable fino o grueso
+          según tu nivel.
+        </strong>
+        Si estás aprendiendo, te decimos si necesitas una comba para
+        principiantes o puedes ir directo a velocidad. También cubrimos cómo
+        regular la longitud, cuántas RPM alcanza y cuánto dura el cable antes de
+        cambiarlo.
+      </p>
+    </>
+  )
+}
+{
+  categoryName === "suplementos" && (
+    <>
+      <h1 class="mb-6 text-center text-3xl font-bold text-white">
+        Suplementos para CrossFit en 2026: Proteína, Creatina y Todo lo que
+        Necesitas Saber
+      </h1>
+      <p class="text-center text-gray-400">
+        Solo los suplementos que realmente funcionan. En MundoBox analizamos la
+        mejor proteína whey para CrossFit —comparando concentrate vs isolate,
+        con o sin lactosa— y la mejor creatina monohidrato, incluyendo opciones
+        Creapure con <strong>buena relación calidad precio.</strong> Resolvemos
+        las dudas más comunes:
+        <strong>
+          cuánta proteína necesitas, cuándo tomar creatina antes o después del
+          WOD, y qué suplementos tomar si empiezas CrossFit. Sin humo, sin
+          productos innecesarios.uplementos realmente necesarios para progresar
+          sin complicarte la vida.
+        </strong>
+      </p>
+    </>
+  )
+}

@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Card from "../components/Card.astro";
+import SectionCategory from "../components/SectionCategory.astro";
+
+interface Props {
+  categoryName: string;
+  posts: CollectionEntry<"blog">[];
+}
+
+const { categoryName, posts } = Astro.props;
+---
+
+<section class="mt-10 border-t border-white/10 px-4 pt-5">
+  <div class="prose prose-invert mx-auto max-w-5xl">
+    <SectionCategory categoryName={categoryName} />
+  </div>
+  <ul class="grid max-w-full gap-6 p-0 md:grid-cols-3 lg:grid-cols-4">
+    {
+      posts.map((post) => (
+        <li>
+          <Card post={post} />
+        </li>
+      ))
+    }
+  </ul>
+</section>

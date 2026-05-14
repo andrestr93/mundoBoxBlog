@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
-import Card from "../../components/Card.astro";
+import CategoryLayout from "../../layouts/CategoryLayout.astro";
 
 const getFullYear = new Date().getFullYear();
 export async function getStaticPaths() {
@@ -86,31 +86,6 @@ const categorySchema = {
     type="application/ld+json"
     set:html={JSON.stringify(categorySchema)}
   />
-  <section class="mt-10 border-t border-white/10 px-4 pt-5">
-    <div class="prose prose-invert mx-auto max-w-4xl">
-      <h1 class="mb-6 text-center text-3xl font-bold text-white">
-        Cómo elegir {categoryName} para entrenamientos de alta intensidad
-      </h1>
-      <p class="text-gray-400">
-        En <strong>MundoBox</strong> no solo listamos productos. Para seleccionar
-        cada
-        {categoryName} de esta comparativa, hemos tenido en cuenta factores críticos
-        como la <strong>estabilidad lateral</strong>, la <strong
-          >transpirabilidad del tejido</strong
-        >
-        y su resistencia ante ejercicios específicos como el <em>Rope Climb</em> o
-        los levantamientos de halterofilia.
-      </p>
-    </div>
-    <ul class="grid max-w-full gap-6 p-0 md:grid-cols-3 lg:grid-cols-4">
-      {
-        posts.map((post) => (
-          <li>
-            <Card post={post} />
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-  <section class="px-4"></section>
+
+  <CategoryLayout posts={posts} categoryName={categoryName} />
 </MainLayout>
