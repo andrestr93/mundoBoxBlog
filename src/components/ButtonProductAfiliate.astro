@@ -3,10 +3,9 @@ import ShoppingCart from "./icons/Cart.astro";
 
 interface Props {
   linkAfiliates: string;
-  brand: string;
 }
 
-const { linkAfiliates, brand } = Astro.props;
+const { linkAfiliates } = Astro.props;
 ---
 
 <div>
@@ -16,7 +15,7 @@ const { linkAfiliates, brand } = Astro.props;
     href={linkAfiliates}
     class="bg-primary font-barlow-condensed flex items-center justify-center rounded-2xl text-xl font-bold text-black md:text-2xl"
   >
-    Ver Precio y Disponibilidad en {brand}
+    Ver Precio y Disponibilidad
     <ShoppingCart class="h-11 w-11" />
   </a>
 </div>
