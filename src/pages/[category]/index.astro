@@ -3,7 +3,6 @@ import { getCollection } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
 import CategoryLayout from "../../layouts/CategoryLayout.astro";
 
-const getFullYear = new Date().getFullYear();
 export async function getStaticPaths() {
   const allPosts = await getCollection("blog");
 
@@ -11,21 +10,47 @@ export async function getStaticPaths() {
     ...new Set(allPosts.map((post) => post.data.category.toLowerCase())),
   ];
 
-  return uniqueCategories.map((category) => {
-    const filteredPosts = allPosts.filter(
-      (post) => post.data.category.toLowerCase() === category,
-    );
-
-    return {
-      params: { category },
-      props: { posts: filteredPosts, categoryName: category },
-    };
-  });
+  return uniqueCategories.map((category) => ({
+    params: { category },
+    props: {
+      categoryName: category,
+      posts: allPosts
+        .filter((post) => post.data.category.toLowerCase() === category)
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+    },
+  }));
 }
 
 const { posts, categoryName } = Astro.props;
+const year = new Date().getFullYear();
+const site = Astro.site!.href.replace(/\/$/, "");
+const categoryUrl = `${site}/${categoryName}/`;
+const label = categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
 
-const categoryUrl = `${Astro.site}/${categoryName}/`;
+// Títulos y descripciones pensados para búsquedas reales de cada categoría
+const seo: Record<string, { title: string; description: string }> = {
+  zapatillas: {
+    title: `Mejores Zapatillas de CrossFit ${year}: Análisis y Opiniones`,
+    description: `Las mejores zapatillas de CrossFit de ${year} probadas en el box: Reebok Nano, Nike Metcon y más. Cuál elegir según tu WOD, pie ancho y presupuesto.`,
+  },
+  calleras: {
+    title: `Mejores Calleras de CrossFit ${year}: Guía de Compra`,
+    description: `Calleras de CrossFit de cuero y sintéticas analizadas. Cuál comprar según tu nivel, 2 o 3 agujeros y cómo elegir la talla correcta.`,
+  },
+  combas: {
+    title: `Mejores Combas de CrossFit ${year} para Dobles`,
+    description: `Combas de velocidad para CrossFit analizadas: cuál elegir para sacar los dobles, cable fino o grueso y cómo ajustar la longitud.`,
+  },
+  suplementos: {
+    title: `Suplementos para CrossFit ${year}: Creatina y Proteína`,
+    description: `Solo los suplementos para CrossFit que funcionan: creatina monohidrato, proteína whey y cómo tomarlos. Análisis honestos, sin humo.`,
+  },
+};
+
+const { title, description } = seo[categoryName] ?? {
+  title: `${label} para CrossFit ${year}: Análisis y Opiniones`,
+  description: `Análisis honestos de ${categoryName} para CrossFit probados en el box.`,
+};
 
 const categorySchema = {
   "@context": "https://schema.org",
@@ -34,41 +59,24 @@ const categorySchema = {
       "@type": "CollectionPage",
       "@id": `${categoryUrl}#webpage`,
       url: categoryUrl,
-      name: `Mejores ${categoryName} de Crossfit ${getFullYear} - MundoBox`,
-      description: `Descubre nuestra selección de las mejores ${categoryName} para Crossfit analizadas por expertos.`,
-      isPartOf: { "@id": `${Astro.site}/#website` },
-      breadcrumb: { "@id": `${categoryUrl}#breadcrumb` },
+      name: title,
+      description,
+      inLanguage: "es-ES",
+      isPartOf: { "@id": `${site}/#website` },
     },
     {
       "@type": "ItemList",
-      name: `Mejores ${categoryName} de Crossfit ${getFullYear} - MundoBox`,
-      description: `Descubre nuestra selección de las mejores ${categoryName} para Crossfit analizadas por expertos.`,
       itemListElement: posts.map((post, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        url: `${Astro.site}/blog/${post.data.slug}/`, // Ajusta esta ruta según tu estructura real de URLs
+        url: `${categoryUrl}${post.id}/`,
       })),
     },
     {
       "@type": "BreadcrumbList",
-      "@id": `${categoryUrl}#breadcrumb`,
       itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          item: {
-            "@id": Astro.site,
-            name: "MundoBox",
-          },
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          item: {
-            "@id": categoryUrl,
-            name: categoryName,
-          },
-        },
+        { "@type": "ListItem", position: 1, name: "Inicio", item: `${site}/` },
+        { "@type": "ListItem", position: 2, name: label, item: categoryUrl },
       ],
     },
   ],
@@ -76,16 +84,9 @@ const categorySchema = {
 ---
 
 <MainLayout
-  isHome={false}
-  title={`Mejores ${categoryName} de Crossfit 2026 - Analisis y Opiniones | MundoBox`}
-  description=`Descubre nuestra selección de las mejores ${categoryName} para Crossfit.`
+  title={`${title} | MundoBox`}
+  description={description}
+  schema={categorySchema}
 >
-  <script
-    is:inline
-    slot="schema-post"
-    type="application/ld+json"
-    set:html={JSON.stringify(categorySchema)}
-  />
-
   <CategoryLayout posts={posts} categoryName={categoryName} />
 </MainLayout>

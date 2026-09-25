@@ -1,99 +1,145 @@
 ---
-// src/pages/[category]/[slug].astro
 import { getCollection, render } from "astro:content";
-import ReviewTemplate from "../../components/templates/ReviewTemplate.astro";
-import MainLayout from "../../layouts/MainLayout.astro";
 import { getImage } from "astro:assets";
+import ReviewTemplate from "../../components/templates/ReviewTemplate.astro";
+import Card from "../../components/Card.astro";
+import MainLayout from "../../layouts/MainLayout.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
 
   return posts.map((post) => ({
     params: {
-      // 1. Rellena la carpeta [category]
       category: post.data.category.toLowerCase().replace(/\s+/g, "-"),
-      // 2. Rellena el archivo [slug].astro (usa el nombre del archivo mdx)
       slug: post.id,
     },
-    props: { post },
+    props: { post, allPosts: posts },
   }));
 }
 
-const { post } = Astro.props;
+const { post, allPosts } = Astro.props;
 
-const { image, rating, reviewCount, title, metaDescription, brand, pubDate } =
-  post.data;
+const {
+  image,
+  rating,
+  title,
+  metaTitle,
+  metaDescription,
+  brand,
+  name,
+  pubDate,
+  updatedDate,
+  category,
+} = post.data;
 const { Content } = await render(post);
 
-const optimizeImage = await getImage({
-  src: image,
-  format: "webp",
-  quality: 50,
-});
+const site = Astro.site!.href.replace(/\/$/, "");
+const categorySlug = category.toLowerCase();
+const pageUrl = `${site}/${categorySlug}/${post.id}/`;
+
+// Imagen para redes sociales y schema (1200px, webp, ligera)
+const socialImage = await getImage({ src: image, format: "webp", width: 1200 });
+const socialImageUrl = new URL(socialImage.src, Astro.site).href;
+
+// Artículos relacionados: primero misma categoría, luego el resto
+const related = allPosts
+  .filter((p) => p.id !== post.id)
+  .sort(
+    (a, b) =>
+      Number(b.data.category === category) -
+        Number(a.data.category === category) ||
+      b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  )
+  .slice(0, 3);
 
 const schema = {
-  "@context": "https://schema.org/",
-  "@type": "Review", // El tipo principal es RESEÑA, no Producto
-  headline: title,
-  description: metaDescription,
-  image: optimizeImage,
-  datePublished: pubDate || new Date().toISOString(),
-  author: {
-    "@type": "Person",
-    name: "Andrés",
-    url: "https://mundobox.blog/about",
-  },
-  publisher: {
-    "@type": "Organization",
-    name: "MundoBox",
-    logo: {
-      "@type": "ImageObject",
-      url: "https://mundobox.blog/logo.png",
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Review",
+      "@id": `${pageUrl}#review`,
+      headline: title,
+      description: metaDescription,
+      image: socialImageUrl,
+      datePublished: pubDate.toISOString(),
+      dateModified: (updatedDate ?? pubDate).toISOString(),
+      inLanguage: "es-ES",
+      mainEntityOfPage: pageUrl,
+      author: {
+        "@type": "Person",
+        name: "Andrés",
+        url: `${site}/sobremi/`,
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "MundoBox",
+        logo: { "@type": "ImageObject", url: `${site}/logo.png` },
+      },
+      itemReviewed: {
+        "@type": "Product",
+        name,
+        image: socialImageUrl,
+        brand: { "@type": "Brand", name: brand },
+      },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
     },
-  },
-  itemReviewed: {
-    "@type": "Product",
-    name: title,
-    image: optimizeImage,
-    brand: {
-      "@type": "Brand",
-      name: brand,
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Inicio", item: `${site}/` },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: category,
+          item: `${site}/${categorySlug}/`,
+        },
+        { "@type": "ListItem", position: 3, name, item: pageUrl },
+      ],
     },
-
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: rating.toString(),
-      reviewCount: "1", // Al ser tu propia reseña, el conteo es 1
-    },
-  },
-  reviewRating: {
-    "@type": "Rating",
-    ratingValue: rating.toString(),
-    bestRating: "5",
-    worstRating: "1",
-  },
-  reviewBody: metaDescription,
+  ],
 };
 ---
 
-<script
-  is:inline
-  type="application/ld+json"
-  set:html={JSON.stringify(schema)}
-/>
 <MainLayout
-  isHome={false}
-  title={title}
+  title={`${metaTitle} | MundoBox`}
   description={metaDescription}
-  image={optimizeImage.src}
-  rating={rating}
-  reviewCount={reviewCount}
+  image={socialImage.src}
+  ogType="article"
+  publishedTime={pubDate}
+  modifiedTime={updatedDate ?? pubDate}
+  schema={schema}
 >
+  <nav aria-label="Migas de pan" class="mx-auto max-w-6xl px-4 text-sm">
+    <a href="/" class="hover:text-primary">Inicio</a> ›
+    <a href={`/${categorySlug}/`} class="hover:text-primary">{category}</a> ›
+    <span aria-current="page">{name}</span>
+  </nav>
+
   {
     post.data.type === "Análisis" && (
-      <ReviewTemplate {...post.data}>
+      <ReviewTemplate {...post.data} slug={post.id}>
         <Content />
       </ReviewTemplate>
+    )
+  }
+
+  {
+    related.length > 0 && (
+      <section class="mx-auto max-w-6xl px-4">
+        <h2>También te puede interesar</h2>
+        <ul class="grid grid-cols-1 gap-4 p-0 md:grid-cols-3">
+          {related.map((p) => (
+            <li class="p-0">
+              <Card post={p} />
+            </li>
+          ))}
+        </ul>
+      </section>
     )
   }
 </MainLayout>

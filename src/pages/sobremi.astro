@@ -4,15 +4,19 @@ import imgAtlete from "./../assets/images/atlete.png";
 import { Image } from "astro:assets";
 ---
 
-<MainLayout isNotIndex={true} title={"Sobre Mi"}>
+<MainLayout
+  title={"Sobre mí: quién está detrás de MundoBox | MundoBox"}
+  description={"Soy Andrés, crossfitter desde hace casi dos años. Pruebo en el box el material que analizo en MundoBox para ayudarte a comprar con criterio."}
+>
   <section class="flex flex-col items-center">
     <div class="relative h-full w-full max-w-7xl rounded-2xl md:aspect-auto">
       <Image
         loading="eager"
-        quality="high"
+        quality={70}
         format="webp"
         src={imgAtlete}
         class="h-full w-full object-cover opacity-80"
+        width={1600}
         widths={[768, 1024, 1600]}
         sizes="100vw"
         alt="Atleta de Crossfit entrenando en el box "

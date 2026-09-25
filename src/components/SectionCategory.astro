@@ -4,20 +4,21 @@ interface Props {
 }
 
 const { categoryName } = Astro.props;
+const year = new Date().getFullYear();
 ---
 
 {
   categoryName === "zapatillas" && (
     <>
       <h1 class="mb-6 text-center text-3xl font-bold text-white">
-        Las Mejores Zapatillas de CrossFit en 2026: Análisis y Comparativas para
+        Las Mejores Zapatillas de CrossFit en {year}: Análisis y Comparativas para
         Elegir Bien
       </h1>
 
       <p class="text-center text-gray-400">
         <strong>Elegir bien la zapatilla lo cambia todo en CrossFit</strong> .
         Analizamos las
-        <strong>mejores zapatillas CrossFit 2026</strong> para hombre y mujer,
+        <strong>mejores zapatillas CrossFit {year}</strong> para hombre y mujer,
         con comparativas reales como Nike Metcon vs Reebok Nano, y{" "}
         <strong>
           guías para saber cómo elegir según tu WOD. Si tienes pie ancho, buscas
@@ -34,13 +35,13 @@ const { categoryName } = Astro.props;
   categoryName === "calleras" && (
     <>
       <h1 class="mb-6 text-center text-3xl font-bold text-white">
-        Las Mejores Calleras para CrossFit en 2026: Guía de Compra y Análisis
+        Las Mejores Calleras para CrossFit en {year}: Guía de Compra y Análisis
       </h1>
       <p class="text-center text-gray-400">
         Las <strong>calleras son imprescindibles en cualquier box.</strong> En
         MundoBox{" "}
         <strong>
-          analizamos las mejores calleras CrossFit 2026 para que elijas con
+          analizamos las mejores calleras CrossFit {year} para que elijas con
           criterio: calleras de cuero, modelos de 3 agujeros y las mejores
           opciones calidad precio para todos los niveles.
         </strong>
@@ -59,13 +60,13 @@ const { categoryName } = Astro.props;
   categoryName === "combas" && (
     <>
       <h1 class="mb-6 text-center text-3xl font-bold text-white">
-        Las Mejores Combas para CrossFit en 2026: Velocidad, Dobles y Guía de
+        Las Mejores Combas para CrossFit en {year}: Velocidad, Dobles y Guía de
         Compra
       </h1>
       <p class="text-center text-gray-400">
         Una buena comba desbloquea los dobles.{" "}
         <strong>
-          Analizamos las mejores combas CrossFit velocidad 2026, con
+          Analizamos las mejores combas CrossFit velocidad {year}, con
           comparativas como RX vs RPM y guías para elegir el cable fino o grueso
           según tu nivel.
         </strong>
@@ -81,7 +82,7 @@ const { categoryName } = Astro.props;
   categoryName === "suplementos" && (
     <>
       <h1 class="mb-6 text-center text-3xl font-bold text-white">
-        Suplementos para CrossFit en 2026: Proteína, Creatina y Todo lo que
+        Suplementos para CrossFit en {year}: Proteína, Creatina y Todo lo que
         Necesitas Saber
       </h1>
       <p class="text-center text-gray-400">
@@ -93,8 +94,7 @@ const { categoryName } = Astro.props;
         <strong>
           cuánta proteína necesitas, cuándo tomar creatina antes o después del
           WOD, y qué suplementos tomar si empiezas CrossFit. Sin humo, sin
-          productos innecesarios.uplementos realmente necesarios para progresar
-          sin complicarte la vida.
+          productos innecesarios.
         </strong>
       </p>
     </>

@@ -5,18 +5,15 @@ import Header from "../components/Header.astro";
 import "../styles/global.css";
 
 interface Props {
-  title?: string;
+  title: string;
   description?: string;
   image?: string;
-  rating?: number;
-  name?: string;
-  brand?: string;
-  category?: string;
-  author?: string;
-  reviewCount?: number;
-  slug?: string;
   isHome?: boolean;
   isNotIndex?: boolean;
+  ogType?: "website" | "article";
+  publishedTime?: Date;
+  modifiedTime?: Date;
+  schema?: Record<string, unknown> | null;
 }
 
 const {
@@ -25,12 +22,21 @@ const {
   image,
   isHome = false,
   isNotIndex = false,
+  ogType = "website",
+  publishedTime,
+  modifiedTime,
+  schema = null,
 } = Astro.props;
+
+const site = Astro.site!.href.replace(/\/$/, "");
 const relativeImage = image ?? `/default.png`;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const socialImageURL = new URL(relativeImage, Astro.site);
-const siteUrl = Astro.site;
-const logoUrl = "/logo.png";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const socialImageURL = new URL(relativeImage, Astro.site).href;
+const imageType = socialImageURL.endsWith(".webp")
+  ? "image/webp"
+  : socialImageURL.endsWith(".jpg") || socialImageURL.endsWith(".jpeg")
+    ? "image/jpeg"
+    : "image/png";
 
 const homeSchema = isHome
   ? {
@@ -38,47 +44,22 @@ const homeSchema = isHome
       "@graph": [
         {
           "@type": "WebSite",
-          "@id": `${siteUrl}#website`,
-          url: siteUrl,
+          "@id": `${site}/#website`,
+          url: `${site}/`,
           name: "MundoBox",
-          description: description,
-          publisher: {
-            "@id": `${siteUrl}#organization`,
-          },
+          description,
+          publisher: { "@id": `${site}/#organization` },
           inLanguage: "es-ES",
         },
         {
           "@type": "Organization",
-          "@id": `${siteUrl}#organization`,
+          "@id": `${site}/#organization`,
           name: "MundoBox",
-          url: siteUrl,
+          url: `${site}/`,
           logo: {
             "@type": "ImageObject",
-            inLanguage: "es-ES",
-            "@id": `${siteUrl}#logo`,
-            url: logoUrl,
-            contentUrl: logoUrl,
-            width: "600",
-            height: "60",
-            caption: "MundoBox",
+            url: `${site}/logo.png`,
           },
-          image: {
-            "@id": `${siteUrl}#logo`,
-          },
-        },
-        {
-          "@type": "WebPage",
-          "@id": `${siteUrl}#webpage`,
-          url: siteUrl,
-          name: title,
-          isPartOf: {
-            "@id": `${siteUrl}#website`,
-          },
-          about: {
-            "@id": `${siteUrl}#organization`,
-          },
-          description: description,
-          inLanguage: "es-ES",
         },
       ],
     }
@@ -86,36 +67,53 @@ const homeSchema = isHome
 ---
 
 <!doctype html>
-<html lang="es" prefix="og: https://ogp.me/ns#">
+<html lang="es-ES" prefix="og: https://ogp.me/ns#">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.ico" />
-    <meta name="generator" content={Astro.generator} />
 
-    {isNotIndex && <meta name="robots" content="noindex, follow" />}
+    <meta
+      name="robots"
+      content={isNotIndex
+        ? "noindex, follow"
+        : "index, follow, max-image-preview:large, max-snippet:-1"}
+    />
 
     <title>{title}</title>
-    <meta name="description" content={description} />
+    {description && <meta name="description" content={description} />}
     <link rel="canonical" href={canonicalURL} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="MundoBox" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-
-    <meta property="og:image" content={socialImageURL.href} />
-    <meta property="og:image:secure_url" content={socialImageURL.href} />
-
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:image" content={socialImageURL} />
+    <meta property="og:image:type" content={imageType} />
+    {
+      publishedTime && (
+        <meta
+          property="article:published_time"
+          content={publishedTime.toISOString()}
+        />
+      )
+    }
+    {
+      modifiedTime && (
+        <meta
+          property="article:modified_time"
+          content={modifiedTime.toISOString()}
+        />
+      )
+    }
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content={Astro.url} />
     <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={socialImageURL.href} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={socialImageURL} />
     <meta
       name="google-site-verification"
       content="obdZR3ImUTWfkcDb2xxlY-4EOKMLYtgma64kgWfNB-U"
@@ -128,6 +126,15 @@ const homeSchema = isHome
           is:inline
           type="application/ld+json"
           set:html={JSON.stringify(homeSchema)}
+        />
+      )
+    }
+    {
+      schema && (
+        <script
+          is:inline
+          type="application/ld+json"
+          set:html={JSON.stringify(schema)}
         />
       )
     }

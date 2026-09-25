@@ -10,7 +10,8 @@ const { post } = Astro.props;
 
 const { data } = post;
 
-const { title, image, category, type, pubDate, metaDescription, slug } = data;
+const { title, image, category, type, pubDate, metaDescription } = data;
+const slug = post.id;
 
 // Convierte el string a objeto Date y saca la distancia
 const publishTime = formatDistanceToNowStrict(new Date(pubDate), {
@@ -29,10 +30,12 @@ const publishTime = formatDistanceToNowStrict(new Date(pubDate), {
       >
         <div>
           <Image
-            width={800}
-            height={800}
-            alt={title}
-            transition:name="product"
+            width={600}
+            height={600}
+            widths={[400, 600]}
+            sizes="(min-width: 768px) 33vw, 100vw"
+            alt={data.name}
+            transition:name={`product-${slug}`}
             src={image}
             quality="mid"
             class="h-full w-full object-cover"
@@ -49,7 +52,7 @@ const publishTime = formatDistanceToNowStrict(new Date(pubDate), {
             <Clock class="h-12 w-7" />
             <time
               class="font-barlow-condensed text-primary text-right text-lg font-semibold capitalize italic"
-              datetime={pubDate.toString()}
+              datetime={pubDate.toISOString()}
             >
               Hace {publishTime}
             </time>
@@ -59,7 +62,7 @@ const publishTime = formatDistanceToNowStrict(new Date(pubDate), {
         <h3>
           <a
             class="font-barlow-condensed font-bold tracking-tighter text-white uppercase italic transition-colors"
-            href={`/${category.toLowerCase()}/${slug}`}
+            href={`/${category.toLowerCase()}/${slug}/`}
           >
             <span class="absolute inset-0" aria-hidden="true"></span>
 

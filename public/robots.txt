@@ -15,7 +15,8 @@ Disallow: /admin/
 # Asegúrate de que esta URL coincida con la de tu dominio real
 Sitemap: https://mundobox.blog/sitemap-index.xml
 
-# Bloquear bots de IA específicos para proteger tu autoría en reviews
+# Bloquear bots de entrenamiento de IA (OAI-SearchBot y ChatGPT-User siguen permitidos
+# para que ChatGPT pueda citarte y enviarte visitas)
 User-agent: GPTBot
 Disallow: /
 
