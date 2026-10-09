@@ -8,9 +8,9 @@ const blog = defineCollection({
         title: z.string().max(100),
         slug: z.string(),
         time: z.number(),
-        draft: z.boolean().default(false),
         name: z.string(),
         pubDate: z.date(),
+        draft: z.boolean().default(false),
         updatedDate: z.date().optional(),
         metaTitle: z.string().max(80),
         metaDescription: z.string().max(160),
@@ -32,6 +32,7 @@ const blog = defineCollection({
                 z.object({
                     id: z.string(),
                     name: z.string(),
+                    draft: z.boolean().default(false),
                     brand: z.string(),
                     bestFor: z.string().max(60),
                     linkAfiliates: z.string(),
@@ -39,7 +40,7 @@ const blog = defineCollection({
                     reviewUrl: z.string().optional(),
                     pros: z.array(z.string().max(80)).max(4),
                     contras: z.array(z.string().max(80)).max(4),
-                    draft: z.boolean()
+
                 }),
             )
             .optional(),
