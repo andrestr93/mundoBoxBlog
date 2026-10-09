@@ -1,6 +1,6 @@
 ---
-import { getCollection } from "astro:content";
-const blogPosts = await getCollection("blog");
+import { getPublishedPosts } from "./../lib/posts";
+const blogPosts = await getPublishedPosts();
 ---
 
 <h1>My posts</h1>

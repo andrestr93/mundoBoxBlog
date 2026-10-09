@@ -1,12 +1,12 @@
 ---
-import { getCollection } from "astro:content";
+import { getPublishedPosts } from "../lib/posts";
 import Card from "../components/Card.astro";
 import Presentation from "../components/Presentation.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 import type { CollectionEntry } from "astro:content";
 const imageDefault = "/default.png";
 
-const posts = await getCollection("blog");
+const posts = await getPublishedPosts();
 
 const lastPosts = posts.sort(
   (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) => {

@@ -1,13 +1,13 @@
 ---
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
+import { getPublishedPosts } from "../../lib/posts";
 import { getImage } from "astro:assets";
 import ReviewTemplate from "../../components/templates/ReviewTemplate.astro";
-import ComparativeTemplate from "../../components/templates/ComparativeTemplate.astro";
 import Card from "../../components/Card.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await getPublishedPosts();
 
   return posts.map((post) => ({
     params: {
@@ -153,14 +153,6 @@ const schema = {
     <a href={`/${categorySlug}/`} class="hover:text-primary">{category}</a> ›
     <span aria-current="page">{name}</span>
   </nav>
-
-  {
-    type === "Comparativa" && (
-      <ComparativeTemplate {...post.data} slug={post.id}>
-        <Content products={products} />
-      </ComparativeTemplate>
-    )
-  }
 
   {
     type === "Análisis" && (
