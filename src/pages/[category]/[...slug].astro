@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import { getImage } from "astro:assets";
 import ReviewTemplate from "../../components/templates/ReviewTemplate.astro";
+import ComparativeTemplate from "../../components/templates/ComparativeTemplate.astro";
 import Card from "../../components/Card.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
 
@@ -30,6 +31,8 @@ const {
   pubDate,
   updatedDate,
   category,
+  type,
+  products = [],
 } = post.data;
 const { Content } = await render(post);
 
@@ -52,42 +55,73 @@ const related = allPosts
   )
   .slice(0, 3);
 
+const author = {
+  "@type": "Person",
+  name: "Andrés",
+  url: `${site}/sobremi/`,
+};
+const publisher = {
+  "@type": "Organization",
+  name: "MundoBox",
+  logo: { "@type": "ImageObject", url: `${site}/logo.png` },
+};
+
+// Análisis (un producto): Product con la reseña dentro de "review"
+const productSchema = {
+  "@type": "Product",
+  "@id": `${pageUrl}#product`,
+  name,
+  image: socialImageUrl,
+  description: metaDescription,
+  brand: { "@type": "Brand", name: brand },
+  review: {
+    "@type": "Review",
+    "@id": `${pageUrl}#review`,
+    name: title,
+    reviewBody: metaDescription,
+    datePublished: pubDate.toISOString(),
+    dateModified: (updatedDate ?? pubDate).toISOString(),
+    inLanguage: "es-ES",
+    author,
+    publisher,
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: rating,
+      bestRating: 5,
+      worstRating: 1,
+    },
+  },
+};
+
+// Comparativa (ranking): artículo con la lista de modelos
+const comparativeSchema = {
+  "@type": "Article",
+  "@id": `${pageUrl}#article`,
+  headline: title,
+  description: metaDescription,
+  image: socialImageUrl,
+  datePublished: pubDate.toISOString(),
+  dateModified: (updatedDate ?? pubDate).toISOString(),
+  inLanguage: "es-ES",
+  mainEntityOfPage: pageUrl,
+  author,
+  publisher,
+  mainEntity: {
+    "@type": "ItemList",
+    numberOfItems: products.length,
+    itemListElement: products.map((product, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: product.name,
+      url: `${pageUrl}#${product.id}`,
+    })),
+  },
+};
+
 const schema = {
   "@context": "https://schema.org",
   "@graph": [
-    {
-      "@type": "Product",
-      "@id": `${pageUrl}#product`,
-      name,
-      image: socialImageUrl,
-      description: metaDescription,
-      brand: { "@type": "Brand", name: brand },
-      review: {
-        "@type": "Review",
-        "@id": `${pageUrl}#review`,
-        name: title,
-        reviewBody: metaDescription,
-        datePublished: pubDate.toISOString(),
-        dateModified: (updatedDate ?? pubDate).toISOString(),
-        inLanguage: "es-ES",
-        author: {
-          "@type": "Person",
-          name: "Andrés",
-          url: `${site}/sobremi/`,
-        },
-        publisher: {
-          "@type": "Organization",
-          name: "MundoBox",
-          logo: { "@type": "ImageObject", url: `${site}/logo.png` },
-        },
-        reviewRating: {
-          "@type": "Rating",
-          ratingValue: rating,
-          bestRating: 5,
-          worstRating: 1,
-        },
-      },
-    },
+    type === "Comparativa" ? comparativeSchema : productSchema,
     {
       "@type": "BreadcrumbList",
       itemListElement: [
@@ -121,7 +155,15 @@ const schema = {
   </nav>
 
   {
-    post.data.type === "Análisis" && (
+    type === "Comparativa" && (
+      <ComparativeTemplate {...post.data} slug={post.id}>
+        <Content products={products} />
+      </ComparativeTemplate>
+    )
+  }
+
+  {
+    type === "Análisis" && (
       <ReviewTemplate {...post.data} slug={post.id}>
         <Content />
       </ReviewTemplate>

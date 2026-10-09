@@ -1,0 +1,83 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+type Data = CollectionEntry<"blog">["data"];
+
+interface Props {
+  title: Data["title"];
+  image: Data["image"];
+  pubDate: Data["pubDate"];
+  updatedDate?: Data["updatedDate"];
+  products?: Data["products"];
+  slug: string;
+}
+
+const { title, image, pubDate, updatedDate, products = [], slug } = Astro.props;
+
+const lastDate = updatedDate ?? pubDate;
+const dateLabel = lastDate.toLocaleDateString("es-ES", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+---
+
+<article class="mx-auto max-w-5xl">
+  <header>
+    <h1 class="text-3xl md:text-5xl">{title}</h1>
+    <p class="text-sm text-gray-400">
+      Por <a href="/sobremi/" class="underline">Andrés</a> · Actualizado el
+      <time datetime={lastDate.toISOString()}>{dateLabel}</time>
+    </p>
+    <Image
+      src={image}
+      alt={title}
+      width={1024}
+      widths={[480, 768, 1024]}
+      sizes="(min-width: 1024px) 1024px, 100vw"
+      format="webp"
+      quality={70}
+      loading="eager"
+      fetchpriority="high"
+      transition:name={`product-${slug}`}
+      class="rounded-2xl"
+    />
+  </header>
+
+  <section class="bg-primary/5 rounded-2xl px-4">
+    <h2>Resumen: cuál elegir</h2>
+    <ul class="p-0">
+      {
+        products.map((product) => (
+          <li class="flex flex-col gap-2 border-b border-white/10 py-3 md:flex-row md:items-center md:justify-between">
+            <div class="p-0">
+              <p class="text-primary font-barlow-condensed p-0 text-lg font-bold uppercase italic">
+                {product.bestFor}
+              </p>
+              <a href={`#${product.id}`} class="p-0 text-2xl">
+                {product.name}
+              </a>
+            </div>
+            <a
+              href={product.linkAfiliates}
+              rel="nofollow sponsored"
+              target="_blank"
+              class="bg-primary font-barlow-condensed w-full shrink-0 rounded-2xl px-6 py-2 text-center text-lg font-bold whitespace-nowrap text-black md:w-44"
+            >
+              Ver precio
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="text-primary text-center text-xs font-bold">
+      Ganamos una pequeña comisión si compras a través de estos enlaces, sin
+      coste extra para ti
+    </p>
+  </section>
+
+  <div class="prose-content">
+    <slot />
+  </div>
+</article>

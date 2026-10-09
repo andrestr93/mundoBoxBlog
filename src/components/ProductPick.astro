@@ -1,0 +1,97 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import ButtonProductAfiliate from "./ButtonProductAfiliate.astro";
+import Plus from "./icons/Plus.astro";
+import Less from "./icons/Less.astro";
+
+type Product = NonNullable<CollectionEntry<"blog">["data"]["products"]>[number];
+
+interface Props {
+  id: string;
+  products?: Product[];
+}
+
+const { id, products = [] } = Astro.props;
+const product = products.find((p) => p.id === id);
+
+if (!product) {
+  throw new Error(
+    `ProductPick: no existe ningún producto con id "${id}" en el frontmatter`,
+  );
+}
+---
+
+<section
+  id={product.id}
+  class="mx-auto my-8 max-w-5xl scroll-mt-6 rounded-2xl border border-white/10 p-4"
+>
+  <p
+    class="bg-primary/20 text-primary font-barlow-condensed w-fit rounded-lg px-3 py-1 font-bold tracking-wider uppercase italic"
+  >
+    {product.bestFor}
+  </p>
+  <h2 class="text-primary">{product.name}</h2>
+
+  <div class="grid grid-cols-1 gap-4 p-0 md:grid-cols-[2fr_1fr]">
+    <div class="p-0">
+      <slot />
+    </div>
+    {
+      product.image && (
+        <div class="p-0">
+          <Image
+            src={product.image}
+            alt={product.name}
+            width={480}
+            widths={[320, 480]}
+            sizes="(min-width: 768px) 30vw, 100vw"
+            format="webp"
+            quality={70}
+            class="rounded-2xl"
+          />
+        </div>
+      )
+    }
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 p-0 md:grid-cols-2">
+    <div class="rounded-2xl bg-green-950/50 p-2">
+      <h3 class="text-green-500">Lo mejor</h3>
+      <ul class="p-0">
+        {
+          product.pros.map((pro) => (
+            <li class="flex items-center p-0">
+              <Plus class="h-10 w-10 shrink-0 text-green-400" aria-hidden="true" />
+              <p class="p-0">{pro}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="rounded-2xl bg-red-950/50 p-2">
+      <h3 class="text-red-500">Lo peor</h3>
+      <ul class="p-0">
+        {
+          product.contras.map((contra) => (
+            <li class="flex items-center p-0">
+              <Less class="h-10 w-10 shrink-0" aria-hidden="true" />
+              <p class="p-0">{contra}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  {
+    product.reviewUrl && (
+      <p class="p-0">
+        <a href={product.reviewUrl} class="text-primary underline">
+          Lee el análisis completo de las {product.name}
+        </a>
+      </p>
+    )
+  }
+  <ButtonProductAfiliate linkAfiliates={product.linkAfiliates} />
+</section>
