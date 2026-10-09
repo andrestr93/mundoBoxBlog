@@ -10,6 +10,7 @@ const blog = defineCollection({
         time: z.number(),
         name: z.string(),
         pubDate: z.date(),
+        updatedDate: z.date().optional(),
         metaTitle: z.string().max(80),
         metaDescription: z.string().max(160),
         characteristics: z.array(z.string().max(80)).max(5),

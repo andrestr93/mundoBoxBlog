@@ -15,7 +15,13 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  integrations: [mdx(), sitemap()],
+  integrations: [
+    mdx(),
+    sitemap({
+      // Las páginas con noindex no deben estar en el sitemap
+      filter: (page) => !page.includes("/legal"),
+    }),
+  ],
   image: {
     service: {
       entrypoint: "astro/assets/services/sharp",

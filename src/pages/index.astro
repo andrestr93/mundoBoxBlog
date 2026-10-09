@@ -10,7 +10,7 @@ const posts = await getCollection("blog");
 
 const lastPosts = posts.sort(
   (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) => {
-    return a.data.pubDate.valueOf() - b.data.pubDate.valueOf();
+    return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
   },
 );
 
@@ -20,8 +20,8 @@ const currentYear = new Date().getFullYear();
 
 <MainLayout
   isHome={true}
-  title={`MundoBox | Guías de Equipamiento Crossfit y Análisis ${currentYear}`}
-  description={"¿Quieres mejorar tus marcas? En MundoBox probamos y analizamos el mejor material de Crossfit en Amazon. De atletas para atletas."}
+  title={`MundoBox | Material de CrossFit: Análisis y Guías de Compra ${currentYear}`}
+  description={"Análisis honestos de zapatillas, calleras, combas y suplementos para CrossFit, probados en el box. Descubre qué material merece la pena antes de comprar."}
   image={imageDefault}
 >
   <section class="flex flex-col items-center p-0">
@@ -29,7 +29,7 @@ const currentYear = new Date().getFullYear();
   </section>
 
   <section>
-    <h2 class="text-center">Ultimos Análisis</h2>
+    <h2 class="text-center">Últimos análisis</h2>
 
     <ul class="grid grid-cols-1 gap-2 p-0 md:grid-cols-3">
       {

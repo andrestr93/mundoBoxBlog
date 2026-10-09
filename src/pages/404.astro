@@ -4,14 +4,14 @@ import { Image } from "astro:assets";
 import imgRack from "./../assets/images/rack.png";
 ---
 
-<MainLayout title={"Pagina no encontrada"} isNotIndex={true}>
+<MainLayout title={"Página no encontrada | MundoBox"} isNotIndex={true}>
   <section
     class="font-barlow-condensed relative m-auto max-w-6xl rounded-2xl text-center"
   >
     <Image
-      alt="Portada MundoBox | blog sobre complementos Crosffit"
       loading="eager"
-      quality="high"
+      quality={70}
+      width={1024}
       widths={[768, 1024]}
       sizes="100vw"
       format="webp"
