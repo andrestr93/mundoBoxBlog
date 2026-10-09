@@ -8,6 +8,7 @@ const blog = defineCollection({
         title: z.string().max(100),
         slug: z.string(),
         time: z.number(),
+        draft: z.boolean().default(false),
         name: z.string(),
         pubDate: z.date(),
         updatedDate: z.date().optional(),
@@ -38,6 +39,7 @@ const blog = defineCollection({
                     reviewUrl: z.string().optional(),
                     pros: z.array(z.string().max(80)).max(4),
                     contras: z.array(z.string().max(80)).max(4),
+                    draft: z.boolean()
                 }),
             )
             .optional(),

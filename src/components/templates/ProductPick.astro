@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
-import ButtonProductAfiliate from "./ButtonProductAfiliate.astro";
-import Plus from "./icons/Plus.astro";
-import Less from "./icons/Less.astro";
+import ButtonProductAfiliate from "../ButtonProductAfiliate.astro";
+import Less from "../icons/Less.astro";
+import Plus from "../icons/Plus.astro";
 
 type Product = NonNullable<CollectionEntry<"blog">["data"]["products"]>[number];
 
@@ -62,7 +62,10 @@ if (!product) {
         {
           product.pros.map((pro) => (
             <li class="flex items-center p-0">
-              <Plus class="h-10 w-10 shrink-0 text-green-400" aria-hidden="true" />
+              <Plus
+                class="h-10 w-10 shrink-0 text-green-400"
+                aria-hidden="true"
+              />
               <p class="p-0">{pro}</p>
             </li>
           ))
